@@ -5,7 +5,8 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', function (req, res) {
-  res.sendFile('./public/test.html', { root: __dirname });
+  console.log(__dirname);
+  res.sendFile(path.join(__dirname, '/../public/test.html'));
 });
 
 module.exports = router;
