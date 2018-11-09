@@ -19,16 +19,16 @@ const User = mongoose.model('User', userSchema);
 
 /* GET users listing. */
 router.post('/register', function (req, res) {
-  bcrypt.hash(req.body.pass, null, null, function (err, hash) {
+  bcrypt.hash(req.body.password, null, null, function (err, hash) {
     const currUser = new User({
-      username: req.body.name,
+      username: req.body.username,
       password: hash,
     });
 
     currUser.save(function (err, currUser) {
       if (err) throw err;
 
-      res.send(req.body.name + ' was successfully saved with id ' + currUser._id);
+      res.send(req.body.username + ' was successfully saved with id ' + currUser._id);
     });
   });
 });
@@ -40,7 +40,7 @@ router.post('/auth', function (req, res, next) {
     if (!user) {
       res.status(401).json({ error: 'Bad username' });
     } else {
-      bcrypt.compare(req.body.pass, user.password, function (err, valid) {
+      bcrypt.compare(req.body.password, user.password, function (err, valid) {
         if (err) {
           res.status(400).json({ error: err });
         } else if (valid) {
