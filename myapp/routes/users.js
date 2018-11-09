@@ -17,13 +17,13 @@ const User = mongoose.model('User', userSchema);
 /* GET users listing. */
 router.post('/register', function (req, res, next) {
   const currUser = new User({
-    name: req.query.name,
-    password: req.query.pass,
+    name: req.body.name,
+    password: req.body.pass,
   });
 
   currUser.save(function (err, currUser) {
-    if(!err) {
-      res.send(req.query.name + ' was successfully saved with id ');
+    if (!err) {
+      res.send(req.body.name + ' was successfully saved with id ');
     } else {
       console.log(err);
     }
