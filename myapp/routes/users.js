@@ -22,7 +22,11 @@ router.post('/register', function (req, res, next) {
   });
 
   currUser.save(function (err, currUser) {
-    res.send(req.query.name + ' was successfully saved with id ' + currUser._id);
+    if(!err) {
+      res.send(req.query.name + ' was successfully saved with id ');
+    } else {
+      console.log(err);
+    }
   });
 });
 
