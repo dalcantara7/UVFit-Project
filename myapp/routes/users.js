@@ -9,8 +9,10 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 
 const userSchema = new mongoose.Schema({
+  email: { type: String, required: true },
   username: { type: String, required: true },
   password: { type: String, required: true },
+  regDate: { type: Date, required: true, default: Date.now },
 });
 
 mongoose.connect('mongodb://localhost/mydb');
@@ -21,6 +23,7 @@ const User = mongoose.model('User', userSchema);
 router.post('/register', function (req, res) {
   bcrypt.hash(req.body.password, null, null, function (err, hash) {
     const currUser = new User({
+      email: req.body.email,
       username: req.body.username,
       password: hash,
     });
@@ -34,11 +37,11 @@ router.post('/register', function (req, res) {
 });
 
 router.post('/auth', function (req, res, next) {
-  User.findOne({ username: req.body.username }, function (err, user) {
+  User.findOne({ username: req.body.username, email: req.body.email }, function (err, user) {
     if (err) throw err;
 
     if (!user) {
-      res.status(401).json({ error: 'Bad username' });
+      res.status(401).json({ error: 'Bad username or email' });
     } else {
       bcrypt.compare(req.body.password, user.password, function (err, valid) {
         if (err) {
@@ -56,6 +59,5 @@ router.post('/auth', function (req, res, next) {
 router.get('/', function (req, res) {
   res.send('successfully accessed USERS route');
 });
-
 
 module.exports = router;
