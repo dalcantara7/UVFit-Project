@@ -3,7 +3,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const bcrypt = require('bcrypt-nodejs');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -21,9 +20,7 @@ const User = mongoose.model('User', userSchema);
 router.post('/register', function (req, res, next) {
   const currUser = new User({
     name: req.body.name,
-    password: bcrypt.hash(req.body.pass, null, null, function (err, hash) {
-      console.log('Hash: ' + hash);
-    }),
+    password: req.body.pass,
   });
 
   currUser.save(function (err, currUser) {
