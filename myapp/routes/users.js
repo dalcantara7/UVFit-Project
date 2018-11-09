@@ -1,23 +1,12 @@
 'use strict';
 
 const express = require('express');
-const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
+const User = require('../models/users');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
-
-const userSchema = new mongoose.Schema({
-  email: { type: String, required: true },
-  username: { type: String, required: true },
-  password: { type: String, required: true },
-  regDate: { type: Date, required: true, default: Date.now },
-});
-
-mongoose.connect('mongodb://localhost/mydb');
-
-const User = mongoose.model('User', userSchema);
 
 /* GET users listing. */
 router.post('/register', function (req, res) {
