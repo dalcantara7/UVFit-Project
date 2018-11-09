@@ -38,7 +38,7 @@ router.post('/auth', function (req, res, next) {
     if (err) throw err;
 
     if (!user) {
-      res.status(401).json({ error: 'Bad username'});
+      res.status(401).json({ error: 'Bad username' });
     } else {
       bcrypt.compare(req.body.pass, user.password, function (err, valid) {
         if (err) {
