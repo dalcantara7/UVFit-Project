@@ -23,7 +23,7 @@ router.post('/register', function (req, res, next) {
 
   currUser.save(function (err, currUser) {
     if (!err) {
-      res.send(req.body.name + ' was successfully saved with id ');
+      res.send(req.body.name + ' was successfully saved with id ' + currUser._id);
     } else {
       console.log(err);
     }
