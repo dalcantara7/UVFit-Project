@@ -21,8 +21,8 @@ router.post('/register', function (req, res, next) {
     password: req.query.pass,
   });
 
-  currUser.save(function (err, user) {
-    res.send(req.query.name + ' was successfully saved with id ' + user._id);
+  currUser.save(function (err, currUser) {
+    res.send(req.query.name + ' was successfully saved with id ' + currUser._id);
   });
 });
 
