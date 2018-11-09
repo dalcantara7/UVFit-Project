@@ -2,8 +2,11 @@
 
 const express = require('express');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const router = express.Router();
+router.use(bodyParser.urlencoded({ extended: false }));
+
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   password: { type: String, required: true },
@@ -12,7 +15,6 @@ const userSchema = new mongoose.Schema({
 mongoose.connect('mongodb://localhost/mydb');
 
 const User = mongoose.model('User', userSchema);
-
 
 /* GET users listing. */
 router.post('/register', function (req, res, next) {
@@ -31,7 +33,6 @@ router.post('/register', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
-  console.log('connected to users route');
   res.send('test successful!');
 });
 
