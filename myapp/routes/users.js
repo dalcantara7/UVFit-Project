@@ -54,7 +54,7 @@ router.post('/auth', function (req, res, next) {
 });
 
 router.get('/', function (req, res) {
-  res.send('successfully accessed users route');
+  res.send('successfully accessed USERS route');
 });
 
 

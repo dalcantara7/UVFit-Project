@@ -13,7 +13,7 @@ router.post('/register', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
-  res.send('test successful!');
+  res.send('Successfully accessed DEVICES route');
 });
 
 module.exports = router;
