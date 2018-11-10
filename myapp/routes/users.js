@@ -19,10 +19,8 @@ router.get('/register', function (req, res, next) {
 router.post('/register/newuser', function (req, res) {
   User.findOne({ email: req.body.email }, function (err, user) {
     if (user) {
-      console.log('user');
       res.json({ success: false, message: 'Email already in use' });
     } else {
-      console.log('no user');
       bcrypt.hash(req.body.password, null, null, function (err, hash) {
         const currUser = new User({
           email: req.body.email,

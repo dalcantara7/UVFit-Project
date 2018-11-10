@@ -34,6 +34,7 @@
     fetch(url, fetchOptions)
       .then(checkStatus)
       .then(function (responseText) {
+        console.log(responseText);
         if (responseText.success) {
           console.log('success');
           window.location.replace('http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/home');
