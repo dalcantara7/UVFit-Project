@@ -19,9 +19,9 @@ router.get('/', function (req, res, next) {
 router.post('/reportevent', function (req, res, next) {
   const data = JSON.parse(req.body.data);
 
-  if (!data.longitude) { res.status(201).send('Missing longitude field'); }
-  if (!data.latitude) { res.status(201).send('Missing latitude field'); }
-  if (!data.deviceID) { res.status(201).send('Missing deviceID field'); }
+  if (!data.hasOwnProperty('longitude')) { res.status(201).send('Missing longitude field'); }
+  if (!data.hasOwnProperty('latitude')) { res.status(201).send('Missing latitude field'); }
+  if (!data.hasOwnProperty('deviceID')) { res.status(201).send('Missing deviceID field'); }
 
   const currEvent = new Event({
     longitude: parseFloat(data.longitude).toFixed(6),
