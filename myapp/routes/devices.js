@@ -20,6 +20,8 @@ router.post('/reportevent', function (req, res, next) {
   // if (!JSON.parse(req.body.data).longitude) { res.status(201).send('Missing longitude field'); }
   // if (!JSON.parse(req.body.data).latitude) { res.status(201).send('Missing latitude field'); }
   // if (!JSON.parse(req.body.data).deviceID) { res.status(201).send('Missing deviceID field'); }
+  console.log('Longitude: ' + JSON.parse(req.body.data).longitude);
+  console.log('Latitude: ' + JSON.parse(req.body.data).latitude);
 
   const currEvent = new Event({
     longitude: parseFloat(JSON.parse(req.body.data).longitude).toFixed(6),
