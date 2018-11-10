@@ -3,6 +3,8 @@ const db = require('../db');
 const eventSchema = new db.Schema({
   longitude: { type: Number, required: true },
   latitude: { type: Number, required: true },
+  uvVal: { type: Number, required: true },
+  speed: { type: Number, require: true },
   deviceID: { type: String, required: true },
   published_at: { type: Date, required: true, default: Date.now },
 });
