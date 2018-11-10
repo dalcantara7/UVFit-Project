@@ -15,6 +15,14 @@
       menu.innerHTML = 'logged in!';
       document.body.appendChild(menu);
       console.log(window.sessionStorage.getItem('token'));
+
+      const logoutLink = document.createElement('a');
+      logoutLink.innerHTML = 'Logout';
+      logoutLink.addEventListener('click', function () {
+        window.sessionStorage.clear();
+        window.location.reload();
+      });
+      document.body.appendChild(logoutLink);
     } else {
       const loginLink = document.createElement('a');
       loginLink.innerHTML = 'Login';
