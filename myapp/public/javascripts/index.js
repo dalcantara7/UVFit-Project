@@ -29,6 +29,11 @@
       loginLink.innerHTML = 'Login';
       loginLink.href = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/login';
       document.body.appendChild(loginLink);
+
+      const registerLink = document.createElement('a');
+      registerLink.innerHTML = 'Register';
+      registerLink.href = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/users/register';
+      document.body.appendChild(registerLink);
     }
   };
 })();
