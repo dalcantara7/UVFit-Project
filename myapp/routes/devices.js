@@ -20,19 +20,17 @@ router.post('/reportevent', function (req, res, next) {
   // if (!JSON.parse(req.body.data).longitude) { res.status(201).send('Missing longitude field'); }
   // if (!JSON.parse(req.body.data).latitude) { res.status(201).send('Missing latitude field'); }
   // if (!JSON.parse(req.body.data).deviceID) { res.status(201).send('Missing deviceID field'); }
-  const type = typeof JSON.parse(req.body.data).longitude;
-  console.log(type);
 
   const currEvent = new Event({
-    longitude: parseFloat(JSON.parse(req.body.data).longitude),
-    latitude: parseFloat(JSON.parse(req.body.data).latitude),
+    longitude: parseFloat(JSON.parse(req.body.data).longitude).toFixed(6),
+    latitude: parseFloat(JSON.parse(req.body.data).latitude).toFixed(6),
     deviceID: req.body.deviceID,
   });
 
   currEvent.save(function (err, currEvent) {
     if (err) throw err;
 
-    res.send('Event at Lat: ' + req.body.latitude + ' Long: ' + req.body.longitude + ' was successfully saved with id ' + currEvent._id);
+    res.send('Event at Lat: ' + JSON.parse(req.body.data).latitude.toFixed(6) + ' Long: ' + JSON.parse(req.body.data).longitude.toFixed(6) + ' was successfully saved with id ' + currEvent._id);
   });
 });
 
