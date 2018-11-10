@@ -10,16 +10,15 @@
   * comment
   */
   window.onload = function () {
-    document.getElementById('submit').addEventListener('click', registerUser);
+    document.getElementById('submit').addEventListener('click', userLogin);
   };
 
-  function registerUser() {
-    const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/users/register/newuser';
+  function userLogin() {
+    const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/users/auth';
 
     const message = {
-      username: document.getElementById('username').value,
-      password: document.getElementById('password').value,
       email: document.getElementById('email').value,
+      password: document.getElementById('password').value,
     };
 
     const fetchOptions = {
@@ -35,8 +34,8 @@
       .then(checkStatus)
       .then(function (responseText) {
         const responseJSON = JSON.parse(responseText);
-        if (responseJSON.success) {
-          document.getElementById('error').innerHTML = responseJSON.message;
+        if (responseJSON.token) {
+          window.sessionStorage.setItem('token', responseJSON.token);
           setTimeout(function () {
             window.location.replace('http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/');
           }, 2000);
