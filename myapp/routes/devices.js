@@ -21,7 +21,7 @@ router.post('/reportevent', function (req, res, next) {
 
   if (!data.hasOwnProperty('longitude')) { res.status(201).send('Missing longitude field'); }
   if (!data.hasOwnProperty('latitude')) { res.status(201).send('Missing latitude field'); }
-  if (!data.hasOwnProperty('deviceID')) { res.status(201).send('Missing deviceID field'); }
+  if (!req.body.hasOwnProperty('deviceID')) { res.status(201).send('Missing deviceID field'); }
 
   const currEvent = new Event({
     longitude: parseFloat(data.longitude).toFixed(6),
