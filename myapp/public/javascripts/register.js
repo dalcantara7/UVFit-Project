@@ -36,7 +36,8 @@
       .then(function (responseText) {
         const responseJSON = JSON.parse(responseText);
         if (responseJSON.success) {
-          window.location.replace('http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/');
+          document.getElementById('error').innerHTML = responseJSON.message;
+          setTimeout(window.location.replace('http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/'), 1500);
         } else {
           document.getElementById('error').innerHTML = responseJSON.message;
         }
