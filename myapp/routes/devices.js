@@ -25,7 +25,7 @@ router.post('/reportevent', function (req, res, next) {
   //   deviceID: req.body.deviceID,
   // });
 
-  console.log(JSON.parse(req.body));
+  console.log(JSON.parse(req.body.data));
 
   // currEvent.save(function (err, currEvent) {
   //   if (err) throw err;
