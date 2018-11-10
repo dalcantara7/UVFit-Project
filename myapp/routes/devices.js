@@ -22,8 +22,8 @@ router.post('/reportevent', function (req, res, next) {
   if (!req.body.deviceID) { res.status(201).send('Missing deviceID field'); }
 
   const currEvent = new Event({
-    longitude: parseFloat(req.body.longitude),
-    latitude: parseFloat(req.body.latitude),
+    longitude: parseFloat(JSON.parse(req.body.data).longitude),
+    latitude: parseFloat(JSON.parse(req.body.data).latitude),
     deviceID: req.body.deviceID,
   });
 
