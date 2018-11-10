@@ -17,21 +17,17 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/reportevent', function (req, res, next) {
-  // const currEvent = new Event({
-  //   data: {
-  //     longitude: parseFloat(req.body.data.longitude),
-  //     latitude: parseFloat(req.body.data.latitude),
-  //   },
-  //   deviceID: req.body.deviceID,
-  // });
+  const currEvent = new Event({
+    longitude: parseFloat(req.body.longitude),
+    latitude: parseFloat(req.body.latitude),
+    deviceID: req.body.deviceID,
+  });
 
-  console.log(JSON.parse(req.body.data));
+  currEvent.save(function (err, currEvent) {
+    if (err) throw err;
 
-  // currEvent.save(function (err, currEvent) {
-  //   if (err) throw err;
-
-  //   res.send('Event at Lat: ' + req.body.latitude + ' Long: ' + req.body.longitude + ' was successfully saved with id ' + currEvent._id);
-  // });
+    res.send('Event at Lat: ' + req.body.latitude + ' Long: ' + req.body.longitude + ' was successfully saved with id ' + currEvent._id);
+  });
 });
 
 module.exports = router;
