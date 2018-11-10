@@ -35,6 +35,7 @@
       .then(checkStatus)
       .then(function (responseText) {
         if (responseText.success) {
+          console.log('success');
           window.location.replace('http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/home');
         } else {
           console.log('no success');
