@@ -13,13 +13,13 @@
     if (window.sessionStorage.getItem('token')) {
       const menu = document.createElement('p');
       menu.innerHTML = 'logged in!';
-      document.appendChild(menu);
+      document.body.appendChild(menu);
       console.log(window.sessionStorage.getItem('token'));
     } else {
       const loginLink = document.createElement('a');
       loginLink.innerHTML = 'Login';
       loginLink.href = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/login';
-      document.appendChild(loginLink);
+      document.body.appendChild(loginLink);
     }
   };
 })();
