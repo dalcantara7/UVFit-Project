@@ -1,14 +1,12 @@
 'use strict';
 
 const express = require('express');
+const path = require('path');
 
 const router = express.Router();
 
 router.get('/', function (req, res) {
-  console.log(__dirname);
-  res.sendFile(path.join(__dirname, '/../public/index.html'));
-
-  // "'./public/index.html', { root: __dirname });
+  res.sendFile(path.resolve(__dirname, '/../public/index.html'));
 });
 
 module.exports = router;
