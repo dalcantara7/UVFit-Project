@@ -3,10 +3,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
+const jwt = require('jwt-simple');
 const User = require('../models/users');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
+
+const secret = 'testsecretkey';
 
 /* GET users listing. */
 router.post('/register', function (req, res) {
@@ -26,17 +29,18 @@ router.post('/register', function (req, res) {
 });
 
 router.post('/auth', function (req, res, next) {
-  User.findOne({ username: req.body.username, email: req.body.email }, function (err, user) {
+  User.findOne({ email: req.body.email }, function (err, user) {
     if (err) throw err;
 
     if (!user) {
-      res.status(401).json({ error: 'Bad username or email' });
+      res.status(401).json({ error: 'Bad email' });
     } else {
       bcrypt.compare(req.body.password, user.password, function (err, valid) {
         if (err) {
           res.status(400).json({ error: err });
         } else if (valid) {
-          res.send('Successful authentication!');
+          const token = jwt.encode({ username: user.username }, secret);
+          res.json({ token: token });
         } else {
           res.status(401).json({ error: 'Bad password' });
         }
