@@ -14,7 +14,6 @@
       const menu = document.createElement('p');
       menu.innerHTML = 'logged in!';
       document.body.appendChild(menu);
-      console.log(window.sessionStorage.getItem('token'));
 
       const logoutLink = document.createElement('a');
       logoutLink.href = '';
