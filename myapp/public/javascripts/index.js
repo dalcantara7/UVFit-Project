@@ -17,6 +17,7 @@
       console.log(window.sessionStorage.getItem('token'));
 
       const logoutLink = document.createElement('a');
+      logoutLink.href = '#';
       logoutLink.innerHTML = 'Logout';
       logoutLink.addEventListener('click', function () {
         window.sessionStorage.clear();
