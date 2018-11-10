@@ -17,6 +17,10 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/reportevent', function (req, res, next) {
+  if (!req.body.longitude) { res.status(201).send('Missing longitude field'); }
+  if (!req.body.latitude) { res.status(201).send('Missing latitude field'); }
+  if (!req.body.deviceID) { res.status(201).send('Missing deviceID field'); }
+
   const currEvent = new Event({
     longitude: parseFloat(req.body.longitude),
     latitude: parseFloat(req.body.latitude),
