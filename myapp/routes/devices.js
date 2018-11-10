@@ -18,9 +18,12 @@ router.get('/', function (req, res, next) {
 
 router.post('/reportevent', function (req, res, next) {
   const currEvent = new Event({
-    latitude: req.body.latitude,
-    longitude: req.body.longitude,
+    data: {
+      longitude: req.body.data.longitude,
+      latitude: req.body.data.latitude,
+    },
     deviceID: req.body.deviceID,
+    published_at: req.body.published_at,
   });
 
   currEvent.save(function (err, currEvent) {
