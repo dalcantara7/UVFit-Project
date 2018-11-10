@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jwt-simple');
+const path = require('path');
 const User = require('../models/users');
 
 const router = express.Router();
@@ -11,20 +12,27 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 const secret = 'testsecretkey';
 
-/* GET users listing. */
-router.post('/register', function (req, res) {
-  bcrypt.hash(req.body.password, null, null, function (err, hash) {
-    const currUser = new User({
-      email: req.body.email,
-      username: req.body.username,
-      password: hash,
-    });
+router.get('/register', function (req, res, next) {
+  res.sendFile(path.resolve('./public/register.html'));
+});
 
-    currUser.save(function (err, currUser) {
-      if (err) throw err;
+router.post('/register/newuser', function (req, res) {
+  User.findOne({ email: req.body.email }, function (err, user) {
+    if (user) {
+      res.json({ success: false, message: 'Email already in use' });
+    } else {
+      bcrypt.hash(req.body.password, null, null, function (err, hash) {
+        const currUser = new User({
+          email: req.body.email,
+          username: req.body.username,
+          password: hash,
+        });
 
-      res.send(req.body.username + ' was successfully saved with id ' + currUser._id);
-    });
+        currUser.save(function (err, currUser) {
+          if (err) throw err;
+        });
+      });
+    }
   });
 });
 
