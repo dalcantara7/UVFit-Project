@@ -37,7 +37,9 @@
         const responseJSON = JSON.parse(responseText);
         if (responseJSON.success) {
           document.getElementById('error').innerHTML = responseJSON.message;
-          setTimeout(window.location.replace('http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/'), 3000);
+          setTimeout(function () {
+            window.location.replace('http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/')
+          }, 3000);
         } else {
           document.getElementById('error').innerHTML = responseJSON.message;
         }
