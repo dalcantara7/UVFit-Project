@@ -16,7 +16,7 @@ router.get('/', function (req, res, next) {
   res.send('Successfully accessed DEVICES route');
 });
 
-router.get('/reportevent', function (req, res, next) {
+router.post('/reportevent', function (req, res, next) {
   const currEvent = new Event({
     latitude: req.body.latitude,
     longitude: req.body.longitude,
