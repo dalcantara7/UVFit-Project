@@ -5,7 +5,6 @@ const eventSchema = new db.Schema({
     longitde: { type: Number, required: true },
     latitude: { type: Number, required: true },
   },
-  longitude: { type: Number, required: true },
   deviceID: { type: String, required: true },
   published_at: { type: Date, required: true, default: Date.now },
 });
