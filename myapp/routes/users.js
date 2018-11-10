@@ -32,6 +32,8 @@ router.post('/register/newuser', function (req, res) {
           if (err) throw err;
         });
       });
+
+      res.json({ success: true, message: 'Successfully registered' });
     }
   });
 });
