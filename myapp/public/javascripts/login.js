@@ -3,7 +3,7 @@
 /**
  * Name: Evan Weiler
  * Section: 001
- * Description:
+ * Description: comment
  */
 (function () {
   /**
