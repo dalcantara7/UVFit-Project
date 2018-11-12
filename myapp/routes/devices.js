@@ -136,6 +136,7 @@ router.post('/reportevent', function (req, res, next) {
 });
 
 router.get('/events', function (req, res) {
+  console.log('reached events');
   res.sendFile(path.resolve('./public/viewEvents.html'));
 });
 

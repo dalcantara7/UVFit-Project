@@ -20,7 +20,6 @@
       .then(checkStatus)
       .then(function (responseText) {
         console.log(responseText);
-        // hey
       })
       .catch(function (error) {
         console.error('ERROR: ' + error);
