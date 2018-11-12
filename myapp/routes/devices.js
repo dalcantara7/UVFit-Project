@@ -141,7 +141,6 @@ router.post('/reportevent', function (req, res, next) {
 
 router.get('/getevents', function (req, res, next) {
   Event.find(function (err, events) {
-    console.log(events);
     res.send(events);
   });
 });

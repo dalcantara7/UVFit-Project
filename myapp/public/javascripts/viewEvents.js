@@ -19,7 +19,7 @@
     fetch(url)
       .then(checkStatus)
       .then(function (responseText) {
-        console.log(responseText);
+        populateTable(responseText);
       })
       .catch(function (error) {
         console.error('ERROR: ' + error);
@@ -31,6 +31,31 @@
       return response.text();
     } else {
       return Promise.reject(new Error(response.status + ':' + response.statusText));
+    }
+  }
+
+  function populateTable(events) {
+    document.getElementById('events').innerHTML = '';
+    const eventTable = document.createElement('table');
+    const row = document.createElement('tr');
+    const header = document.createElement('th');
+    const data = document.createElement('td');
+    header.innerHTML = 'Device ID';
+    row.appendChild(header);
+    header.innerHTML = 'Longitude';
+    row.appendChild(header);
+    header.innerHTML = 'Latitude';
+    row.appendChild(header);
+    header.innerHTML = 'UV Value';
+    row.appendChild(header);
+    header.innerHTML = 'Speed';
+    row.appendChild(header);
+    header.innerHTML = 'Date';
+    row.appendChild(header);
+    eventTable.appendChild(row);
+
+    for (const event of events) {
+      console.log(event);
     }
   }
 })();
