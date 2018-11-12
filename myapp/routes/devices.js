@@ -135,9 +135,8 @@ router.post('/reportevent', function (req, res, next) {
   });
 });
 
-router.get('/events', function (req, res) {
-  console.log('reached events');
-  res.sendFile(path.resolve('./public/viewEvents.html'));
+router.get('/events', function (req, res, next) {
+  res.sendFile(path.resolve('./public/register.html'));
 });
 
 router.get('/getevents', function (req, res) {
