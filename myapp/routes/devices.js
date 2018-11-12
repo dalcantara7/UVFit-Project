@@ -7,6 +7,10 @@ const Event = require('../models/events');
 
 const router = express.Router();
 
+router.get('/events', function (req, res, next) {
+  res.sendFile(path.resolve('./public/viewEvents.html'));
+});
+
 /* Authenticate user */
 // const secret = fs.readFileSync(path.resolve(__dirname, '../jwtkey.txt')).toString();
 
@@ -133,10 +137,6 @@ router.post('/reportevent', function (req, res, next) {
 
     res.send('Event at Lat: ' + data.latitude.toFixed(6) + ' Long: ' + data.longitude.toFixed(6) + ' Speed: ' + data.speed + ' UV value: ' + data.uvVal + ' was saved with id ' + currEvent._id);
   });
-});
-
-router.get('/events', function (req, res, next) {
-  res.sendFile(path.resolve('./public/viewEvents.html'));
 });
 
 router.get('/getevents', function (req, res) {
