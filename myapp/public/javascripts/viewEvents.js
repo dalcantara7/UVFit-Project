@@ -14,12 +14,13 @@
   };
 
   function showEvents() {
-    const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/devices/events';
+    const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/devices/getevents';
 
     fetch(url)
       .then(checkStatus)
       .then(function (responseText) {
         console.log(responseText);
+        // hey
       })
       .catch(function (error) {
         console.error('ERROR: ' + error);
