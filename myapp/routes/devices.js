@@ -82,9 +82,9 @@ const router = express.Router();
 //   });
 // });
 
-// router.get('/', function (req, res, next) {
-//   res.send('Successfully accessed DEVICES route');
-// });
+router.get('/', function (req, res, next) {
+  res.send('Successfully accessed DEVICES route');
+});
 
 // // Checking to see if device IDs have been registered
 // router.get('/status/:devid', function (req, res, next) {
@@ -136,7 +136,7 @@ router.post('/reportevent', function (req, res, next) {
 });
 
 router.get('/events', function (req, res, next) {
-  res.sendFile(path.resolve('./public/register.html'));
+  res.sendFile(path.resolve('./public/viewEvents.html'));
 });
 
 router.get('/getevents', function (req, res) {
