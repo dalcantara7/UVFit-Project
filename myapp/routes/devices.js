@@ -87,7 +87,7 @@ router.get('/events', function (req, res, next) {
 // });
 
 router.get('/', function (req, res, next) {
-  res.send('Successfully accessed DEVICES route');
+  res.send('Successfully accessed DEVICES routee');
 });
 
 // // Checking to see if device IDs have been registered
@@ -139,7 +139,7 @@ router.post('/reportevent', function (req, res, next) {
   });
 });
 
-router.get('/getevents', function (req, res) {
+router.get('/getevents', function (req, res, next) {
   Event.find(function (err, events) {
     for (const event of events) {
       console.log(event);
