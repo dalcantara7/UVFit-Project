@@ -141,12 +141,9 @@ router.post('/reportevent', function (req, res, next) {
 
 router.get('/getevents', function (req, res, next) {
   Event.find(function (err, events) {
-    for (const event of events) {
-      console.log(event);
-    }
+    console.log(events);
+    res.send(events);
   });
-
-  res.send('testing');
 });
 
 module.exports = router;
