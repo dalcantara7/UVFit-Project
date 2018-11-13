@@ -68,6 +68,8 @@
       row.appendChild(data);
       data.innerHTML = event.published_at;
       row.appendChild(data);
+      console.log(event);
+      console.log(row);
 
       eventTable.appendChild(row);
     }
