@@ -59,6 +59,10 @@ router.post('/auth', function (req, res, next) {
   });
 });
 
+router.get('/events', function (req, res, next) {
+  res.sendFile(path.resolve('./public/viewEvents.html'));
+});
+
 router.get('/', function (req, res) {
   res.send('successfully accessed USERS route');
 });

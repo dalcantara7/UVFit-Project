@@ -28,7 +28,9 @@
     fetch(url, fetchOptions)
       .then(checkStatus)
       .then(function (responseText) {
-        populateTable(JSON.parse(responseText).events);
+        const responseJSON = JSON.parse(responseText);
+        document.getElementById('usertext').innerHTML = responseJSON.message;
+        populateTable(responseJSON.events);
       })
       .catch(function (error) {
         console.error('ERROR: ' + error);
