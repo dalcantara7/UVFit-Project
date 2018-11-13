@@ -15,6 +15,7 @@
 
   function registerDevice() {
     const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/devices/register';
+    const token = window.sessionStorage.getItem('token');
 
     const message = {
       deviceID: document.getElementById('deviceID').value,
@@ -25,7 +26,7 @@
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        x_auth: window.sessionStorage.getItem('token'),
+        x_auth: token,
       },
       body: message,
     };
