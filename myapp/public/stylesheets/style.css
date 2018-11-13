@@ -5,3 +5,12 @@ input {
 a {
   display: block;
 }
+
+.eventTable {
+  border: 1px black solid;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+}

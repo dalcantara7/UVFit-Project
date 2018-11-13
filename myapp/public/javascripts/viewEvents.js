@@ -64,21 +64,27 @@
       row = document.createElement('tr');
       row.innerHTML = '';
       data = document.createElement('td');
+      data.className = eventTable;
       data.innerHTML = event.deviceID;
       row.appendChild(data);
       data = document.createElement('td');
+      data.className = eventTable;
       data.innerHTML = event.longitude;
       row.appendChild(data);
       data = document.createElement('td');
+      data.className = eventTable;
       data.innerHTML = event.latitude;
       row.appendChild(data);
       data = document.createElement('td');
+      data.className = eventTable;
       data.innerHTML = event.uvVal;
       row.appendChild(data);
       data = document.createElement('td');
+      data.className = eventTable;
       data.innerHTML = event.speed;
       row.appendChild(data);
       data = document.createElement('td');
+      data.className = eventTable;
       data.innerHTML = event.published_at;
       row.appendChild(data);
 
