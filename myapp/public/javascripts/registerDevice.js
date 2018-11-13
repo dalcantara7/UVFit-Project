@@ -20,6 +20,8 @@
       deviceID: document.getElementById('deviceID').value,
     };
 
+    console.log('Token: ' + window.sessionStorage.getItem('token'));
+
     const fetchOptions = {
       method: 'POST',
       headers: {
