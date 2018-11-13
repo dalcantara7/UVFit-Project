@@ -13,7 +13,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
 const secret = 'testsecretkey';
 
 router.get('/register', function (req, res, next) {
-  res.sendFile(path.resolve('./public/register.html'));
+  res.sendFile(path.resolve('./public/registerUser.html'));
 });
 
 router.post('/register', function (req, res) {
