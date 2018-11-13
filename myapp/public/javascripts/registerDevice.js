@@ -14,12 +14,10 @@
   };
 
   function registerUser() {
-    const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/users/register/newuser';
+    const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/devices/register';
 
     const message = {
-      username: document.getElementById('username').value,
-      password: document.getElementById('password').value,
-      email: document.getElementById('email').value,
+      deviceID: document.getElementById('deviceID').value,
     };
 
     const fetchOptions = {
@@ -27,6 +25,7 @@
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
+        x_auth: window.sessionStorage.getItem('token'),
       },
       body: JSON.stringify(message),
     };

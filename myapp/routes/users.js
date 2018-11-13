@@ -16,7 +16,7 @@ router.get('/register', function (req, res, next) {
   res.sendFile(path.resolve('./public/register.html'));
 });
 
-router.post('/register/newuser', function (req, res) {
+router.post('/register', function (req, res) {
   User.findOne({ email: req.body.email }, function (err, user) {
     if (user) {
       res.json({ success: false, message: 'Email already in use' });
@@ -49,8 +49,8 @@ router.post('/auth', function (req, res, next) {
         if (err) {
           res.status(400).json({ error: err });
         } else if (valid) {
-          const token = jwt.encode({ username: user.username }, secret);
-          res.json({ token: token });
+          const token = jwt.encode({ userEmail: user.email }, secret);
+          res.json({ token: token, username: user.username });
         } else {
           res.status(401).json({ error: 'Bad password' });
         }

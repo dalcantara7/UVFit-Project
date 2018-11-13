@@ -4,6 +4,7 @@ const jwt = require('jwt-simple');
 const path = require('path');
 const Device = require('../models/devices');
 const Event = require('../models/events');
+const User = require('../models/users');
 
 const router = express.Router();
 
@@ -12,88 +13,84 @@ router.get('/events', function (req, res, next) {
 });
 
 /* Authenticate user */
-// const secret = fs.readFileSync(path.resolve(__dirname, '../jwtkey.txt')).toString();
+const secret = fs.readFileSync(path.resolve(__dirname, '../jwtkey.txt')).toString();
 
-// function getNewApikey() {
-//   let newApikey = '';
-//   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+function getNewApikey() {
+  let newApikey = '';
+  const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-//   for (let i = 0; i < 32; i++) {
-//     newApikey += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-//   }
+  for (let i = 0; i < 32; i++) {
+    newApikey += alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+  }
 
-//   return newApikey;
-// }
+  return newApikey;
+}
 
-// router.post('/register', function (req, res, next) {
-//   const responseJson = {
-//     registered: false,
-//     message: '',
-//     apikey: 'none',
-//   };
-
-//   if (!req.body.hasOwnProperty('deviceID')) {
-//     responseJson.message = 'Missing deviceID!';
-//     return res.status(400).json(responseJson);
-//   }
-
-//   let email = '';
-
-//   if (req.headers['x-auth']) {
-//     try {
-//       const decodedToken = jwt.decode(req.header['x-auth'], secret);
-//       email = decodedToken.email;
-//     } catch (ex) {
-//       responseJson.message = 'Invalid authorization token.';
-//       return res.status(400).json(responseJson);
-//     }
-//   } else {
-//     if (!req.body.hasOwnProperty('email')) {
-//       responseJson.message = 'Invalid authorization token or missing email address.';
-//       return res.status(400).json(responseJson);
-//     }
-//     email = req.body.email;
-//   }
-
-//   // Has the device already been registered?
-//   Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
-//     // If the device was found, it's already been registered
-//     if (device !== null) {
-//       responseJson.message = 'Device ID ' + req.body.deviceID + 'already registered.';
-//       return res.status(400).json(responseJson);
-//     } else {
-//       const deviceApiKey = getNewApikey();
-
-//       const newDevice = new Device({
-//         deviceID: req.body.deviceID,
-//         userEmail: email,
-//         apikey: deviceApiKey,
-//       });
-
-//       newDevice.save(function (err, newDevice) {
-//         if (err) {
-//           console.log('Error: ' + err);
-//           responseJson.message = err;
-//           return res.status(400).json(responseJson);
-//         } else {
-//           responseJson.registered = true;
-//           responseJson.apikey = newDevice.deviceApikey;
-//           responseJson.message = 'Device ID ' + req.body.deviceID + 'was registered.';
-//           return res.status(201).json(responseJson);
-//         }
-//       });
-//     }
-//   });
-// });
-
-router.get('/', function (req, res, next) {
-  res.send('Successfully accessed DEVICES routee');
+router.get('/register', function (req, res, next) {
+  res.sendFile(path.resolve('./public/registerUser.html'));
 });
 
-// // Checking to see if device IDs have been registered
+router.post('/register', function (req, res, next) {
+  const responseJSON = {
+    success: false,
+    message: '',
+    apikey: 'none',
+  };
+  let userEmail;
+
+  if (!req.body.hasOwnProperty('deviceID')) {
+    responseJSON.message = 'Missing deviceID!';
+    res.status(400).json(responseJSON);
+  }
+
+  // authentication check
+  if (req.headers.x_auth) {
+    try {
+      userEmail = jwt.decode(req.header.x_auth, secret).userEmail;
+    } catch (ex) {
+      responseJSON.message = 'Invalid authorization token.';
+      res.status(401).json(responseJSON);
+    }
+  } else {
+    responseJSON.message = 'Missing authorization token.';
+    res.status(401).json(responseJSON);
+  }
+
+  // Has the device already been registered?
+  Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
+    if (device) {
+      responseJSON.message = 'Device ID ' + req.body.deviceID + 'already registered.';
+      return res.status(400).json(responseJSON);
+    } else {
+      const deviceApiKey = getNewApikey();
+
+      const newDevice = new Device({
+        deviceID: req.body.deviceID,
+        userEmail: userEmail,
+        apikey: deviceApiKey,
+      });
+
+      newDevice.save(function (err, newDevice) {
+        if (err) {
+          throw err;
+        } else {
+          // associate device with user
+          User.findOne({ email: userEmail }, function (err, user) {
+            user.deviceID = newDevice.deviceID;
+          });
+          responseJSON.success = true;
+          responseJSON.message = 'Device ID ' + newDevice.deviceID + 'was successfully registered to your account!';
+          res.status(201).json(responseJSON);
+        }
+      });
+    }
+  });
+});
+
+// Checking to see if device IDs have been registered
 // router.get('/status/:devid', function (req, res, next) {
 //   const deviceID = req.query.devid;
-//   const responseJson = { devices: [] };
+//   const responseJSON = { devices: [] };
 //   let query;
 
 //   if (deviceID === 'all') {
@@ -108,10 +105,10 @@ router.get('/', function (req, res, next) {
 //       res.status(400).json(errorMsg);
 //     } else {
 //       for (const doc of allDevices) {
-//         responseJson.devices.push({ deviceID: doc.deviceID, lastContact: doc.lastContact });
+//         responseJSON.devices.push({ deviceID: doc.deviceID, lastContact: doc.lastContact });
 //       }
 //     }
-//     res.status(200).json(responseJson);
+//     res.status(200).json(responseJSON);
 //   });
 // });
 
@@ -137,6 +134,10 @@ router.post('/reportevent', function (req, res, next) {
 
     res.send('Event at Lat: ' + data.latitude.toFixed(6) + ' Long: ' + data.longitude.toFixed(6) + ' Speed: ' + data.speed + ' UV value: ' + data.uvVal + ' was saved with id ' + currEvent._id);
   });
+});
+
+router.get('/', function (req, res, next) {
+  res.send('Successfully accessed DEVICES route');
 });
 
 router.get('/getevents', function (req, res, next) {

@@ -3,22 +3,23 @@
 /**
  * Name: Evan Weiler
  * Section: 001
- * Description: comment
+ * Description:
  */
 (function () {
   /**
   * comment
   */
   window.onload = function () {
-    document.getElementById('submit').addEventListener('click', userLogin);
+    document.getElementById('submit').addEventListener('click', registerUser);
   };
 
-  function userLogin() {
-    const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/users/auth';
+  function registerUser() {
+    const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/users/register';
 
     const message = {
-      email: document.getElementById('email').value,
+      username: document.getElementById('username').value,
       password: document.getElementById('password').value,
+      email: document.getElementById('email').value,
     };
 
     const fetchOptions = {
@@ -34,9 +35,8 @@
       .then(checkStatus)
       .then(function (responseText) {
         const responseJSON = JSON.parse(responseText);
-        if (responseJSON.token) {
-          window.sessionStorage.setItem('token', responseJSON.token);
-          window.sessionStorage.setItem('username', responseJSON.username);
+        if (responseJSON.success) {
+          document.getElementById('error').innerHTML = responseJSON.message;
           setTimeout(function () {
             window.location.replace('http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/');
           }, 2000);
