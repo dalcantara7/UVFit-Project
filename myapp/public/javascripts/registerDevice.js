@@ -10,17 +10,15 @@
   * comment
   */
   window.onload = function () {
-    document.getElementById('submit').addEventListener('click', registerUser);
+    document.getElementById('submit').addEventListener('click', registerDevice);
   };
 
-  function registerUser() {
+  function registerDevice() {
     const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/devices/register';
 
     const message = {
       deviceID: document.getElementById('deviceID').value,
     };
-
-    console.log('Token: ' + window.sessionStorage.getItem('token'));
 
     const fetchOptions = {
       method: 'POST',
@@ -31,6 +29,8 @@
       },
       body: JSON.stringify(message),
     };
+
+    console.log(fetchOptions);
 
     fetch(url, fetchOptions)
       .then(checkStatus)
