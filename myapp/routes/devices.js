@@ -145,8 +145,26 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/getevents', function (req, res, next) {
-  Event.find(function (err, events) {
-    res.send(events);
+  let userEmail;
+
+  if (req.headers.x_auth) {
+    try {
+      const token = req.headers.x_auth;
+      userEmail = jwt.decode(token, secret).userEmail;
+    } catch (ex) {
+      res.status(401).json({ success: false, message: 'Invalid authorization token.' });
+    }
+  } else {
+    res.status(401).json({ success: false, message: 'Missing authorization token.' });
+  }
+
+  User.findOne({ email: userEmail }, function (err, user) {
+    if (err) throw err;
+
+    Event.find({ deviceID: { $in: user.deviceIDs } }, function (err, events) {
+      if (err) throw err;
+      res.json({ success: true, events: events, message: 'Events for user ' + user.username });
+    });
   });
 });
 
