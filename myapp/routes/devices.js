@@ -142,7 +142,7 @@ router.post('/reportevent', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
-  res.send('Successfully accessed DEVICES route. Secret: ' + secret);
+  res.send('Successfully accessed DEVICES route');
 });
 
 router.get('/getevents', function (req, res, next) {
