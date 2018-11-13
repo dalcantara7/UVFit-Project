@@ -29,11 +29,11 @@ function getNewApikey() {
 }
 
 router.get('/register', function (req, res, next) {
+  console.warn('pm2 log check');
   res.sendFile(path.resolve('./public/registerDevice.html'));
 });
 
 router.post('/register', function (req, res, next) {
-  console.warn('pm2 log check');
   const responseJSON = {
     success: false,
     message: '',
