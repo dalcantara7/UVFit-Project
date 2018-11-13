@@ -79,7 +79,7 @@ router.post('/register', function (req, res, next) {
         } else {
           // associate device with user
           User.findOne({ email: userEmail }, function (err, user) {
-            user.deviceID.push(newDevice.deviceID);
+            user.deviceIDs.push(newDevice.deviceID);
             user.save();
           });
           responseJSON.success = true;

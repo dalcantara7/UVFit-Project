@@ -5,7 +5,7 @@ const userSchema = new db.Schema({
   username: { type: String, required: true },
   password: { type: String, required: true },
   regDate: { type: Date, required: true, default: Date.now },
-  deviceID: [{ type: String }],
+  deviceIDs: [String],
 });
 
 const User = db.model('User', userSchema);
