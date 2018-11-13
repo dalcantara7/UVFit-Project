@@ -35,14 +35,16 @@ router.get('/register', function (req, res, next) {
 router.post('/register', function (req, res, next) {
   const responseJSON = {
     success: false,
-    message: '',
+    message: 'test',
     apikey: 'none',
   };
   let userEmail;
 
+  res.send(responseJSON);
+
   if (!req.body.hasOwnProperty('deviceID')) {
     responseJSON.message = 'Missing deviceID!';
-    res.json(responseJSON);
+    res.send(responseJSON);
   }
 
   // authentication check
