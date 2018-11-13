@@ -11,15 +11,15 @@ router.get('/', function (req, res) {
 });
 
 
-// continuous integration through github webhook
-router.post('/', function (req, res) {
-  exec('./restart.sh', function (error, stdout, stderr) {
-    console.log(error);
-    console.log(stdout);
-    console.log(stderr);
-  });
+// continuous integration through github webhook (commented out for the purposes of this demo)
+// router.post('/', function (req, res) {
+//   exec('./restart.sh', function (error, stdout, stderr) {
+//     console.log(error);
+//     console.log(stdout);
+//     console.log(stderr);
+//   });
 
-  res.json({ message: 'Successful Restart' });
-});
+//   res.json({ message: 'Successful Restart' });
+// });
 
 module.exports = router;
