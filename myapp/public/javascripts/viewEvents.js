@@ -19,7 +19,7 @@
     fetch(url)
       .then(checkStatus)
       .then(function (responseText) {
-        populateTable(JSON.parse(responseText));
+        populateTable(JSON.parse(responseText).events);
       })
       .catch(function (error) {
         console.error('ERROR: ' + error);
