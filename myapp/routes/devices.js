@@ -33,15 +33,12 @@ router.get('/register', function (req, res, next) {
 });
 
 router.post('/register', function (req, res, next) {
-  console.log('start of function?');
   const responseJSON = {
     success: false,
     message: '',
     apikey: 'none',
   };
   let userEmail;
-
-  console.log('before device id check');
 
   if (!req.body.hasOwnProperty('deviceID')) {
     responseJSON.message = 'Missing deviceID!';
@@ -62,13 +59,11 @@ router.post('/register', function (req, res, next) {
     res.status(401).json(responseJSON);
   }
 
-  console.log('past auth check');
-
   // Has the device already been registered?
   Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
     if (device) {
       responseJSON.message = 'Device ID ' + req.body.deviceID + 'already registered.';
-      res.status(400).json(responseJSON);
+      res.json(responseJSON);
     } else {
       const deviceApiKey = getNewApikey();
 
