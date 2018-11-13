@@ -59,11 +59,13 @@ router.post('/register', function (req, res, next) {
     res.status(401).json(responseJSON);
   }
 
+  console.log('past auth check');
+
   // Has the device already been registered?
   Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
     if (device) {
       responseJSON.message = 'Device ID ' + req.body.deviceID + 'already registered.';
-      return res.status(400).json(responseJSON);
+      res.status(400).json(responseJSON);
     } else {
       const deviceApiKey = getNewApikey();
 
