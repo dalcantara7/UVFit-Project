@@ -9,6 +9,7 @@ a {
 .eventTable td, tr, th {
   border: 1px black solid;
   text-align: center;
+  padding: 2px;
 }
 
 table {
