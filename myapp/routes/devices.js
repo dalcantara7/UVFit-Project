@@ -33,6 +33,7 @@ router.get('/register', function (req, res, next) {
 });
 
 router.post('/register', function (req, res, next) {
+  console.log('start of function?');
   const responseJSON = {
     success: false,
     message: '',
