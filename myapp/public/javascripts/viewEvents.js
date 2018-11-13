@@ -38,20 +38,26 @@
     document.getElementById('events').innerHTML = '';
     const eventTable = document.createElement('table');
     let row = document.createElement('tr');
-    const header = document.createElement('th');
+    let header = document.createElement('th');
     let data = document.createElement('td');
     header.innerHTML = 'Device ID';
     row.appendChild(header);
+    header = document.createElement('th');
     header.innerHTML = 'Longitude';
     row.appendChild(header);
+    header = document.createElement('th');
     header.innerHTML = 'Latitude';
     row.appendChild(header);
+    header = document.createElement('th');
     header.innerHTML = 'UV Value';
     row.appendChild(header);
+    header = document.createElement('th');
     header.innerHTML = 'Speed';
     row.appendChild(header);
+    header = document.createElement('th');
     header.innerHTML = 'Date';
     row.appendChild(header);
+    header = document.createElement('th');
     eventTable.appendChild(row);
 
     for (const event of events) {
