@@ -29,7 +29,6 @@ function getNewApikey() {
 }
 
 router.get('/register', function (req, res, next) {
-  console.warn('pm2 log check');
   res.sendFile(path.resolve('./public/registerDevice.html'));
 });
 
@@ -60,7 +59,7 @@ router.post('/register', function (req, res, next) {
     res.status(401).json(responseJSON);
   }
 
-  console.warn('past auth check');
+  console.log('past auth check');
 
   // Has the device already been registered?
   Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
