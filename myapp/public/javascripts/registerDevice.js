@@ -36,6 +36,7 @@
       .then(checkStatus)
       .then(function (responseText) {
         const responseJSON = JSON.parse(responseText);
+        console.log(responseJSON);
         if (responseJSON.success) {
           document.getElementById('error').innerHTML = responseJSON.message;
           setTimeout(function () {
