@@ -33,17 +33,12 @@ router.get('/register', function (req, res, next) {
 });
 
 router.post('/register', function (req, res, next) {
-  const responseJSON = {
-    success: false,
-    message: 'test',
-    apikey: 'none',
-  };
+  const responseJSON = {};
   let userEmail;
-
-  return res.send(responseJSON);
 
   if (!req.body.hasOwnProperty('deviceID')) {
     responseJSON.message = 'Missing deviceID!';
+    responseJSON.success = false;
     res.send(responseJSON);
   }
 
@@ -54,10 +49,12 @@ router.post('/register', function (req, res, next) {
       userEmail = jwt.decode(token, secret).userEmail;
     } catch (ex) {
       responseJSON.message = 'Invalid authorization token.';
+      responseJSON.success = false;
       res.status(401).json(responseJSON);
     }
   } else {
     responseJSON.message = 'Missing authorization token.';
+    responseJSON.success = false;
     res.status(401).json(responseJSON);
   }
 
@@ -65,6 +62,7 @@ router.post('/register', function (req, res, next) {
   Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
     if (device) {
       responseJSON.message = 'Device ID ' + req.body.deviceID + 'already registered.';
+      responseJSON.success = false;
       res.json(responseJSON);
     } else {
       const deviceApiKey = getNewApikey();
