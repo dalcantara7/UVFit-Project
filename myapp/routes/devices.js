@@ -40,10 +40,10 @@ router.post('/register', function (req, res, next) {
   };
   let userEmail;
 
-  if (!req.body.hasOwnProperty('deviceID')) {
-    responseJSON.message = 'Missing deviceID!';
-    res.status(400).json(responseJSON);
-  }
+  // if (!req.body.hasOwnProperty('deviceID')) {
+  //   responseJSON.message = 'Missing deviceID!';
+  //   res.status(400).json(responseJSON);
+  // }
 
   // authentication check
   if (req.headers.x_auth) {
