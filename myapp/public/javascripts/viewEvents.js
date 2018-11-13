@@ -63,6 +63,7 @@
     for (const event of events) {
       row = document.createElement('tr');
       row.innerHTML = '';
+      data = document.createElement('td');
       data.innerHTML = event.deviceID;
       row.appendChild(data);
       data = document.createElement('td');
@@ -80,7 +81,6 @@
       data = document.createElement('td');
       data.innerHTML = event.published_at;
       row.appendChild(data);
-      console.log(row);
 
       eventTable.appendChild(row);
     }
