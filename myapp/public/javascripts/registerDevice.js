@@ -53,8 +53,10 @@
 
   function checkStatus(response) {
     if (response.status >= 200 && response.status < 300) {
+      console.log(response);
       return response.text();
     } else {
+      console.log(response);
       return Promise.reject(new Error(response.status + ':' + response.statusText));
     }
   }
