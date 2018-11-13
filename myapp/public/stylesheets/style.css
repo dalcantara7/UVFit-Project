@@ -6,7 +6,7 @@ a {
   display: block;
 }
 
-.eventTable {
+.eventTable td, tr, th {
   border: 1px black solid;
   text-align: center;
 }
