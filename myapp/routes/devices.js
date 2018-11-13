@@ -157,7 +157,7 @@ router.get('/getevents', function (req, res, next) {
   User.findOne({ email: userEmail }, function (err, user) {
     if (err) throw err;
 
-    Event.find({ deviceID: { $in: user.deviceIDs } }, function (err, events) {
+    Event.find({ query: { deviceID: { $in: user.deviceIDs }, $orderby: { deviceID: 1 } }, function (err, events) {
       if (err) throw err;
 
       res.json({ success: true, events: events, message: 'Events for user ' + user.username });
