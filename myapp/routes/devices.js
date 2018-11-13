@@ -17,8 +17,6 @@ router.get('/events', function (req, res, next) {
 /* Authenticate user */
 const secret = fs.readFileSync(path.resolve(__dirname, '../jwtkey.txt')).toString();
 
-console.log(secret);
-
 function getNewApikey() {
   let newApikey = '';
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -144,7 +142,7 @@ router.post('/reportevent', function (req, res, next) {
 });
 
 router.get('/', function (req, res, next) {
-  res.send('Successfully accessed DEVICES route');
+  res.send('Successfully accessed DEVICES route. Secret: ' + secret);
 });
 
 router.get('/getevents', function (req, res, next) {
