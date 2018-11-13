@@ -16,7 +16,16 @@
   function showEvents() {
     const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/devices/getevents';
 
-    fetch(url)
+    const fetchOptions = {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        x_auth: window.sessionStorage.getItem('token'),
+      },
+    };
+
+    fetch(url, fetchOptions)
       .then(checkStatus)
       .then(function (responseText) {
         populateTable(JSON.parse(responseText).events);
