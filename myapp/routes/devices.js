@@ -33,6 +33,7 @@ router.get('/register', function (req, res, next) {
 });
 
 router.post('/register', function (req, res, next) {
+  console.log('pm2 log check');
   const responseJSON = {
     success: false,
     message: '',
@@ -40,10 +41,10 @@ router.post('/register', function (req, res, next) {
   };
   let userEmail;
 
-  // if (!req.body.hasOwnProperty('deviceID')) {
-  //   responseJSON.message = 'Missing deviceID!';
-  //   res.status(400).json(responseJSON);
-  // }
+  if (!req.body.hasOwnProperty('deviceID')) {
+    responseJSON.message = 'Missing deviceID!';
+    res.status(400).json(responseJSON);
+  }
 
   // authentication check
   if (req.headers.x_auth) {
