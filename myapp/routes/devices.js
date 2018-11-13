@@ -10,10 +10,6 @@ const User = require('../models/users');
 
 const router = express.Router();
 
-router.get('/events', function (req, res, next) {
-  res.sendFile(path.resolve('./public/viewEvents.html'));
-});
-
 /* Authenticate user */
 const secret = fs.readFileSync(path.resolve(__dirname, '../jwtkey.txt')).toString();
 
