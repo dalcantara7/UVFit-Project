@@ -10,6 +10,22 @@
 </head>
 <body>
   <p>Welcome to the UV Fit thingy</p>
-  <div id='login'></div>
+  <div id="loggedin">
+    <p id="welcomemessage"></p>
+    <p>
+      <a href="http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/devices/register">Register Device</a>
+    </p>
+    <p>
+      <a href="" id='logoutlink'>Logout</a>
+    </p>
+  </div>
+  <div id="loggedout">
+    <p>
+      <a href="http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/login">Login</a>
+    </p>
+    <p>
+      <a href="http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/users/register">Register</a>
+    </p>
+  </div>
 </body>
 </html>
