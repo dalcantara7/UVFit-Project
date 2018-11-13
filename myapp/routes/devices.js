@@ -33,7 +33,7 @@ router.get('/register', function (req, res, next) {
 });
 
 router.post('/register', function (req, res, next) {
-  console.log('pm2 log check');
+  console.warn('pm2 log check');
   const responseJSON = {
     success: false,
     message: '',
@@ -60,7 +60,7 @@ router.post('/register', function (req, res, next) {
     res.status(401).json(responseJSON);
   }
 
-  console.log('past auth check');
+  console.warn('past auth check');
 
   // Has the device already been registered?
   Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
