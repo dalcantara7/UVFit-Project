@@ -55,7 +55,21 @@
     eventTable.appendChild(row);
 
     for (const event of events) {
-      console.log(event);
+      row.innerHTML = '';
+      data.innerHTML = event.deviceID;
+      row.appendChild(data);
+      data.innerHTML = event.longitude;
+      row.appendChild(data);
+      data.innerHTML = event.latitude;
+      row.appendChild(data);
+      data.innerHTML = event.uvVal;
+      row.appendChild(data);
+      data.innerHTML = event.speed;
+      row.appendChild(data);
+      data.innerHTML = event.published_at;
+      row.appendChild(data);
     }
+
+    document.getElementById('events').appendChild(eventTable);
   }
 })();
