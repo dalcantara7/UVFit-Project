@@ -48,7 +48,8 @@ router.post('/register', function (req, res, next) {
   // authentication check
   if (req.headers.x_auth) {
     try {
-      userEmail = jwt.decode(req.header.x_auth, secret).userEmail;
+      const token = req.headers.x_auth;
+      userEmail = jwt.decode(token, secret).userEmail;
     } catch (ex) {
       responseJSON.message = 'Invalid authorization token.';
       res.status(401).json(responseJSON);
