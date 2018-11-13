@@ -80,6 +80,7 @@ router.post('/register', function (req, res, next) {
           // associate device with user
           User.findOne({ email: userEmail }, function (err, user) {
             user.deviceID = newDevice.deviceID;
+            user.save();
           });
           responseJSON.success = true;
           responseJSON.message = 'Device ID ' + newDevice.deviceID + 'was successfully registered to your account!';
