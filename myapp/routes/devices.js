@@ -17,6 +17,8 @@ router.get('/events', function (req, res, next) {
 /* Authenticate user */
 const secret = fs.readFileSync(path.resolve(__dirname, '../jwtkey.txt')).toString();
 
+console.log(secret);
+
 function getNewApikey() {
   let newApikey = '';
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
