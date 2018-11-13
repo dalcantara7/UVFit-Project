@@ -28,7 +28,7 @@
         'Content-Type': 'application/json',
         x_auth: token,
       },
-      body: message,
+      body: JSON.stringify(message),
     };
 
     console.log(fetchOptions);
