@@ -61,7 +61,7 @@ router.post('/register', function (req, res, next) {
   // Has the device already been registered?
   Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
     if (device) {
-      responseJSON.message = 'Device ID ' + req.body.deviceID + 'already registered.';
+      responseJSON.message = 'Device ID ' + req.body.deviceID + ' is already registered.';
       responseJSON.success = false;
       res.json(responseJSON);
     } else {
@@ -83,7 +83,7 @@ router.post('/register', function (req, res, next) {
             user.save();
           });
           responseJSON.success = true;
-          responseJSON.message = 'Device ID ' + newDevice.deviceID + 'was successfully registered to your account!';
+          responseJSON.message = 'Device ID ' + newDevice.deviceID + ' was successfully registered to your account!';
           res.status(201).json(responseJSON);
         }
       });
