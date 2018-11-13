@@ -28,7 +28,7 @@
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(message),
+      body: message,
     };
 
     fetch(url, fetchOptions)

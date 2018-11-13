@@ -27,7 +27,7 @@
         'Content-Type': 'application/json',
         x_auth: window.sessionStorage.getItem('token'),
       },
-      body: JSON.stringify(message),
+      body: message,
     };
 
     console.log(fetchOptions);
