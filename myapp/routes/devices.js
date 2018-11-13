@@ -40,10 +40,10 @@ router.post('/register', function (req, res, next) {
   };
   let userEmail;
 
-  // if (!req.body.hasOwnProperty('deviceID')) {
-  //   responseJSON.message = 'Missing deviceID!';
-  //   res.status(400).json(responseJSON);
-  // }
+  if (!req.body.hasOwnProperty('deviceID')) {
+    responseJSON.message = 'Missing deviceID!';
+    res.json(responseJSON);
+  }
 
   // authentication check
   if (req.headers.x_auth) {
@@ -118,11 +118,11 @@ router.post('/register', function (req, res, next) {
 router.post('/reportevent', function (req, res, next) {
   const data = JSON.parse(req.body.data);
 
-  if (!data.hasOwnProperty('longitude')) { res.status(201).send('Missing longitude field'); }
-  if (!data.hasOwnProperty('latitude')) { res.status(201).send('Missing latitude field'); }
-  if (!req.body.hasOwnProperty('deviceID')) { res.status(201).send('Missing deviceID field'); }
-  if (!data.hasOwnProperty('uvVal')) { res.status(201).send('Missing UV value field'); }
-  if (!data.hasOwnProperty('speed')) { res.status(201).send('Missing speed field'); }
+  if (!data.hasOwnProperty('longitude')) { res.send('Missing longitude field'); }
+  if (!data.hasOwnProperty('latitude')) { res.send('Missing latitude field'); }
+  if (!req.body.hasOwnProperty('deviceID')) { res.send('Missing deviceID field'); }
+  if (!data.hasOwnProperty('uvVal')) { res.send('Missing UV value field'); }
+  if (!data.hasOwnProperty('speed')) { res.send('Missing speed field'); }
 
   const currEvent = new Event({
     longitude: parseFloat(data.longitude).toFixed(6),
