@@ -37,9 +37,9 @@
   function populateTable(events) {
     document.getElementById('events').innerHTML = '';
     const eventTable = document.createElement('table');
-    const row = document.createElement('tr');
+    let row = document.createElement('tr');
     const header = document.createElement('th');
-    const data = document.createElement('td');
+    let data = document.createElement('td');
     header.innerHTML = 'Device ID';
     row.appendChild(header);
     header.innerHTML = 'Longitude';
@@ -55,20 +55,25 @@
     eventTable.appendChild(row);
 
     for (const event of events) {
+      row = document.createElement('tr');
       row.innerHTML = '';
       data.innerHTML = event.deviceID;
       row.appendChild(data);
+      data = document.createElement('td');
       data.innerHTML = event.longitude;
       row.appendChild(data);
+      data = document.createElement('td');
       data.innerHTML = event.latitude;
       row.appendChild(data);
+      data = document.createElement('td');
       data.innerHTML = event.uvVal;
       row.appendChild(data);
+      data = document.createElement('td');
       data.innerHTML = event.speed;
       row.appendChild(data);
+      data = document.createElement('td');
       data.innerHTML = event.published_at;
       row.appendChild(data);
-      console.log(event);
       console.log(row);
 
       eventTable.appendChild(row);
