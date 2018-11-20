@@ -3,6 +3,7 @@
 const express = require('express');
 const fs = require('fs');
 const jwt = require('jwt-simple');
+const sanitize = require('mongo-sanitize');
 const path = require('path');
 const Device = require('../models/devices');
 const Event = require('../models/events');
@@ -55,7 +56,7 @@ router.post('/register', function (req, res, next) {
   }
 
   // Has the device already been registered?
-  Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
+  Device.findOne({ deviceID: sanitize(req.body.deviceID) }, function (err, device) {
     if (device) {
       responseJSON.message = 'Device ID ' + req.body.deviceID + ' is already registered.';
       responseJSON.success = false;

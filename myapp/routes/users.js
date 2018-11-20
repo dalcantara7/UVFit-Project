@@ -3,6 +3,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
+const sanitize = require('mongo-sanitize');
 const jwt = require('jwt-simple');
 const path = require('path');
 const User = require('../models/users');
@@ -17,7 +18,7 @@ router.get('/register', function (req, res, next) {
 });
 
 router.post('/register', function (req, res) {
-  User.findOne({ email: req.body.email }, function (err, user) {
+  User.findOne({ email: sanitize(req.body.email) }, function (err, user) {
     if (user) {
       res.json({ success: false, message: 'Email already in use' });
     } else {
@@ -39,7 +40,7 @@ router.post('/register', function (req, res) {
 });
 
 router.post('/auth', function (req, res, next) {
-  User.findOne({ email: req.body.email }, function (err, user) {
+  User.findOne({ email: sanitize(req.body.email) }, function (err, user) {
     if (err) throw err;
 
     if (!user) {
