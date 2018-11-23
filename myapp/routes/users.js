@@ -14,7 +14,6 @@ router.use(bodyParser.urlencoded({ extended: false }));
 const secret = 'testsecretkey';
 
 router.get('/register', function (req, res, next) {
-  console.log(__dirname);
   res.sendFile(path.resolve('./public/registerUser.html'));
 });
 
