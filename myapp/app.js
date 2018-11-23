@@ -27,7 +27,7 @@ app.use(function (req, res, next) {
 });
 
 function checkFunction(url) {
-  const blockedURL = ['javascripts/index.js'];
+  const blockedURL = ['/javascripts/index.js'];
 
   return blockedURL.find(function (urlCheck) {
     return urlCheck === url;
