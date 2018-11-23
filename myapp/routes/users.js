@@ -50,6 +50,7 @@ router.post('/auth', function (req, res, next) {
         if (err) {
           res.status(400).json({ error: err });
         } else if (valid) {
+          router.use(express.static(path.join(__dirname, 'authenticated')));
           const token = jwt.encode({ userEmail: user.email }, secret);
           res.json({ token: token, username: user.username });
         } else {
