@@ -22,7 +22,7 @@ app.use(function (req, res, next) {
   if (!checkFunction(req.url)) {
     next();
   } else {
-    res.send(404, 'Not found');
+    res.send(403, 'Forbidden');
   }
 });
 
