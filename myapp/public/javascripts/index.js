@@ -10,6 +10,7 @@
   * comment
   */
   window.onload = function () {
+    console.log(window.location.pathname);
     if (window.sessionStorage.getItem('token')) {
       document.getElementById('loggedin').style.display = 'block';
       document.getElementById('loggedout').style.display = 'none';
