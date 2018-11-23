@@ -22,7 +22,7 @@ app.use(function (req, res, next) {
   if (!checkFunction(req.url)) {
     next();
   } else {
-    res.send(401, 'Unauthorized');
+    res.status(401).send('Unauthorized');
   }
 });
 
