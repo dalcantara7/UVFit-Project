@@ -18,22 +18,6 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// app.use(function (req, res, next) {
-//   if (!checkFunction(req.url)) {
-//     next();
-//   } else {
-//     res.status(401).send('Unauthorized');
-//   }
-// });
-
-// function checkFunction(url) {
-//   const blockedURL = ['/javascripts/registerDevice.js'];
-
-//   return blockedURL.find(function (urlCheck) {
-//     return urlCheck === url;
-//   });
-// }
-
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
