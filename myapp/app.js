@@ -18,6 +18,12 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
+app.use(function (req, res, next) {
+  if ((req.path.indexOf('html') >= 0)) {
+    res.redirect('/');
+  }
+});
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -27,12 +33,6 @@ app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
-});
-
-app.use(function (req, res, next) {
-  if ((req.path.indexOf('html') >= 0)) {
-    res.redirect('/');
-  }
 });
 
 app.use('/', indexRouter);
