@@ -29,6 +29,12 @@ app.use(function (req, res, next) {
   next();
 });
 
+app.use(function (req, res, next) {
+  if ((req.path.indexOf('html') >= 0)) {
+    res.redirect('/');
+  }
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/devices', devicesRouter);
