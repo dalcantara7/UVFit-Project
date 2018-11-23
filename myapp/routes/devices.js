@@ -26,6 +26,7 @@ function getNewApikey() {
 }
 
 router.get('/register', function (req, res, next) {
+  console.log(__dirname);
   res.sendFile(path.resolve('./public/registerDevice.html'));
 });
 
