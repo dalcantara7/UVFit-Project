@@ -18,11 +18,21 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-// app.use(function (req, res, next) {
-//   if ((req.path.indexOf('html') >= 0)) {
-//     res.redirect('/');
-//   }
-// });
+app.use(function (req, res, next) {
+  if (!checkFunction(req.url)) {
+    next();
+  } else {
+    res.send(404, 'Not found');
+  }
+});
+
+function checkFunction(url) {
+  const blockedURL = ['javascripts/index.js'];
+
+  return blockedURL.find(function (urlCheck) {
+    return urlCheck === url;
+  });
+}
 
 app.use(logger('dev'));
 app.use(express.json());
