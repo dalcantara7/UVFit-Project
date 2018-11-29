@@ -14,7 +14,7 @@
   };
 
   function showEvents() {
-    const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/devices/getevents';
+    const url = 'http://13.59.207.131:3000/devices/getevents';
 
     const fetchOptions = {
       method: 'GET',

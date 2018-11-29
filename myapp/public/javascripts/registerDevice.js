@@ -14,7 +14,7 @@
   };
 
   function registerDevice() {
-    const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/devices/register';
+    const url = 'http://13.59.207.131:3000/devices/register';
     const token = window.sessionStorage.getItem('token');
 
     const message = {
@@ -38,7 +38,7 @@
         if (responseJSON.success) {
           document.getElementById('error').innerHTML = responseJSON.message;
           setTimeout(function () {
-            window.location.replace('http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/');
+            window.location.replace('http://13.59.207.131:3000/');
           }, 2000);
         } else {
           document.getElementById('error').innerHTML = responseJSON.message;

@@ -14,7 +14,7 @@
   };
 
   function userLogin() {
-    const url = 'http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/users/auth';
+    const url = 'http://13.59.207.131:3000/users/auth';
 
     const message = {
       email: document.getElementById('email').value,
@@ -38,7 +38,7 @@
           window.sessionStorage.setItem('token', responseJSON.token);
           window.sessionStorage.setItem('username', responseJSON.username);
           setTimeout(function () {
-            window.location.replace('http://ec2-13-59-207-131.us-east-2.compute.amazonaws.com:3000/');
+            window.location.replace('http://13.59.207.131:3000/');
           }, 2000);
         } else {
           document.getElementById('error').innerHTML = responseJSON.message;
