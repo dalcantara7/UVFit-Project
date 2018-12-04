@@ -10,7 +10,7 @@
   * comment
   */
   window.onload = function () {
-    document.getElementById('submit').addEventListener('click', registerUser);
+    document.getElementById('signup').addEventListener('click', registerUser);
   };
 
   function registerUser() {
