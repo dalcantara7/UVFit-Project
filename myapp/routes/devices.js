@@ -173,29 +173,29 @@ router.post('/reportevent', function (req, res, next) {
   // if (!data.hasOwnProperty('uvVal')) { res.status(400).json({ success: false, message: 'Missing UV value field' }); }
   // if (!data.hasOwnProperty('speed')) { res.status(400).json({ success: false, message: 'Missing speed field' }); }
 
-  Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
-    if (err) {
-      res.status(400).json({ success: false, error: err });
-    } else if (device) {
-      if (device.apiKey === data.apiKey) {
-        const currEvent = new Event({
-          longitude: parseFloat(data.longitude).toFixed(6),
-          latitude: parseFloat(data.latitude).toFixed(6),
-          uvVal: parseFloat(data.uvVal),
-          speed: parseFloat(data.speed),
-          deviceID: req.body.deviceID,
-        });
+  // Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
+  //   if (err) {
+  //     res.status(400).json({ success: false, error: err });
+  //   } else if (device) {
+  //     if (device.apiKey === data.apiKey) {
+  //       const currEvent = new Event({
+  //         longitude: parseFloat(data.longitude).toFixed(6),
+  //         latitude: parseFloat(data.latitude).toFixed(6),
+  //         uvVal: parseFloat(data.uvVal),
+  //         speed: parseFloat(data.speed),
+  //         deviceID: req.body.deviceID,
+  //       });
 
-        currEvent.save(function (err, currEvent) {
-          if (err) throw err;
+  //       currEvent.save(function (err, currEvent) {
+  //         if (err) throw err;
 
-          res.send('Event at Lat: ' + data.latitude.toFixed(6) + ' Long: ' + data.longitude.toFixed(6) + ' Speed: ' + data.speed + ' UV value: ' + data.uvVal + ' was saved with id ' + currEvent._id);
-        });
-      } else {
-        res.status(400).json({ success: false, error: 'Invalid API key' });
-      }
-    }
-  });
+  //         res.send('Event at Lat: ' + data.latitude.toFixed(6) + ' Long: ' + data.longitude.toFixed(6) + ' Speed: ' + data.speed + ' UV value: ' + data.uvVal + ' was saved with id ' + currEvent._id);
+  //       });
+  //     } else {
+  //       res.status(400).json({ success: false, error: 'Invalid API key' });
+  //     }
+  //   }
+  // });
 });
 
 router.get('/', function (req, res, next) {
