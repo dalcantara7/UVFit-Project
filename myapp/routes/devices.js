@@ -125,6 +125,8 @@ router.get('/sendinfo', function (req, res, next) {
       access_token: particleToken,
       args: '123456:::40',
     },
+  }, function (err, res, body) {
+    console.log(res);
   });
 
   responseJSON.success = true;
