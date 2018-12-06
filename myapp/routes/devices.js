@@ -157,11 +157,7 @@ router.get('/sendinfo', function (req, res, next) {
 // });
 
 router.post('/reportevent', function (req, res, next) {
-  if (req.body.data) {
-    console.log('data exists');
-  } else {
-    console.log('error with body.data');
-  }
+  console.log(req.body.data);
   const data = JSON.parse(req.body.data);
   console.log(data);
 
