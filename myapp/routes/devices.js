@@ -157,8 +157,8 @@ router.get('/sendinfo', function (req, res, next) {
 // });
 
 router.post('/reportevent', function (req, res, next) {
-  console.log('report event');
   const data = JSON.parse(req.body.data);
+  console.log('after json parse');
 
   // if (!data.hasOwnProperty('apiKey')) { res.status(400).json({ success: false, message: 'Missing device API key' }); }
   // if (!data.hasOwnProperty('longitude')) { res.status(400).json({ success: false, message: 'Missing longitude field' }); }
