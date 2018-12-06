@@ -158,9 +158,8 @@ router.get('/sendinfo', function (req, res, next) {
 
 router.post('/reportevent', function (req, res, next) {
   console.log(req.body);
-  const data = JSON.parse(req.body.data, function (key, value) {
-    console.log('yeet');
-  });
+  const json = JSON.parse(req.body);
+  const data = JSON.parse(json.data);
   console.log(data);
 
   // if (!data.hasOwnProperty('apiKey')) { res.status(400).json({ success: false, message: 'Missing device API key' }); }
