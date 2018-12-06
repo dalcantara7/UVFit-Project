@@ -159,7 +159,7 @@ router.get('/sendinfo', function (req, res, next) {
 router.post('/reportevent', function (req, res, next) {
   const data = JSON.parse(req.body.data);
 
-  if (!req.body.hasOwnProperty('apiKey')) { res.send('Missing device API key'); }
+  if (!data.hasOwnProperty('apiKey')) { res.send('Missing device API key'); }
   if (!data.hasOwnProperty('longitude')) { res.send('Missing longitude field'); }
   if (!data.hasOwnProperty('latitude')) { res.send('Missing latitude field'); }
   if (!req.body.hasOwnProperty('deviceID')) { res.send('Missing deviceID field'); }
