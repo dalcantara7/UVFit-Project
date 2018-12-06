@@ -170,8 +170,8 @@ router.post('/reportevent', function (req, res, next) {
     if (err) {
       res.status(400).json({ success: false, error: err });
     } else if (device) {
-      console.log(device.apiKey == data.apiKey);
-      console.log(device.apiKey === data.apiKey);
+      console.log(typeof device.apiKey);
+      console.log(typeof data.apiKey);
       if (device.apiKey === data.apiKey) {
         const currEvent = new Event({
           longitude: parseFloat(data.longitude).toFixed(6),
