@@ -90,44 +90,43 @@ router.post('/register', function (req, res, next) {
   });
 });
 
-router.get('/sendinfo', function (req, res, next) {
+router.post('/sendinfo', function (req, res, next) {
   const responseJSON = {
     success: false,
     message: '',
   };
-  // authentication check
-  // if (req.headers.x_auth) {
-  //   try {
-  //     const token = req.headers.x_auth;
-  //   } catch (ex) {
-  //     responseJSON.message = 'Invalid authorization token.';
-  //     responseJSON.success = false;
-  //     res.status(401).json(responseJSON);
-  //   }
-  // } else {
-  //   responseJSON.message = 'Missing authorization token.';
-  //   responseJSON.success = false;
-  //   res.status(401).json(responseJSON);
-  // }
 
-  if (!req.query.deviceid) {
+  // authentication check
+  if (req.headers.x_auth) {
+    try {
+      const token = req.headers.x_auth;
+    } catch (ex) {
+      responseJSON.message = 'Invalid authorization token.';
+      responseJSON.success = false;
+      res.status(401).json(responseJSON);
+    }
+  } else {
+    responseJSON.message = 'Missing authorization token.';
+    responseJSON.success = false;
+    res.status(401).json(responseJSON);
+  }
+
+  if (!req.body.deviceid) {
     responseJSON.message = 'missing device id';
     res.status(400).json(responseJSON);
   }
 
   request({
     method: 'POST',
-    uri: 'https://api.particle.io/v1/devices/' + req.query.deviceid + '/apiAndUV',
+    uri: 'https://api.particle.io/v1/devices/' + req.body.deviceid + '/apiAndUV',
     form: {
       access_token: particleToken,
       args: 'HKEHcD22BHFsL7wGGWOdglC6IpdZYdls:::40',
     },
-  }, function (err, res, body) {
-    console.log(res.statusCode);
   });
 
   responseJSON.success = true;
-  responseJSON.message = 'Device ID ' + req.query.deviceid + ' pinged.';
+  responseJSON.message = 'Device ID ' + req.body.deviceid + ' pinged.';
   res.json(responseJSON);
 });
 

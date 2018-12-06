@@ -7,6 +7,7 @@ const sanitize = require('mongo-sanitize');
 const jwt = require('jwt-simple');
 const path = require('path');
 const User = require('../models/users');
+const Device = require('../models/devices');
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
@@ -15,6 +16,10 @@ const secret = 'testsecretkey';
 
 router.get('/register', function (req, res, next) {
   res.sendFile(path.resolve('./public/registerUser.html'));
+});
+
+router.get('/dashboard', function (req, res, next) {
+  res.sendFile(path.resolve('./public/userDashboard.html'));
 });
 
 router.post('/register', function (req, res) {
@@ -64,8 +69,41 @@ router.get('/events', function (req, res, next) {
   res.sendFile(path.resolve('./public/viewEvents.html'));
 });
 
-router.get('/', function (req, res) {
-  res.send('successfully accessed USERS route');
+router.get('/getdevices', function (req, res) {
+  let userEmail;
+  const responseJSON = {
+    success: false,
+    devices: [],
+  };
+
+  // authentication check
+  if (req.headers.x_auth) {
+    try {
+      const token = req.headers.x_auth;
+      userEmail = jwt.decode(token, secret).userEmail;
+    } catch (ex) {
+      responseJSON.message = 'Invalid authorization token.';
+      responseJSON.success = false;
+      res.status(401).json(responseJSON);
+    }
+  } else {
+    responseJSON.message = 'Missing authorization token.';
+    responseJSON.success = false;
+
+    res.status(401).json(responseJSON);
+  }
+
+  Device.find({ userEmail: sanitize(userEmail) }, function (err, devices) {
+    if (err) throw err;
+
+    for (const device of devices) {
+      responseJSON.users.push(device.deviceID);
+    }
+
+    responseJSON.success = true;
+  });
+
+  res.json(responseJSON);
 });
 
 module.exports = router;
