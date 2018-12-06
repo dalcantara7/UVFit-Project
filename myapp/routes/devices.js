@@ -160,17 +160,18 @@ router.post('/reportevent', function (req, res, next) {
   console.log(req.body.data);
   const data = JSON.parse(req.body.data);
 
-  if (!data.hasOwnProperty('apiKey')) { res.status(400).json({ success: false, message: 'Missing device API key' }); }
-  if (!data.hasOwnProperty('longitude')) { res.status(400).json({ success: false, message: 'Missing longitude field' }); }
-  if (!data.hasOwnProperty('latitude')) { res.status(400).json({ success: false, message: 'Missing latitude field' }); }
-  if (!req.body.hasOwnProperty('deviceID')) { res.status(400).json({ success: false, message: 'Missing deviceID field' }); }
-  if (!data.hasOwnProperty('uvVal')) { res.status(400).json({ success: false, message: 'Missing UV value field' }); }
-  if (!data.hasOwnProperty('speed')) { res.status(400).json({ success: false, message: 'Missing speed field' }); }
+  // if (!data.hasOwnProperty('apiKey')) { res.status(400).json({ success: false, message: 'Missing device API key' }); }
+  // if (!data.hasOwnProperty('longitude')) { res.status(400).json({ success: false, message: 'Missing longitude field' }); }
+  // if (!data.hasOwnProperty('latitude')) { res.status(400).json({ success: false, message: 'Missing latitude field' }); }
+  // if (!req.body.hasOwnProperty('deviceID')) { res.status(400).json({ success: false, message: 'Missing deviceID field' }); }
+  // if (!data.hasOwnProperty('uvVal')) { res.status(400).json({ success: false, message: 'Missing UV value field' }); }
+  // if (!data.hasOwnProperty('speed')) { res.status(400).json({ success: false, message: 'Missing speed field' }); }
 
   Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
     if (err) {
       res.status(400).json({ success: false, error: err });
     } else if (device) {
+      console.log(device);
       if (device.apiKey === data.apiKey) {
         const currEvent = new Event({
           longitude: parseFloat(data.longitude).toFixed(6),
