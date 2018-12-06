@@ -159,18 +159,18 @@ router.get('/sendinfo', function (req, res, next) {
 router.post('/reportevent', function (req, res, next) {
   const data = JSON.parse(req.body.data);
 
-  if (!data.hasOwnProperty('apiKey')) { res.send('Missing device API key'); }
-  if (!data.hasOwnProperty('longitude')) { res.send('Missing longitude field'); }
-  if (!data.hasOwnProperty('latitude')) { res.send('Missing latitude field'); }
-  if (!req.body.hasOwnProperty('deviceID')) { res.send('Missing deviceID field'); }
-  if (!data.hasOwnProperty('uvVal')) { res.send('Missing UV value field'); }
-  if (!data.hasOwnProperty('speed')) { res.send('Missing speed field'); }
+  if (!data.hasOwnProperty('apiKey')) { res.status(400).send('Missing device API key'); }
+  if (!data.hasOwnProperty('longitude')) { res.status(400).send('Missing longitude field'); }
+  if (!data.hasOwnProperty('latitude')) { res.status(400).send('Missing latitude field'); }
+  if (!req.body.hasOwnProperty('deviceID')) { res.status(400).send('Missing deviceID field'); }
+  if (!data.hasOwnProperty('uvVal')) { res.status(400).send('Missing UV value field'); }
+  if (!data.hasOwnProperty('speed')) { res.status(400).send('Missing speed field'); }
 
   Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
     if (err) {
       res.status(400).json({ success: false, error: err });
     } else if (device) {
-      if (device.apiKey === req.body.apiKey) {
+      if (device.apiKey === data.apiKey) {
         const currEvent = new Event({
           longitude: parseFloat(data.longitude).toFixed(6),
           latitude: parseFloat(data.latitude).toFixed(6),
