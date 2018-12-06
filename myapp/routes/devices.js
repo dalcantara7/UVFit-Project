@@ -95,13 +95,10 @@ router.get('/sendinfo', function (req, res, next) {
     success: false,
     message: '',
   };
-  let userEmail;
-
   // authentication check
   // if (req.headers.x_auth) {
   //   try {
   //     const token = req.headers.x_auth;
-  //     userEmail = jwt.decode(token, secret).userEmail;
   //   } catch (ex) {
   //     responseJSON.message = 'Invalid authorization token.';
   //     responseJSON.success = false;
@@ -123,7 +120,7 @@ router.get('/sendinfo', function (req, res, next) {
     uri: 'https://api.particle.io/v1/devices/' + req.query.deviceid + '/apiAndUV',
     form: {
       access_token: particleToken,
-      args: '123456:::40',
+      args: 'HKEHcD22BHFsL7wGGWOdglC6IpdZYdls:::40',
     },
   }, function (err, res, body) {
     console.log(res.statusCode);
@@ -162,24 +159,35 @@ router.get('/sendinfo', function (req, res, next) {
 router.post('/reportevent', function (req, res, next) {
   const data = JSON.parse(req.body.data);
 
+  if (!req.body.hasOwnProperty('apiKey')) { res.send('Missing device API key'); }
   if (!data.hasOwnProperty('longitude')) { res.send('Missing longitude field'); }
   if (!data.hasOwnProperty('latitude')) { res.send('Missing latitude field'); }
   if (!req.body.hasOwnProperty('deviceID')) { res.send('Missing deviceID field'); }
   if (!data.hasOwnProperty('uvVal')) { res.send('Missing UV value field'); }
   if (!data.hasOwnProperty('speed')) { res.send('Missing speed field'); }
 
-  const currEvent = new Event({
-    longitude: parseFloat(data.longitude).toFixed(6),
-    latitude: parseFloat(data.latitude).toFixed(6),
-    uvVal: parseFloat(data.uvVal),
-    speed: parseFloat(data.speed),
-    deviceID: req.body.deviceID,
-  });
+  Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
+    if (err) {
+      res.status(400).json({ success: false, error: err });
+    } else if (device) {
+      if (device.apiKey === req.body.apiKey) {
+        const currEvent = new Event({
+          longitude: parseFloat(data.longitude).toFixed(6),
+          latitude: parseFloat(data.latitude).toFixed(6),
+          uvVal: parseFloat(data.uvVal),
+          speed: parseFloat(data.speed),
+          deviceID: req.body.deviceID,
+        });
 
-  currEvent.save(function (err, currEvent) {
-    if (err) throw err;
+        currEvent.save(function (err, currEvent) {
+          if (err) throw err;
 
-    res.send('Event at Lat: ' + data.latitude.toFixed(6) + ' Long: ' + data.longitude.toFixed(6) + ' Speed: ' + data.speed + ' UV value: ' + data.uvVal + ' was saved with id ' + currEvent._id);
+          res.send('Event at Lat: ' + data.latitude.toFixed(6) + ' Long: ' + data.longitude.toFixed(6) + ' Speed: ' + data.speed + ' UV value: ' + data.uvVal + ' was saved with id ' + currEvent._id);
+        });
+      } else {
+        res.status(400).json({ success: false, error: 'Invalid API key' });
+      }
+    }
   });
 });
 
