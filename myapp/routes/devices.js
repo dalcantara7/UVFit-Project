@@ -5,6 +5,7 @@ const fs = require('fs');
 const jwt = require('jwt-simple');
 const sanitize = require('mongo-sanitize');
 const path = require('path');
+const request = require('request');
 const Device = require('../models/devices');
 const Event = require('../models/events');
 const User = require('../models/users');
@@ -13,6 +14,7 @@ const router = express.Router();
 
 /* Authenticate user */
 const secret = fs.readFileSync(path.resolve(__dirname, '../jwtkey.txt')).toString();
+const particleToken = fs.readFileSync(path.resolve(__dirname, '../particlekey.txt')).toString();
 
 function getNewApikey() {
   let newApikey = '';
@@ -86,6 +88,48 @@ router.post('/register', function (req, res, next) {
       });
     }
   });
+});
+
+router.get('/sendinfo', function (req, res, next) {
+  const responseJSON = {
+    success: false,
+    message: '',
+  };
+  let userEmail;
+
+  // authentication check
+  if (req.headers.x_auth) {
+    try {
+      const token = req.headers.x_auth;
+      userEmail = jwt.decode(token, secret).userEmail;
+    } catch (ex) {
+      responseJSON.message = 'Invalid authorization token.';
+      responseJSON.success = false;
+      res.status(401).json(responseJSON);
+    }
+  } else {
+    responseJSON.message = 'Missing authorization token.';
+    responseJSON.success = false;
+    res.status(401).json(responseJSON);
+  }
+
+  if (!req.query.deviceid) {
+    responseJSON.message = 'missing device id';
+    res.status(400).json(responseJSON);
+  }
+
+  request({
+    method: 'POST',
+    uri: 'https://api.particle.io/v1/devices/' + req.query.deviceid + '/apiAndUV',
+    form: {
+      access_token: particleToken,
+      args: '123456:::40',
+    },
+  });
+
+  responseJSON.success = true;
+  responseJSON.message = 'Device ID ' + req.query.deviceid + ' pinged.';
+  res.json(responseJSON);
 });
 
 // Checking to see if device IDs have been registered
