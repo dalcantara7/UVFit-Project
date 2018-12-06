@@ -126,7 +126,7 @@ router.get('/sendinfo', function (req, res, next) {
       args: '123456:::40',
     },
   }, function (err, res, body) {
-    console.log(res);
+    console.log(res.statusCode);
   });
 
   responseJSON.success = true;
