@@ -98,20 +98,20 @@ router.get('/sendinfo', function (req, res, next) {
   let userEmail;
 
   // authentication check
-  if (req.headers.x_auth) {
-    try {
-      const token = req.headers.x_auth;
-      userEmail = jwt.decode(token, secret).userEmail;
-    } catch (ex) {
-      responseJSON.message = 'Invalid authorization token.';
-      responseJSON.success = false;
-      res.status(401).json(responseJSON);
-    }
-  } else {
-    responseJSON.message = 'Missing authorization token.';
-    responseJSON.success = false;
-    res.status(401).json(responseJSON);
-  }
+  // if (req.headers.x_auth) {
+  //   try {
+  //     const token = req.headers.x_auth;
+  //     userEmail = jwt.decode(token, secret).userEmail;
+  //   } catch (ex) {
+  //     responseJSON.message = 'Invalid authorization token.';
+  //     responseJSON.success = false;
+  //     res.status(401).json(responseJSON);
+  //   }
+  // } else {
+  //   responseJSON.message = 'Missing authorization token.';
+  //   responseJSON.success = false;
+  //   res.status(401).json(responseJSON);
+  // }
 
   if (!req.query.deviceid) {
     responseJSON.message = 'missing device id';
