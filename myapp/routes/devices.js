@@ -96,8 +96,6 @@ router.post('/sendinfo', function (req, res, next) {
     message: '',
   };
 
-  console.log(req.body);
-
   // authentication check
   if (req.headers.x_auth) {
     try {

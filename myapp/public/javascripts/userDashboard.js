@@ -17,9 +17,7 @@
   function startActivity() {
     const deviceID = document.getElementById('deviceList').value.split(':::')[0];
     const apikey = document.getElementById('deviceList').value.split(':::')[1];
-
     const url = 'http://13.59.207.131:3000/devices/sendinfo';
-
     const message = {
       deviceID: deviceID,
       apikey: apikey,
