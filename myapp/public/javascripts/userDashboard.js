@@ -20,6 +20,11 @@
 
     const url = 'http://13.59.207.131:3000/devices/sendinfo';
 
+    const message = {
+      deviceID: deviceID,
+      apikey: apikey,
+    };
+
     const fetchOptions = {
       method: 'POST',
       headers: {
@@ -27,10 +32,7 @@
         'Content-Type': 'application/json',
         x_auth: window.sessionStorage.getItem('token'),
       },
-      body: {
-        deviceID: deviceID,
-        apikey: apikey,
-      },
+      body: JSON.stringify(message);
     };
 
     fetch(url, fetchOptions)
