@@ -15,7 +15,25 @@
   };
 
   function startActivity() {
+    const deviceID = document.getElementById('deviceList').value;
 
+    const url = 'http://13.59.207.131:3000/devices/sendinfo';
+
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        x_auth: window.sessionStorage.getItem('token'),
+      },
+      body: { deviceID: deviceID },
+    };
+
+    fetch(url, fetchOptions)
+      .then(checkStatus)
+      .catch(function (error) {
+        console.error('ERROR: ' + error);
+      });
   }
 
   function populateList() {

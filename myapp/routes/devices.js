@@ -111,14 +111,14 @@ router.post('/sendinfo', function (req, res, next) {
     res.status(401).json(responseJSON);
   }
 
-  if (!req.body.deviceid) {
+  if (!req.body.deviceID) {
     responseJSON.message = 'missing device id';
     res.status(400).json(responseJSON);
   }
 
   request({
     method: 'POST',
-    uri: 'https://api.particle.io/v1/devices/' + req.body.deviceid + '/apiAndUV',
+    uri: 'https://api.particle.io/v1/devices/' + req.body.deviceID + '/apiAndUV',
     form: {
       access_token: particleToken,
       args: 'HKEHcD22BHFsL7wGGWOdglC6IpdZYdls:::40',
