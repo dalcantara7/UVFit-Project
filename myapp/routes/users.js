@@ -101,6 +101,8 @@ router.get('/getdevices', function (req, res) {
     }
 
     responseJSON.success = true;
+
+    console.log(responseJSON);
   });
 
   res.status(200).json(responseJSON);

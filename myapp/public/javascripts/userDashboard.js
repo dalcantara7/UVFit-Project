@@ -34,7 +34,6 @@
       .then(checkStatus)
       .then(function (responseText) {
         const responseJSON = JSON.parse(responseText);
-        console.log(responseJSON);
 
         for (const id of responseJSON.devices) {
           const option = document.createElement('option');
