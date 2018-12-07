@@ -103,7 +103,7 @@ router.get('/getdevices', function (req, res) {
     responseJSON.success = true;
   });
 
-  res.json(responseJSON);
+  res.status(200).json(responseJSON);
 });
 
 module.exports = router;
