@@ -8,6 +8,11 @@
 table {
   border-collapse: collapse;
 }
+
+select {
+  display: block;
+  padding: 5px;
+}
 /* From Evan's CSS */
 
 /* @extend display-flex; */
