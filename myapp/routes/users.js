@@ -97,7 +97,7 @@ router.get('/getdevices', function (req, res) {
     if (err) throw err;
 
     for (const device of devices) {
-      responseJSON.devices.push(device.deviceID);
+      responseJSON.devices.push(device);
     }
 
     responseJSON.success = true;

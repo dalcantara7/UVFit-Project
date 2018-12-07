@@ -15,7 +15,8 @@
   };
 
   function startActivity() {
-    const deviceID = document.getElementById('deviceList').value;
+    const deviceID = document.getElementById('deviceList').value.split(':::')[0];
+    const apikey = document.getElementById('deviceList').value.split(':::')[1];
 
     const url = 'http://13.59.207.131:3000/devices/sendinfo';
 
@@ -26,7 +27,10 @@
         'Content-Type': 'application/json',
         x_auth: window.sessionStorage.getItem('token'),
       },
-      body: { deviceID: deviceID },
+      body: {
+        deviceID: deviceID,
+        apikey: apikey,
+      },
     };
 
     fetch(url, fetchOptions)
@@ -53,10 +57,10 @@
       .then(function (responseText) {
         const responseJSON = JSON.parse(responseText);
 
-        for (const id of responseJSON.devices) {
+        for (const device of responseJSON.devices) {
           const option = document.createElement('option');
-          option.value = id;
-          option.innerHTML = id;
+          option.value = device.deviceID + ':::' + device.apikey;
+          option.innerHTML = device.deviceID;
           document.getElementById('deviceList').appendChild(option);
         }
       })

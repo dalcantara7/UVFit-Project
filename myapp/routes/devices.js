@@ -121,7 +121,7 @@ router.post('/sendinfo', function (req, res, next) {
     uri: 'https://api.particle.io/v1/devices/' + req.body.deviceID + '/apiAndUV',
     form: {
       access_token: particleToken,
-      args: 'HKEHcD22BHFsL7wGGWOdglC6IpdZYdls:::40',
+      args: req.body.apikey + ':::' + 40,
     },
   });
 
