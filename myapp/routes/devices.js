@@ -101,7 +101,7 @@ router.post('/sendinfo', function (req, res, next) {
   // authentication check
   if (req.headers.x_auth) {
     try {
-      const token = req.headers.x_auth;
+      const token = jwt.decode(req.headers.x_auth, secret);
     } catch (ex) {
       responseJSON.message = 'Invalid authorization token.';
       responseJSON.success = false;
