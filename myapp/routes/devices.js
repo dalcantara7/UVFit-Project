@@ -174,7 +174,7 @@ router.post('/reportevent', function (req, res, next) {
       if (device.apikey === data.apiKey) {
         if (parseFloat(data.speed < 5)) {
           activityType = 'Walking';
-        } else if (parseFloat(data.speed >= 5 && data.speed < 15)) { 
+        } else if (parseFloat(data.speed >= 5 && data.speed < 15)) {
           activityType = 'Running';
         } else if (parseFloat(data.speed >= 15)) {
           activityType = 'Cycling';
