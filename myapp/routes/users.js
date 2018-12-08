@@ -65,8 +65,8 @@ router.post('/auth', function (req, res, next) {
   });
 });
 
-router.get('/events', function (req, res, next) {
-  res.sendFile(path.resolve('./public/viewEvents.html'));
+router.get('/activities', function (req, res, next) {
+  res.sendFile(path.resolve('./public/viewActivities.html'));
 });
 
 router.get('/getdevices', function (req, res) {
