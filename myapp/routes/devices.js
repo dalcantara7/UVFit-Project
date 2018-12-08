@@ -214,7 +214,7 @@ router.get('/getevents', function (req, res, next) {
     Event.find({ deviceID: { $in: user.deviceIDs } }, function (err, events) {
       if (err) throw err;
 
-      res.json({ success: true, events: events, message: 'Activities for user ' + user.username });
+      res.json({ success: true, events: events, message: 'Activities for ' + user.username });
     });
   });
 });
