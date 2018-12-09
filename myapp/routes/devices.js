@@ -250,44 +250,44 @@ router.get('/getevents', function (req, res, next) {
   });
 });
 
-function calcData(activity) {
-  console.log(activity);
+function calcData(activities) {
   const eventArray = [];
-
   let totalDistance;
   let totalSpeed;
   let totalUV;
 
-  for (const eventID of activity.events) {
-    Event.findOne(eventID, function (err, event) {
-      if (err) throw err;
+  for (const activity of activities) {
+    for (const eventID of activity.events) {
+      Event.findOne(eventID, function (err, event) {
+        if (err) throw err;
 
-      eventArray.push(event);
-    });
-  }
-
-  for (const [index, event] of eventArray.entries()) {
-    // distance
-    if (index !== eventArray.length - 1) {
-      totalDistance += distance(event.latitude, event.longitude,
-        eventArray[index + 1].latitude,
-        eventArray[index + 1].longitude);
+        eventArray.push(event);
+      });
     }
-    totalSpeed += event.speed;
-    totalUV += event.uvVal;
-  }
 
-  activity.avgSpeed = totalSpeed / eventArray.length;
-  activity.distance = totalDistance;
-  activity.duration = activity.startTime + (1000 * eventArray.length);
-  activity.uvExposure = totalUV;
+    for (const [index, event] of eventArray.entries()) {
+      // distance
+      if (index !== eventArray.length - 1) {
+        totalDistance += distance(event.latitude, event.longitude,
+          eventArray[index + 1].latitude,
+          eventArray[index + 1].longitude);
+      }
+      totalSpeed += event.speed;
+      totalUV += event.uvVal;
+    }
 
-  if (totalSpeed / eventArray.length < 5) {
-    activity.activityType = 'Walking';
-  } else if (totalSpeed / eventArray.length < 15) {
-    activity.activityType = 'Running';
-  } else {
-    activity.activityType = 'Cycling';
+    activity.avgSpeed = totalSpeed / eventArray.length;
+    activity.distance = totalDistance;
+    activity.duration = activity.startTime + (1000 * eventArray.length);
+    activity.uvExposure = totalUV;
+
+    if (totalSpeed / eventArray.length < 5) {
+      activity.activityType = 'Walking';
+    } else if (totalSpeed / eventArray.length < 15) {
+      activity.activityType = 'Running';
+    } else {
+      activity.activityType = 'Cycling';
+    }
   }
 }
 
