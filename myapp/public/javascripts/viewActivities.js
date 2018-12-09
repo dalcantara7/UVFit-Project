@@ -92,13 +92,13 @@
       data.innerHTML = activity.uvExposure;
       row.appendChild(data);
       data = document.createElement('td');
-      data.innerHTML = activity.avgSpeed;
+      data.innerHTML = activity.avgSpeed.toFixed(2);
       row.appendChild(data);
       data = document.createElement('td');
       data.innerHTML = activity.duration;
       row.appendChild(data);
       data = document.createElement('td');
-      data.innerHTML = activity.distance;
+      data.innerHTML = activity.distance.toFixed(4);
       row.appendChild(data);
 
       // totalUV += event.uvVal;
