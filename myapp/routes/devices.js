@@ -221,11 +221,9 @@ router.post('/reportevent', function (req, res, next) {
   });
 });
 
-router.get('/', function (req, res, next) {
-  res.send('Successfully accessed DEVICES route');
-});
+// router.get('/')
 
-router.get('/getevents', function (req, res, next) {
+router.get('/getactivities', function (req, res, next) {
   let userEmail;
 
   if (req.headers.x_auth) {
@@ -253,7 +251,6 @@ router.get('/getevents', function (req, res, next) {
 });
 
 function calcData(activities) {
-  const activityArray = [];
   let totalDistance;
   let totalSpeed;
   let totalUV;
@@ -291,45 +288,6 @@ function calcData(activities) {
       activity.save();
     });
   }
-
-  // for (const activity of activities) {
-  //   for (const eventID of activity.events) {
-  //     Event.findOne(eventID, function (err, event) {
-  //       if (err) throw err;
-
-  //       console.log(event);
-  //       eventArray.push(event);
-  //     });
-  //   }
-
-  //   for (const [index, event] of eventArray.entries()) {
-  //     // distance
-  //     if (index !== eventArray.length - 1) {
-  //       totalDistance += distance(event.latitude, event.longitude,
-  //         eventArray[index + 1].latitude,
-  //         eventArray[index + 1].longitude);
-  //     }
-  //     totalSpeed += event.speed;
-  //     totalUV += event.uvVal;
-  //   }
-
-  //   activity.avgSpeed = totalSpeed / eventArray.length;
-  //   activity.distance = totalDistance;
-  //   activity.duration = activity.startTime + (1000 * eventArray.length);
-  //   activity.uvExposure = totalUV;
-
-  //   if (totalSpeed / eventArray.length < 5) {
-  //     activity.activityType = 'Walking';
-  //   } else if (totalSpeed / eventArray.length < 15) {
-  //     activity.activityType = 'Running';
-  //   } else {
-  //     activity.activityType = 'Cycling';
-  //   }
-
-  //   // activityArray.push(activity);
-  // }
-
-  // return activityArray;
 }
 
 function distance(lat1, lon1, lat2, lon2) {

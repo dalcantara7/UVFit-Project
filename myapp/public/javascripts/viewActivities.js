@@ -15,7 +15,7 @@
   };
 
   function showEvents() {
-    const url = 'http://13.59.207.131:3000/devices/getevents';
+    const url = 'http://13.59.207.131:3000/devices/getactivities';
 
     const fetchOptions = {
       method: 'GET',
@@ -57,7 +57,6 @@
 
     let totalUV = 0;
     let totalDuration = 0;
-    let totalSpeed = 0;
     let totalCalories = 0;
 
     header.innerHTML = 'Device ID';
@@ -109,7 +108,6 @@
 
       totalUV += activity.uvExposure;
       totalDuration += activity.duration;
-      totalSpeed += activity.avgSpeed;
       totalCalories += activity.avgSpeed * activity.distance;
 
       row.addEventListener('click', function () {
@@ -184,6 +182,6 @@
   }
 
   function showSingleActivity(activity) {
-    console.log(activity);
+    for ()
   }
 })();
