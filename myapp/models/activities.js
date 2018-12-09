@@ -1,10 +1,9 @@
 const db = require('../db');
-const Event = require('./events');
 
 const activitySchema = new db.Schema({
   startTime: { type: Date, required: true },
   published_at: { type: Date, default: Date.now },
-  events: [{ type: Event }],
+  events: [{ type: db.Schema.ObjectId, ref: 'Event' }],
 });
 
 const Device = db.model('Activity', activitySchema);
