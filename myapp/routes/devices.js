@@ -253,7 +253,6 @@ router.get('/getevents', function (req, res, next) {
 });
 
 function calcData(activities) {
-  const eventArray = [];
   const activityArray = [];
   let totalDistance;
   let totalSpeed;
@@ -262,31 +261,30 @@ function calcData(activities) {
   for (const activity of activities) {
     Event.find({ _id: { $in: activity.events } }, function (err, events) {
       if (err) throw err;
-      for (const [index, event] of eventArray.entries()) {
+      for (const [index, event] of events.entries()) {
         // distance
-        if (index !== eventArray.length - 1) {
+        if (index !== events.length - 1) {
           totalDistance += distance(event.latitude, event.longitude,
-            eventArray[index + 1].latitude,
-            eventArray[index + 1].longitude);
+            events[index + 1].latitude,
+            events[index + 1].longitude);
         }
         totalSpeed += event.speed;
         totalUV += event.uvVal;
       }
 
-      activity.avgSpeed = totalSpeed / eventArray.length;
+      activity.avgSpeed = totalSpeed / events.length;
       activity.distance = totalDistance;
-      activity.duration = activity.startTime + (1000 * eventArray.length);
+      activity.duration = activity.startTime + (1000 * events.length);
       activity.uvExposure = totalUV;
 
-      if (totalSpeed / eventArray.length < 5) {
+      if (totalSpeed / events.length < 5) {
         activity.activityType = 'Walking';
-      } else if (totalSpeed / eventArray.length < 15) {
+      } else if (totalSpeed / events.length < 15) {
         activity.activityType = 'Running';
       } else {
         activity.activityType = 'Cycling';
       }
 
-      activity.save();
       console.log(activity);
     });
   }
