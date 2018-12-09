@@ -258,42 +258,49 @@ function calcData(activities) {
   let totalUV;
 
   for (const activity of activities) {
-    for (const eventID of activity.events) {
-      Event.findOne(eventID, function (err, event) {
-        if (err) throw err;
-        console.log(event);
-        eventArray.push(event);
-      });
-    }
+    Event.find({ _id: { $in: activity.events } }, function (err, events) {
+      if (err) throw err;
 
-    console.log(eventArray);
-
-    for (const [index, event] of eventArray.entries()) {
-      // distance
-      if (index !== eventArray.length - 1) {
-        totalDistance += distance(event.latitude, event.longitude,
-          eventArray[index + 1].latitude,
-          eventArray[index + 1].longitude);
-      }
-      totalSpeed += event.speed;
-      totalUV += event.uvVal;
-    }
-
-    activity.avgSpeed = totalSpeed / eventArray.length;
-    activity.distance = totalDistance;
-    activity.duration = activity.startTime + (1000 * eventArray.length);
-    activity.uvExposure = totalUV;
-
-    if (totalSpeed / eventArray.length < 5) {
-      activity.activityType = 'Walking';
-    } else if (totalSpeed / eventArray.length < 15) {
-      activity.activityType = 'Running';
-    } else {
-      activity.activityType = 'Cycling';
-    }
-
-    // activityArray.push(activity);
+      console.log(events);
+    });
   }
+
+  // for (const activity of activities) {
+  //   for (const eventID of activity.events) {
+  //     Event.findOne(eventID, function (err, event) {
+  //       if (err) throw err;
+
+  //       console.log(event);
+  //       eventArray.push(event);
+  //     });
+  //   }
+
+  //   for (const [index, event] of eventArray.entries()) {
+  //     // distance
+  //     if (index !== eventArray.length - 1) {
+  //       totalDistance += distance(event.latitude, event.longitude,
+  //         eventArray[index + 1].latitude,
+  //         eventArray[index + 1].longitude);
+  //     }
+  //     totalSpeed += event.speed;
+  //     totalUV += event.uvVal;
+  //   }
+
+  //   activity.avgSpeed = totalSpeed / eventArray.length;
+  //   activity.distance = totalDistance;
+  //   activity.duration = activity.startTime + (1000 * eventArray.length);
+  //   activity.uvExposure = totalUV;
+
+  //   if (totalSpeed / eventArray.length < 5) {
+  //     activity.activityType = 'Walking';
+  //   } else if (totalSpeed / eventArray.length < 15) {
+  //     activity.activityType = 'Running';
+  //   } else {
+  //     activity.activityType = 'Cycling';
+  //   }
+
+  //   // activityArray.push(activity);
+  // }
 
   // return activityArray;
 }
