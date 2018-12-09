@@ -289,7 +289,6 @@ function calcData(activities) {
       }
 
       activity.save();
-      console.log(activity);
     });
   }
 
