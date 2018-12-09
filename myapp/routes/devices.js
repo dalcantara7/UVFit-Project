@@ -251,7 +251,8 @@ router.get('/getevents', function (req, res, next) {
 
 function calcData(activity) {
   for (const eventID of activity.events) {
-    Event.findById(eventID, function (err, event) {
+    console.log(eventID);
+    Event.find(eventID, function (err, event) {
       if (err) throw err;
 
       console.log('If this isnt undefined we good: ' + event.speed);
