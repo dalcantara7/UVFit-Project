@@ -250,7 +250,13 @@ router.get('/getevents', function (req, res, next) {
 });
 
 function calcData(activity) {
-  console.log(activity);
+  for (const eventID of activity) {
+    Event.findById(eventID, function (err, event) {
+      if (err) throw err;
+
+      console.log('If this isnt undefined we good: ' + event.speed);
+    });
+  }
 }
 
 function distance(lat1, lon1, lat2, lon2) {
