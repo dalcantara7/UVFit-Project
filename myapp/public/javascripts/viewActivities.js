@@ -52,9 +52,9 @@
     let row = document.createElement('tr');
     let header = document.createElement('th');
     let data = document.createElement('td');
-    let totalUV = 0.0;
-    let totalSpeed = 0.0;
-    let totalDuration = 0.0;
+    // let totalUV = 0.0;
+    // let totalSpeed = 0.0;
+    // let totalDuration = 0.0;
 
     header.innerHTML = 'Device ID';
     row.appendChild(header);
@@ -95,12 +95,12 @@
       data.innerHTML = activity.avgSpeed;
       row.appendChild(data);
       data = document.createElement('td');
-      data.innerHTML = event.duration;
+      data.innerHTML = activity.duration;
       row.appendChild(data);
 
-      totalUV += event.uvVal;
-      totalDuration += event.duration;
-      totalSpeed += event.speed;
+      // totalUV += event.uvVal;
+      // totalDuration += event.duration;
+      // totalSpeed += event.speed;
 
       row.addEventListener('click', function () {
 
@@ -112,65 +112,65 @@
     document.getElementById('events').appendChild(eventTable);
 
     // summary table
-    document.getElementById('summary').innerHTML = '';
-    const summaryTable = document.createElement('table');
-    row = document.createElement('tr');
-    header = document.createElement('th');
-    data = document.createElement('td');
+    // document.getElementById('summary').innerHTML = '';
+    // const summaryTable = document.createElement('table');
+    // row = document.createElement('tr');
+    // header = document.createElement('th');
+    // data = document.createElement('td');
 
-    const avgUV = totalUV / events.length;
-    const avgDuration = totalDuration / events.length;
-    const totalCalories = totalSpeed * totalDuration;
-    const avgCalories = totalCalories / events.length;
+    // const avgUV = totalUV / events.length;
+    // const avgDuration = totalDuration / events.length;
+    // const totalCalories = totalSpeed * totalDuration;
+    // const avgCalories = totalCalories / events.length;
 
-    header.innerHTML = '';
-    row.appendChild(header);
-    header = document.createElement('th');
-    header.innerHTML = 'Duration';
-    row.appendChild(header);
-    header = document.createElement('th');
-    header.innerHTML = 'UV Exposure';
-    row.appendChild(header);
-    header = document.createElement('th');
-    header.innerHTML = 'Calories Burned';
-    row.appendChild(header);
-    header = document.createElement('th');
-    summaryTable.appendChild(row);
+    // header.innerHTML = '';
+    // row.appendChild(header);
+    // header = document.createElement('th');
+    // header.innerHTML = 'Duration';
+    // row.appendChild(header);
+    // header = document.createElement('th');
+    // header.innerHTML = 'UV Exposure';
+    // row.appendChild(header);
+    // header = document.createElement('th');
+    // header.innerHTML = 'Calories Burned';
+    // row.appendChild(header);
+    // header = document.createElement('th');
+    // summaryTable.appendChild(row);
 
-    // total activity
-    row = document.createElement('tr');
-    row.innerHTML = '';
-    data = document.createElement('td');
-    data.innerHTML = 'Total Activity';
-    row.appendChild(data);
-    data = document.createElement('td');
-    data.innerHTML = totalDuration;
-    row.appendChild(data);
-    data = document.createElement('td');
-    data.innerHTML = totalUV;
-    row.appendChild(data);
-    data = document.createElement('td');
-    data.innerHTML = totalCalories;
-    row.appendChild(data);
-    summaryTable.appendChild(row);
+    // // total activity
+    // row = document.createElement('tr');
+    // row.innerHTML = '';
+    // data = document.createElement('td');
+    // data.innerHTML = 'Total Activity';
+    // row.appendChild(data);
+    // data = document.createElement('td');
+    // data.innerHTML = totalDuration;
+    // row.appendChild(data);
+    // data = document.createElement('td');
+    // data.innerHTML = totalUV;
+    // row.appendChild(data);
+    // data = document.createElement('td');
+    // data.innerHTML = totalCalories;
+    // row.appendChild(data);
+    // summaryTable.appendChild(row);
 
-    // avg activity
-    row = document.createElement('tr');
-    row.innerHTML = '';
-    data = document.createElement('td');
-    data.innerHTML = 'Average Activity';
-    row.appendChild(data);
-    data = document.createElement('td');
-    data.innerHTML = avgDuration;
-    row.appendChild(data);
-    data = document.createElement('td');
-    data.innerHTML = avgUV;
-    row.appendChild(data);
-    data = document.createElement('td');
-    data.innerHTML = avgCalories;
-    row.appendChild(data);
-    summaryTable.appendChild(row);
+    // // avg activity
+    // row = document.createElement('tr');
+    // row.innerHTML = '';
+    // data = document.createElement('td');
+    // data.innerHTML = 'Average Activity';
+    // row.appendChild(data);
+    // data = document.createElement('td');
+    // data.innerHTML = avgDuration;
+    // row.appendChild(data);
+    // data = document.createElement('td');
+    // data.innerHTML = avgUV;
+    // row.appendChild(data);
+    // data = document.createElement('td');
+    // data.innerHTML = avgCalories;
+    // row.appendChild(data);
+    // summaryTable.appendChild(row);
 
-    document.getElementById('summary').appendChild(summaryTable);
+    // document.getElementById('summary').appendChild(summaryTable);
   }
 })();
