@@ -287,6 +287,8 @@ function calcData(activities) {
     } else {
       activity.activityType = 'Cycling';
     }
+
+    activityArray.push(activity);
   }
 
   return activityArray;
