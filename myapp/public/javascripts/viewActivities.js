@@ -30,7 +30,7 @@
       .then(function (responseText) {
         const responseJSON = JSON.parse(responseText);
         document.getElementById('usertext').innerHTML = responseJSON.message;
-        populateTable(responseJSON.events);
+        populateTable(responseJSON.activities);
       })
       .catch(function (error) {
         console.error('ERROR: ' + error);
@@ -45,9 +45,9 @@
     }
   }
 
-  function populateTable(events) {
+  function populateTable(activities) {
     // all activities table
-    document.getElementById('events').innerHTML = '';
+    document.getElementById('activities').innerHTML = '';
     const eventTable = document.createElement('table');
     let row = document.createElement('tr');
     let header = document.createElement('th');
@@ -79,7 +79,7 @@
     header = document.createElement('th');
     eventTable.appendChild(row);
 
-    for (const event of events) {
+    for (const activity of activities) {
       row = document.createElement('tr');
       row.innerHTML = '';
       data = document.createElement('td');

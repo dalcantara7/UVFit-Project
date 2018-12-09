@@ -4,6 +4,7 @@ const activitySchema = new db.Schema({
   startTime: { type: Date, required: true },
   distance: { type: Number, required: true },
   deviceID: { type: String, required: true },
+  activityType: { type: String, required: true },
   published_at: { type: Date, default: Date.now },
   events: [{ type: db.Schema.ObjectId, ref: 'Event' }],
 });
