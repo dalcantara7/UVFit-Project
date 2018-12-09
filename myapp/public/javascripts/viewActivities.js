@@ -89,13 +89,10 @@
       data.innerHTML = activity.startTime;
       row.appendChild(data);
       data = document.createElement('td');
-      data.innerHTML = event.latitude;
+      data.innerHTML = activity.uvExposure;
       row.appendChild(data);
       data = document.createElement('td');
-      data.innerHTML = event.uvVal;
-      row.appendChild(data);
-      data = document.createElement('td');
-      data.innerHTML = event.speed;
+      data.innerHTML = activity.avgSpeed;
       row.appendChild(data);
       data = document.createElement('td');
       data.innerHTML = event.duration;

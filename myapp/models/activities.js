@@ -6,6 +6,7 @@ const activitySchema = new db.Schema({
   deviceID: { type: String, required: true },
   activityType: { type: String },
   uvExposure: { type: Number },
+  avgSpeed: { type: Number },
   published_at: { type: Date, default: Date.now },
   events: [{ type: db.Schema.ObjectId, ref: 'Event' }],
 });
