@@ -262,6 +262,7 @@ function calcData(activities) {
     Event.find({ _id: { $in: activity.events } }, function (err, events) {
       if (err) throw err;
       for (const [index, event] of events.entries()) {
+        console.log(event);
         // distance
         if (index !== events.length - 1) {
           totalDistance += distance(event.latitude, event.longitude,
