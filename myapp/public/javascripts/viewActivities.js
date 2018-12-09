@@ -74,6 +74,8 @@
     header.innerHTML = 'Duration';
     row.appendChild(header);
     header = document.createElement('th');
+    header.innerHTML = 'Distance';
+    row.appendChild(header);
     eventTable.appendChild(row);
 
     for (const activity of activities) {
@@ -97,13 +99,16 @@
       data = document.createElement('td');
       data.innerHTML = activity.duration;
       row.appendChild(data);
+      data = document.createElement('td');
+      data.innerHTML = activity.distance;
+      row.appendChild(data);
 
       // totalUV += event.uvVal;
       // totalDuration += event.duration;
       // totalSpeed += event.speed;
 
       row.addEventListener('click', function () {
-
+        console.log('placeholder');
       });
 
       eventTable.appendChild(row);

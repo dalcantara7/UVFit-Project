@@ -240,19 +240,53 @@ router.get('/getevents', function (req, res, next) {
   User.findOne({ email: userEmail }, function (err, user) {
     if (err) throw err;
 
-    Event.find({ deviceID: { $in: user.deviceIDs } }, function (err, events) {
+    Activity.find({ deviceID: { $in: user.deviceIDs } }, function (err, activities) {
       if (err) throw err;
 
-      res.json({ success: true, events: events, message: 'Activities for ' + user.username });
+      calcData(activities);
+
+      res.json({ success: true, activities: activities, message: 'Activities for ' + user.username });
     });
   });
 });
 
 function calcData(activity) {
+  const eventArray = [];
+
+  let totalDistance;
+  let totalSpeed;
+  let totalUV;
+
   for (const eventID of activity.events) {
     Event.findOne(eventID, function (err, event) {
       if (err) throw err;
+
+      eventArray.push(event);
     });
+  }
+
+  for (const [index, event] of eventArray.entries()) {
+    // distance
+    if (index !== eventArray.length - 1) {
+      totalDistance += distance(event.latitude, event.longitude,
+        eventArray[index + 1].latitude,
+        eventArray[index + 1].longitude);
+    }
+    totalSpeed += event.speed;
+    totalUV += event.uvVal;
+  }
+
+  activity.avgSpeed = totalSpeed / eventArray.length;
+  activity.distance = totalDistance;
+  activity.duration = activity.startTime + (1000 * eventArray.length);
+  activity.uvExposure = totalUV;
+
+  if (totalSpeed / eventArray.length < 5) {
+    activity.activityType = 'Walking';
+  } else if (totalSpeed / eventArray.length < 15) {
+    activity.activityType = 'Running';
+  } else {
+    activity.activityType = 'Cycling';
   }
 }
 
