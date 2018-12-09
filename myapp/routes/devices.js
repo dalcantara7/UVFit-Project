@@ -243,15 +243,14 @@ router.get('/getevents', function (req, res, next) {
     Activity.find({ deviceID: { $in: user.deviceIDs } }, function (err, activities) {
       if (err) throw err;
 
-      calcData(activities);
-
-      res.json({ success: true, activities: activities, message: 'Activities for ' + user.username });
+      res.json({ success: true, activities: calcData(activities), message: 'Activities for ' + user.username });
     });
   });
 });
 
 function calcData(activities) {
   const eventArray = [];
+  const activityArray = [];
   let totalDistance;
   let totalSpeed;
   let totalUV;
@@ -289,6 +288,8 @@ function calcData(activities) {
       activity.activityType = 'Cycling';
     }
   }
+
+  return activityArray;
 }
 
 function distance(lat1, lon1, lat2, lon2) {
