@@ -158,7 +158,7 @@
     data.innerHTML = totalUV;
     row.appendChild(data);
     data = document.createElement('td');
-    data.innerHTML = totalCalories;
+    data.innerHTML = totalCalories.toFixed(2);
     row.appendChild(data);
     summaryTable.appendChild(row);
 
@@ -175,7 +175,7 @@
     data.innerHTML = avgUV;
     row.appendChild(data);
     data = document.createElement('td');
-    data.innerHTML = avgCalories;
+    data.innerHTML = avgCalories.toFixed(2);
     row.appendChild(data);
     summaryTable.appendChild(row);
 
