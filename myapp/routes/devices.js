@@ -266,7 +266,6 @@ function calcData(activities) {
     Event.find({ _id: { $in: activity.events } }, function (err, events) {
       if (err) throw err;
       for (const [index, event] of events.entries()) {
-        console.log(typeof event.speed);
         // distance
         if (index !== events.length - 1) {
           totalDistance += distance(event.latitude, event.longitude,
@@ -276,7 +275,6 @@ function calcData(activities) {
         totalSpeed += event.speed;
         totalUV += event.uvVal;
       }
-      console.log(totalSpeed + ' ' + events.length);
       activity.avgSpeed = totalSpeed / events.length;
       activity.distance = totalDistance;
       activity.duration = activity.startTime + (1000 * events.length);
