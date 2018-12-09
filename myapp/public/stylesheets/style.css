@@ -9,7 +9,7 @@ table {
   border-collapse: collapse;
 }
 
-#activities tr:hover {
+#activities tr:hover:not(:first-child) {
   cursor: pointer;
 }
 
