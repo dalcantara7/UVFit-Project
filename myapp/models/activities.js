@@ -1,7 +1,6 @@
 const db = require('../db');
 const Event = require('../models/events');
 
-
 const activitySchema = new db.Schema({
   startTime: { type: Number, required: true },
   deviceID: { type: String, required: true },
@@ -11,7 +10,7 @@ const activitySchema = new db.Schema({
   uvExposure: { type: Number },
   activityType: { type: String },
   published_at: { type: Date, default: Date.now },
-  events: [{ type: db.Schema.ObjectId, ref: Event }],
+  events: [[Event]],
 });
 
 const Device = db.model('Activity', activitySchema);
