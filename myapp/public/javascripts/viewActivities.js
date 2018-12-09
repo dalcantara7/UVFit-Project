@@ -1,3 +1,4 @@
+/* eslint-disable no-loop-func */
 'use strict';
 
 /**
@@ -112,7 +113,7 @@
       totalCalories += activity.avgSpeed * activity.distance;
 
       row.addEventListener('click', function () {
-        console.log('placeholder');
+        showSingleActivity(activity);
       });
 
       eventTable.appendChild(row);
@@ -180,5 +181,9 @@
     summaryTable.appendChild(row);
 
     document.getElementById('summary').appendChild(summaryTable);
+  }
+
+  function showSingleActivity(activity) {
+    console.log(activity);
   }
 })();
