@@ -231,7 +231,7 @@ router.get('/getevents', function (req, res, next) {
   });
 });
 
-function distance(lat1, lon1, lat2, lon2, unit) {
+function distance(lat1, lon1, lat2, lon2) {
   if ((lat1 === lat2) && (lon1 === lon2)) {
     return 0;
   } else {
