@@ -98,7 +98,7 @@
       data.innerHTML = activity.duration;
       row.appendChild(data);
       data = document.createElement('td');
-      data.innerHTML = activity.distance.toFixed(4);
+      data.innerHTML = activity.distance.toFixed(3);
       row.appendChild(data);
 
       // totalUV += event.uvVal;
