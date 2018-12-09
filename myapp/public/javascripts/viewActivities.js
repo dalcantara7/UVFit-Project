@@ -52,9 +52,9 @@
     let row = document.createElement('tr');
     let header = document.createElement('th');
     let data = document.createElement('td');
-    let totalUV = 0.0;
-    let totalSpeed = 0.0;
-    let totalDuration = 0.0;
+    // let totalUV = 0.0;
+    // let totalSpeed = 0.0;
+    // let totalDuration = 0.0;
 
     header.innerHTML = 'Device ID';
     row.appendChild(header);
