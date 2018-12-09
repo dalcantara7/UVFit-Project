@@ -249,7 +249,7 @@ router.get('/getevents', function (req, res, next) {
 
 function calcData(activity) {
   for (const event of activity.events) {
-    console.log(event);
+    for (const thing in event) console.log(thing);
   }
 }
 
