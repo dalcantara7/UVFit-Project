@@ -200,11 +200,11 @@ router.post('/reportevent', function (req, res, next) {
             currActivity.save(function (err, activity) {
               if (err) throw err;
 
-              console.log('Activity with start time' + currActivity.startTime + ' was successfully saved!');
+              console.log('Activity with start time ' + currActivity.startTime + ' was successfully saved!');
 
               res.status(201).json({
                 success: true,
-                message: 'Activity with start time' + currActivity.startTime + ' was successfully saved!',
+                message: 'Activity with start time ' + currActivity.startTime + ' was successfully saved!',
               });
             });
           } else {
