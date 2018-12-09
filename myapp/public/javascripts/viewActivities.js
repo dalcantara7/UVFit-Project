@@ -242,6 +242,7 @@
       data = document.createElement('td');
       data.innerHTML = event.speed;
       row.appendChild(data);
+      singleTable.appendChild(row);
     }
 
     document.getElementById('singletable').appendChild(singleTable);
