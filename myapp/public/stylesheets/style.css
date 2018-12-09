@@ -18,6 +18,10 @@ select {
   padding: 5px;
   margin: 10px 0px 10px 0px;
 }
+
+#singleactivity {
+  display: none;
+}
 /* From Evan's CSS */
 
 input.error {
