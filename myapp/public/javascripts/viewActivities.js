@@ -1,4 +1,5 @@
 /* eslint-disable no-loop-func */
+
 'use strict';
 
 /**
@@ -12,6 +13,10 @@
   */
   window.onload = function () {
     showEvents();
+    document.getElementById('back').addEventListener('click', function () {
+      document.getElementById('singletable').style.display = 'none';
+      document.getElementById('activityView').style.display = 'block';
+    });
   };
 
   function showEvents() {
@@ -110,7 +115,9 @@
       totalCalories += activity.avgSpeed * activity.distance;
 
       row.addEventListener('click', function () {
-        let url = 'http://13.59.207.131:3000/devices/getevents?startTime=' + activity.startTime;
+        document.getElementById('singletable').style.display = 'block';
+        document.getElementById('activityView').style.display = 'none';
+        const url = 'http://13.59.207.131:3000/devices/getevents?startTime=' + activity.startTime;
 
         const fetchOptions = {
           method: 'GET',
@@ -201,6 +208,40 @@
   }
 
   function showSingleActivity(events) {
-    console.log(events);
+    document.getElementById('singletable').innerHTML = '';
+    const singleTable = document.createElement('table');
+    let row = document.createElement('tr');
+    let header = document.createElement('th');
+    let data = document.createElement('td');
+
+    header.innerHTML = 'Longitude';
+    row.appendChild(header);
+    header = document.createElement('th');
+    header.innerHTML = 'Latitude';
+    row.appendChild(header);
+    header = document.createElement('th');
+    header.innerHTML = 'UV Exposure';
+    row.appendChild(header);
+    header = document.createElement('th');
+    header.innerHTML = 'Speed (mph)';
+    row.appendChild(header);
+    singleTable.appendChild(row);
+
+    for (const event of events) {
+      row = document.createElement('tr');
+      row.innerHTML = '';
+      data = document.createElement('td');
+      data.innerHTML = event.longitude;
+      row.appendChild(data);
+      data = document.createElement('td');
+      data.innerHTML = event.latitude;
+      row.appendChild(data);
+      data = document.createElement('td');
+      data.innerHTML = event.uvVal;
+      row.appendChild(data);
+      data = document.createElement('td');
+      data.innerHTML = event.speed;
+      row.appendChild(data);
+    }
   }
 })();
