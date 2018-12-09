@@ -179,6 +179,6 @@
     row.appendChild(data);
     summaryTable.appendChild(row);
 
-    // document.getElementById('summary').appendChild(summaryTable);
+    document.getElementById('summary').appendChild(summaryTable);
   }
 })();
