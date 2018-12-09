@@ -251,6 +251,7 @@ router.get('/getevents', function (req, res, next) {
 });
 
 function calcData(activity) {
+  console.log(activity);
   const eventArray = [];
 
   let totalDistance;
