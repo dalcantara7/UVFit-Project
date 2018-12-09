@@ -181,7 +181,7 @@
     document.getElementById('summary').appendChild(summaryTable);
   }
 
-  function showSingleActivity(activity) {
-    for ()
-  }
+  // function showSingleActivity(activity) {
+  //   for ()
+  // }
 })();
