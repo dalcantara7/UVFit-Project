@@ -14,6 +14,7 @@
   window.onload = function () {
     showEvents();
     document.getElementById('back').addEventListener('click', function () {
+      document.getElementById('singletable').innerHTML = '';
       document.getElementById('singleactivity').style.display = 'none';
       document.getElementById('activityView').style.display = 'block';
     });
