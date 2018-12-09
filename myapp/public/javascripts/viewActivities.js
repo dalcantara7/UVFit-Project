@@ -110,9 +110,9 @@
       totalDuration += activity.duration;
       totalCalories += activity.avgSpeed * activity.distance;
 
-      row.addEventListener('click', function () {
-        showSingleActivity(activity);
-      });
+      // row.addEventListener('click', function () {
+      //   showSingleActivity(activity);
+      // });
 
       eventTable.appendChild(row);
     }
