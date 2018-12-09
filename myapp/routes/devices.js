@@ -261,7 +261,7 @@ function calcData(activities) {
     for (const eventID of activity.events) {
       Event.findOne(eventID, function (err, event) {
         if (err) throw err;
-
+        console.log(event);
         eventArray.push(event);
       });
     }
