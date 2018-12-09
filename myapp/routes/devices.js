@@ -277,7 +277,7 @@ function calcData(activities) {
       }
       activity.avgSpeed = totalSpeed / events.length;
       activity.distance = totalDistance;
-      activity.duration = activity.startTime + (1000 * events.length);
+      activity.duration = (1000 * events.length);
       activity.uvExposure = totalUV;
 
       if (totalSpeed / events.length < 5) {

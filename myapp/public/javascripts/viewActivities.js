@@ -69,7 +69,7 @@
     header.innerHTML = 'Average Speed';
     row.appendChild(header);
     header = document.createElement('th');
-    header.innerHTML = 'Duration';
+    header.innerHTML = 'Duration (s)';
     row.appendChild(header);
     header = document.createElement('th');
     header.innerHTML = 'Distance';
