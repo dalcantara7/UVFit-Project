@@ -183,6 +183,8 @@ router.post('/reportevent', function (req, res, next) {
             deviceID: req.body.deviceID,
           });
 
+          currEvent.save();
+
           if (!activity) {
             const currActivity = new Activity({
               startTime: parseInt(data.startTime, 10),
@@ -195,7 +197,7 @@ router.post('/reportevent', function (req, res, next) {
 
               res.status(201).json({
                 success: true,
-                message: 'Activity with start time ' + currActivity.startTime + ' was successfully saved!',
+                message: 'Activity with start time ' + activity.startTime + ' was successfully saved!',
               });
             });
           } else {
@@ -249,7 +251,7 @@ router.get('/getevents', function (req, res, next) {
 
 function calcData(activity) {
   for (const event of activity.events) {
-    for (const thing in event) console.log(thing);
+    console.log(event.deviceID);
   }
 }
 
