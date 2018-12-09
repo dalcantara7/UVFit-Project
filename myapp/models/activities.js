@@ -5,6 +5,7 @@ const activitySchema = new db.Schema({
   distance: { type: Number, required: true },
   deviceID: { type: String, required: true },
   activityType: { type: String, required: true },
+  uvExposure: { type: Number, required: true },
   published_at: { type: Date, default: Date.now },
   events: [{ type: db.Schema.ObjectId, ref: 'Event' }],
 });
