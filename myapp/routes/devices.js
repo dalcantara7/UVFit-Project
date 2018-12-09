@@ -159,9 +159,10 @@ router.post('/sendinfo', function (req, res, next) {
 router.post('/reportevent', function (req, res, next) {
   console.log(req.body);
   console.log(req.body.data);
+  let data;
 
   try {
-    const data = JSON.parse(req.body.data);
+    data = req.body.data;
   } catch (ex) {
     console.log(ex);
   }
