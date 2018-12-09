@@ -189,7 +189,7 @@ router.post('/reportevent', function (req, res, next) {
             const currActivity = new Activity({
               startTime: parseInt(data.startTime, 10),
               deviceID: req.body.deviceID,
-              events: [currEvent._id],
+              events: [currEvent],
             });
 
             currActivity.save(function (err, activity) {
@@ -201,7 +201,7 @@ router.post('/reportevent', function (req, res, next) {
               });
             });
           } else {
-            activity.events.push(currEvent._id);
+            activity.events.push(currEvent);
             calcData(activity);
             activity.save(function (err, activity) {
               if (err) throw err;
