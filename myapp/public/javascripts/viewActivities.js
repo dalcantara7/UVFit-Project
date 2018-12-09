@@ -126,7 +126,7 @@
           .then(function (responseText) {
             const responseJSON = JSON.parse(responseText);
 
-            showSingleActivity(responseJSON);
+            showSingleActivity(responseJSON.events);
           })
           .catch(function (error) {
             console.error('ERROR: ' + error);
