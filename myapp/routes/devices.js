@@ -157,9 +157,6 @@ router.post('/sendinfo', function (req, res, next) {
 // });
 
 router.post('/reportevent', function (req, res, next) {
-  console.log(req.body);
-  console.log(req.body.data);
-
   const data = req.body.data;
 
   if (!data.hasOwnProperty('apiKey')) { res.status(400).json({ success: false, message: 'Missing device API key' }); }
