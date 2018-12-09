@@ -165,36 +165,48 @@ router.post('/reportevent', function (req, res, next) {
   if (!req.body.hasOwnProperty('deviceID')) { res.status(400).json({ success: false, message: 'Missing deviceID field' }); }
   if (!data.hasOwnProperty('uvVal')) { res.status(400).json({ success: false, message: 'Missing UV value field' }); }
   if (!data.hasOwnProperty('speed')) { res.status(400).json({ success: false, message: 'Missing speed field' }); }
+  if (!data.hasOwnProperty('startTime')) { res.status(400).json({ success: false, message: 'Missing start time field' }); }
 
   Device.findOne({ deviceID: req.body.deviceID }, function (err, device) {
     if (err) {
       res.status(400).json({ success: false, error: err });
     } else if (device) {
       let activityType;
-
       if (device.apikey === data.apiKey) {
-        if (parseFloat(data.speed < 5)) {
-          activityType = 'Walking';
-        } else if (parseFloat(data.speed >= 5 && data.speed < 15)) {
-          activityType = 'Running';
-        } else if (parseFloat(data.speed >= 15)) {
-          activityType = 'Cycling';
-        }
-
-        const currEvent = new Event({
-          longitude: parseFloat(data.longitude).toFixed(6),
-          latitude: parseFloat(data.latitude).toFixed(6),
-          activityType: activityType,
-          uvVal: parseFloat(data.uvVal),
-          speed: parseFloat(data.speed),
-          deviceID: req.body.deviceID,
-        });
-
-        currEvent.save(function (err, currEvent) {
-          if (err) throw err;
-
-          res.send('Event at Lat: ' + data.latitude.toFixed(6) + ' Long: ' + data.longitude.toFixed(6) + ' Speed: ' + data.speed + ' UV value: ' + data.uvVal + ' was saved with id ' + currEvent._id);
-        });
+        Activity.findOne({ startTime : data.startTime }, function (err, activity) {
+              if (err) {
+                const errorMsg = { message: err };
+                res.status(400).json(errorMsg);
+              } else {
+                const currEvent = new Event({
+                  longitude: parseFloat(data.longitude).toFixed(6),
+                  latitude: parseFloat(data.latitude).toFixed(6),
+                  activityType: activityType,
+                  uvVal: parseFloat(data.uvVal),
+                  speed: parseFloat(data.speed),
+                  deviceID: req.body.deviceID,
+                });
+                if (!activity) {
+                  const currActivity = new Activity ({
+                    startTime: parseInt(data.startTime),
+                    deviceID: req.body.deviceID,
+                  })
+                  currActivity.save(function (err, activity) {
+                    if (err) {
+                      throw err;
+                    } else {
+                      responseJSON.success = true;
+                      responseJSON.message = 'Activity with start time' + currActivity.startTime + ' was successfully saved!';
+                      res.status(201).json(responseJSON);
+                    }
+                  });
+                }
+                else {
+                  activity.events.push(event);
+                }
+              }
+              res.status(200).json(responseJSON);
+            });
       } else {
         res.status(400).json({ success: false, error: 'Invalid API key' });
       }
