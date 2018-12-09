@@ -221,7 +221,36 @@ router.post('/reportevent', function (req, res, next) {
   });
 });
 
-// router.get('/')
+router.get('/getevents', function (req, res, next) {
+  let userEmail;
+
+  if (req.headers.x_auth) {
+    try {
+      const token = req.headers.x_auth;
+      userEmail = jwt.decode(token, secret).userEmail;
+    } catch (ex) {
+      res.status(401).json({ success: false, message: 'Invalid authorization token.' });
+    }
+  } else {
+    res.status(401).json({ success: false, message: 'Missing authorization token.' });
+  }
+
+  if (!req.query.startTime) { res.status(400).json({ success: false, message: 'Missing start time param' }); }
+
+  User.findOne({ email: userEmail }, function (err, user) {
+    if (err) throw err;
+
+    Activity.findOne({ startTime: req.query.startTime }, function (err, activity) {
+      if (err) throw err;
+
+      Event.find({ _id: { $in: activity.events } }, function (err, events) {
+        if (err) throw err;
+
+        res.json({ success: true, events: events });
+      });
+    });
+  });
+});
 
 router.get('/getactivities', function (req, res, next) {
   let userEmail;

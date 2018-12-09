@@ -47,7 +47,6 @@
   }
 
   function populateTable(activities) {
-    console.log(activities);
     // all activities table
     document.getElementById('activities').innerHTML = '';
     const eventTable = document.createElement('table');
@@ -110,9 +109,29 @@
       totalDuration += activity.duration;
       totalCalories += activity.avgSpeed * activity.distance;
 
-      // row.addEventListener('click', function () {
-      //   showSingleActivity(activity);
-      // });
+      row.addEventListener('click', function () {
+        let url = 'http://13.59.207.131:3000/devices/getevents?startTime=' + activity.startTime;
+
+        const fetchOptions = {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            x_auth: window.sessionStorage.getItem('token'),
+          },
+        };
+
+        fetch(url, fetchOptions)
+          .then(checkStatus)
+          .then(function (responseText) {
+            const responseJSON = JSON.parse(responseText);
+
+            showSingleActivity(responseJSON);
+          })
+          .catch(function (error) {
+            console.error('ERROR: ' + error);
+          });
+      });
 
       eventTable.appendChild(row);
     }
@@ -168,7 +187,7 @@
     data.innerHTML = 'Average Activity';
     row.appendChild(data);
     data = document.createElement('td');
-    data.innerHTML = avgDuration;
+    data.innerHTML = avgDuration.toFixed(1);
     row.appendChild(data);
     data = document.createElement('td');
     data.innerHTML = avgUV;
@@ -181,7 +200,7 @@
     document.getElementById('summary').appendChild(summaryTable);
   }
 
-  // function showSingleActivity(activity) {
-  //   for ()
-  // }
+  function showSingleActivity(events) {
+    console.log(events);
+  }
 })();
