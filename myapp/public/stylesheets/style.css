@@ -20,6 +20,10 @@ select {
 }
 /* From Evan's CSS */
 
+input.error {
+    border: 2px solid red;
+}
+
 /* @extend display-flex; */
 display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
   display: flex;
