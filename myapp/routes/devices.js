@@ -250,7 +250,7 @@ router.get('/getevents', function (req, res, next) {
 });
 
 function calcData(activity) {
-  for (const eventID of activity) {
+  for (const eventID of activity.events) {
     Event.findById(eventID, function (err, event) {
       if (err) throw err;
 
