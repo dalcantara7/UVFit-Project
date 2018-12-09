@@ -243,7 +243,9 @@ router.get('/getevents', function (req, res, next) {
     Activity.find({ deviceID: { $in: user.deviceIDs } }, function (err, activities) {
       if (err) throw err;
 
-      res.json({ success: true, activities: calcData(activities), message: 'Activities for ' + user.username });
+      calcData(activities);
+
+      res.json({ success: true, activities: activities, message: 'Activities for ' + user.username });
     });
   });
 });
@@ -288,12 +290,12 @@ function calcData(activities) {
       activity.activityType = 'Cycling';
     }
 
-    console.log(activity);
+    activity.save();
 
-    activityArray.push(activity);
+    // activityArray.push(activity);
   }
 
-  return activityArray;
+  // return activityArray;
 }
 
 function distance(lat1, lon1, lat2, lon2) {
