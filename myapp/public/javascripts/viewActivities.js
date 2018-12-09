@@ -112,7 +112,7 @@
       eventTable.appendChild(row);
     }
 
-    document.getElementById('events').appendChild(eventTable);
+    document.getElementById('activities').appendChild(eventTable);
 
     // summary table
     // document.getElementById('summary').innerHTML = '';
