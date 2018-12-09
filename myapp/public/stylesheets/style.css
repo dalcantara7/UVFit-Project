@@ -17,7 +17,7 @@ select {
 /* From Evan's CSS */
 
 input.error {
-    border: 2px solid red;
+    border-bottom: 2px solid red;
 }
 
 /* @extend display-flex; */

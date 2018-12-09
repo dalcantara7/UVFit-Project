@@ -57,7 +57,7 @@
     }
   }
   
-    function validateForm() {
+  function validateForm() {
     if ($("#email").val().length == 0) {
       $("#email").addClass("error");
     }
