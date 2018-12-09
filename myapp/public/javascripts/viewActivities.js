@@ -72,7 +72,7 @@
     header.innerHTML = 'Duration (s)';
     row.appendChild(header);
     header = document.createElement('th');
-    header.innerHTML = 'Distance';
+    header.innerHTML = 'Distance (sm)';
     row.appendChild(header);
     eventTable.appendChild(row);
 
