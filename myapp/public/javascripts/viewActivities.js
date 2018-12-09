@@ -14,7 +14,7 @@
   window.onload = function () {
     showEvents();
     document.getElementById('back').addEventListener('click', function () {
-      document.getElementById('singletable').style.display = 'none';
+      document.getElementById('singleactivity').style.display = 'none';
       document.getElementById('activityView').style.display = 'block';
     });
   };
@@ -115,7 +115,7 @@
       totalCalories += activity.avgSpeed * activity.distance;
 
       row.addEventListener('click', function () {
-        document.getElementById('singletable').style.display = 'block';
+        document.getElementById('singleactivity').style.display = 'block';
         document.getElementById('activityView').style.display = 'none';
         const url = 'http://13.59.207.131:3000/devices/getevents?startTime=' + activity.startTime;
 
@@ -243,5 +243,7 @@
       data.innerHTML = event.speed;
       row.appendChild(data);
     }
+
+    document.getElementById('singletable').appendChild(singleTable);
   }
 })();
