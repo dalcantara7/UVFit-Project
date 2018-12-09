@@ -259,6 +259,10 @@ function calcData(activities) {
   let totalUV;
 
   for (const activity of activities) {
+    totalDistance = 0;
+    totalSpeed = 0;
+    totalUV = 0;
+
     Event.find({ _id: { $in: activity.events } }, function (err, events) {
       if (err) throw err;
       for (const [index, event] of events.entries()) {
