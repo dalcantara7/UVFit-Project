@@ -178,41 +178,44 @@ router.post('/reportevent', function (req, res, next) {
     if (err) {
       res.status(400).json({ success: false, error: err });
     } else if (device) {
-      let activityType;
       if (device.apikey === data.apiKey) {
         Activity.findOne({ startTime: data.startTime }, function (err, activity) {
-          if (err) {
-            const errorMsg = { message: err };
-            res.status(400).json(errorMsg);
-          } else {
-            const currEvent = new Event({
-              longitude: parseFloat(data.longitude).toFixed(6),
-              latitude: parseFloat(data.latitude).toFixed(6),
-              activityType: activityType,
-              uvVal: parseFloat(data.uvVal),
-              speed: parseFloat(data.speed),
+          if (err) throw err;
+
+          const currEvent = new Event({
+            longitude: parseFloat(data.longitude).toFixed(6),
+            latitude: parseFloat(data.latitude).toFixed(6),
+            uvVal: parseFloat(data.uvVal),
+            speed: parseFloat(data.speed),
+            deviceID: req.body.deviceID,
+          });
+
+          if (!activity) {
+            const currActivity = new Activity({
+              startTime: parseInt(data.startTime, 10),
               deviceID: req.body.deviceID,
             });
-            if (!activity) {
-              const currActivity = new Activity ({
-                startTime: parseInt(data.startTime),
-                deviceID: req.body.deviceID,
-              })
-              currActivity.save(function (err, activity) {
-                if (err) {
-                  throw err;
-                } else {
-                  responseJSON.success = true;
-                  responseJSON.message = 'Activity with start time' + currActivity.startTime + ' was successfully saved!';
-                  res.status(201).json(responseJSON);
-                }
+
+            currActivity.save(function (err, activity) {
+              if (err) throw err;
+
+              console.log('Activity with start time' + currActivity.startTime + ' was successfully saved!');
+
+              res.status(201).json({
+                success: true,
+                message: 'Activity with start time' + currActivity.startTime + ' was successfully saved!',
               });
-            }
-            else {
-              activity.events.push(event);
-            }
+            });
+          } else {
+            activity.events.push(currEvent);
+            activity.save(function (err, activity) {
+              if (err) throw err;
+
+              console.log('Activity with start time' + activity.startTime + ' was succesfully updated');
+
+              res.status(200).json({ success: true });
+            });
           }
-          res.status(200).json(responseJSON);
         });
       } else {
         res.status(400).json({ success: false, error: 'Invalid API key' });

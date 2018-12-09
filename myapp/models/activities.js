@@ -1,13 +1,14 @@
 const db = require('../db');
 
+
 const activitySchema = new db.Schema({
-  startTime: { type: Date, required: true },
-  distance: { type: Number },
+  startTime: { type: Number, required: true },
   deviceID: { type: String, required: true },
-  activityType: { type: String },
-  uvExposure: { type: Number },
+  distance: { type: Number },
   avgSpeed: { type: Number },
   duration: { type: Number },
+  uvExposure: { type: Number },
+  activityType: { type: String },
   published_at: { type: Date, default: Date.now },
   events: [{ type: db.Schema.ObjectId, ref: 'Event' }],
 });
