@@ -169,10 +169,21 @@ router.post('/reportevent', function (req, res, next) {
     if (err) {
       res.status(400).json({ success: false, error: err });
     } else if (device) {
+      let activityType;
+
       if (device.apikey === data.apiKey) {
+        if (parseFloat(data.speed < 5)) {
+          activityType = 'Walking';
+        } else if (parseFloat(data.speed >= 5 && data.speed < 15)) {
+          activityType = 'Running';
+        } else if (parseFloat(data.speed >= 15)) {
+          activityType = 'Cycling';
+        }
+
         const currEvent = new Event({
           longitude: parseFloat(data.longitude).toFixed(6),
           latitude: parseFloat(data.latitude).toFixed(6),
+          activityType: activityType,
           uvVal: parseFloat(data.uvVal),
           speed: parseFloat(data.speed),
           deviceID: req.body.deviceID,

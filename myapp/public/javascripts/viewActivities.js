@@ -54,6 +54,9 @@
     header.innerHTML = 'Device ID';
     row.appendChild(header);
     header = document.createElement('th');
+    header.innerHTML = 'Activity';
+    row.appendChild(header);
+    header = document.createElement('th');
     header.innerHTML = 'Longitude';
     row.appendChild(header);
     header = document.createElement('th');
@@ -76,6 +79,9 @@
       row.innerHTML = '';
       data = document.createElement('td');
       data.innerHTML = event.deviceID;
+      row.appendChild(data);
+      data = document.createElement('td');
+      data.innerHTML = event.activityType;
       row.appendChild(data);
       data = document.createElement('td');
       data.innerHTML = event.longitude;
