@@ -202,7 +202,6 @@ router.post('/reportevent', function (req, res, next) {
             });
           } else {
             activity.events.push(currEvent._id);
-            calcData(activity);
             activity.save(function (err, activity) {
               if (err) throw err;
 
@@ -251,11 +250,8 @@ router.get('/getevents', function (req, res, next) {
 
 function calcData(activity) {
   for (const eventID of activity.events) {
-    console.log(eventID);
     Event.findOne(eventID, function (err, event) {
       if (err) throw err;
-
-      console.log('If this isnt undefined we good: ' + event.speed);
     });
   }
 }
