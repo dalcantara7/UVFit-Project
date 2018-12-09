@@ -11,7 +11,7 @@ table {
 
 #activities tr:hover:not(:first-child) {
   cursor: pointer;
-  border: 2px solid red;
+  background-color: lightgray;
 }
 
 select {
