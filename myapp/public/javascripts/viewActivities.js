@@ -46,6 +46,7 @@
   }
 
   function populateTable(activities) {
+    console.log(activities);
     // all activities table
     document.getElementById('activities').innerHTML = '';
     const eventTable = document.createElement('table');
