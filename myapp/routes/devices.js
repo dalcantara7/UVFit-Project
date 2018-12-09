@@ -189,7 +189,7 @@ router.post('/reportevent', function (req, res, next) {
             const currActivity = new Activity({
               startTime: parseInt(data.startTime, 10),
               deviceID: req.body.deviceID,
-              events: [currEvent],
+              events: [currEvent._id],
             });
 
             currActivity.save(function (err, activity) {
@@ -201,7 +201,7 @@ router.post('/reportevent', function (req, res, next) {
               });
             });
           } else {
-            activity.events.push(currEvent);
+            activity.events.push(currEvent._id);
             calcData(activity);
             activity.save(function (err, activity) {
               if (err) throw err;
@@ -252,7 +252,7 @@ router.get('/getevents', function (req, res, next) {
 function calcData(activity) {
   for (const eventID of activity.events) {
     console.log(eventID);
-    Event.find(eventID, function (err, event) {
+    Event.find({ _id: eventID }, function (err, event) {
       if (err) throw err;
 
       console.log('If this isnt undefined we good: ' + event.speed);
