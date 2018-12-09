@@ -1,3 +1,5 @@
+/* eslint-disable no-loop-func */
+
 'use strict';
 
 const express = require('express');
@@ -260,8 +262,31 @@ function calcData(activities) {
   for (const activity of activities) {
     Event.find({ _id: { $in: activity.events } }, function (err, events) {
       if (err) throw err;
+      for (const [index, event] of eventArray.entries()) {
+        // distance
+        if (index !== eventArray.length - 1) {
+          totalDistance += distance(event.latitude, event.longitude,
+            eventArray[index + 1].latitude,
+            eventArray[index + 1].longitude);
+        }
+        totalSpeed += event.speed;
+        totalUV += event.uvVal;
+      }
 
-      console.log(events);
+      activity.avgSpeed = totalSpeed / eventArray.length;
+      activity.distance = totalDistance;
+      activity.duration = activity.startTime + (1000 * eventArray.length);
+      activity.uvExposure = totalUV;
+
+      if (totalSpeed / eventArray.length < 5) {
+        activity.activityType = 'Walking';
+      } else if (totalSpeed / eventArray.length < 15) {
+        activity.activityType = 'Running';
+      } else {
+        activity.activityType = 'Cycling';
+      }
+
+      console.log(activity);
     });
   }
 
