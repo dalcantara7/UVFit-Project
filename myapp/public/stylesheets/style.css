@@ -11,6 +11,7 @@ table {
 
 #activities tr:hover:not(:first-child) {
   cursor: pointer;
+  border: 2px solid red;
 }
 
 select {
@@ -25,7 +26,7 @@ select {
 /* From Evan's CSS */
 
 input.error {
-    border-bottom: 2px solid red;
+  border-bottom: 2px solid red;
 }
 
 /* @extend display-flex; */
