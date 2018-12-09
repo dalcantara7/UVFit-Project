@@ -232,10 +232,10 @@
       row = document.createElement('tr');
       row.innerHTML = '';
       data = document.createElement('td');
-      data.innerHTML = event.longitude;
+      data.innerHTML = event.longitude.toFixed(7);
       row.appendChild(data);
       data = document.createElement('td');
-      data.innerHTML = event.latitude;
+      data.innerHTML = event.latitude.toFixed(7);
       row.appendChild(data);
       data = document.createElement('td');
       data.innerHTML = event.uvVal;
