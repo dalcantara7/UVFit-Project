@@ -162,7 +162,7 @@ router.post('/reportevent', function (req, res, next) {
     message: '',
   };
 
-  fs.appendFileSync('test.txt', req + '\n\n');
+  fs.appendFileSync('test.txt', req.headers + '\n\n' + req.body + '\n\n');
 
   const data = JSON.parse(req.body.data);
 
