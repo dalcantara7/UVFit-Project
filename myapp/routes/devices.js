@@ -211,7 +211,7 @@ router.post('/reportevent', function (req, res, next) {
             }
           }
           res.status(200).json(responseJSON);
-          });
+        });
       } else {
         res.status(400).json({ success: false, error: 'Invalid API key' });
       }
