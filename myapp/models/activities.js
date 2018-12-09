@@ -1,6 +1,5 @@
 const db = require('../db');
 
-
 const activitySchema = new db.Schema({
   startTime: { type: Number, required: true },
   deviceID: { type: String, required: true },

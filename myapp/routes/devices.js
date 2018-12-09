@@ -183,13 +183,13 @@ router.post('/reportevent', function (req, res, next) {
             deviceID: req.body.deviceID,
           });
 
-          currEvent.save();
+          // currEvent.save();
 
           if (!activity) {
             const currActivity = new Activity({
               startTime: parseInt(data.startTime, 10),
               deviceID: req.body.deviceID,
-              events: [currEvent],
+              events: [currEvent._id],
             });
 
             currActivity.save(function (err, activity) {
@@ -201,7 +201,7 @@ router.post('/reportevent', function (req, res, next) {
               });
             });
           } else {
-            activity.events.push(currEvent);
+            activity.events.push(currEvent._id);
             calcData(activity);
             activity.save(function (err, activity) {
               if (err) throw err;
@@ -250,9 +250,7 @@ router.get('/getevents', function (req, res, next) {
 });
 
 function calcData(activity) {
-  for (const event of activity.events) {
-    console.log(event.deviceID);
-  }
+  console.log(activity);
 }
 
 function distance(lat1, lon1, lat2, lon2) {
