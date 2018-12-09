@@ -11,7 +11,7 @@ const activitySchema = new db.Schema({
   uvExposure: { type: Number },
   activityType: { type: String },
   published_at: { type: Date, default: Date.now },
-  events: [{ type: Event }],
+  events: [{ type: db.Schema.ObjectId, ref: Event }],
 });
 
 const Device = db.model('Activity', activitySchema);
