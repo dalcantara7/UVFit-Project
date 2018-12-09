@@ -183,7 +183,7 @@ router.post('/reportevent', function (req, res, next) {
             deviceID: req.body.deviceID,
           });
 
-          // currEvent.save();
+          currEvent.save();
 
           if (!activity) {
             const currActivity = new Activity({
