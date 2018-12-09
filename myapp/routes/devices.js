@@ -266,6 +266,8 @@ function calcData(activities) {
       });
     }
 
+    console.log(eventArray);
+
     for (const [index, event] of eventArray.entries()) {
       // distance
       if (index !== eventArray.length - 1) {
@@ -289,9 +291,6 @@ function calcData(activities) {
     } else {
       activity.activityType = 'Cycling';
     }
-
-    console.log(activity);
-    activity.save();
 
     // activityArray.push(activity);
   }
