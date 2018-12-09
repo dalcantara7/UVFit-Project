@@ -200,6 +200,7 @@ router.post('/reportevent', function (req, res, next) {
             });
           } else {
             activity.events.push(currEvent);
+            calcData(activity);
             activity.save(function (err, activity) {
               if (err) throw err;
 
@@ -245,6 +246,12 @@ router.get('/getevents', function (req, res, next) {
     });
   });
 });
+
+function calcData(activity) {
+  for (const event of activity.events) {
+    console.log(event);
+  }
+}
 
 function distance(lat1, lon1, lat2, lon2) {
   if ((lat1 === lat2) && (lon1 === lon2)) {
