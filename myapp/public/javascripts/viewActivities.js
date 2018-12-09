@@ -66,7 +66,7 @@
     header.innerHTML = 'Average UV Exposure';
     row.appendChild(header);
     header = document.createElement('th');
-    header.innerHTML = 'Average Speed';
+    header.innerHTML = 'Average Speed (mph)';
     row.appendChild(header);
     header = document.createElement('th');
     header.innerHTML = 'Duration (s)';
