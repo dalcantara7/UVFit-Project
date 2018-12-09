@@ -7,7 +7,6 @@ const eventSchema = new db.Schema({
   uvVal: { type: Number, required: true },
   speed: { type: Number, required: true },
   deviceID: { type: String, required: true },
-  published_at: { type: Date, required: true, default: Date.now },
 });
 
 const Event = db.model('Event', eventSchema);
