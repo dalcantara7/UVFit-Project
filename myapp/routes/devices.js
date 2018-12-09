@@ -286,6 +286,7 @@ function calcData(activities) {
         activity.activityType = 'Cycling';
       }
 
+      activity.save();
       console.log(activity);
     });
   }
