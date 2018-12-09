@@ -255,7 +255,6 @@ function calcData(activity) {
     Event.findOne(eventID, function (err, event) {
       if (err) throw err;
 
-      console.log(event);
       console.log('If this isnt undefined we good: ' + event.speed);
     });
   }
