@@ -271,7 +271,7 @@ function calcData(activities) {
         totalSpeed += event.speed;
         totalUV += event.uvVal;
       }
-
+      console.log(totalSpeed + ' ' + events.length);
       activity.avgSpeed = totalSpeed / events.length;
       activity.distance = totalDistance;
       activity.duration = activity.startTime + (1000 * events.length);
