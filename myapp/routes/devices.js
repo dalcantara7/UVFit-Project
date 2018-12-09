@@ -288,6 +288,8 @@ function calcData(activities) {
       activity.activityType = 'Cycling';
     }
 
+    console.log(activity);
+
     activityArray.push(activity);
   }
 
