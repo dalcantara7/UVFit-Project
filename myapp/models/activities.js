@@ -2,7 +2,7 @@ const db = require('../db');
 
 const activitySchema = new db.Schema({
   startTime: { type: Date, required: true },
-  distance: { type: Number, required: true },
+  distance: { type: Number },
   deviceID: { type: String, required: true },
   activityType: { type: String, required: true },
   uvExposure: { type: Number, required: true },
