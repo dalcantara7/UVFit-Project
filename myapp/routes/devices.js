@@ -178,40 +178,40 @@ router.post('/reportevent', function (req, res, next) {
     } else if (device) {
       let activityType;
       if (device.apikey === data.apiKey) {
-        Activity.findOne({ startTime : data.startTime }, function (err, activity) {
-              if (err) {
-                const errorMsg = { message: err };
-                res.status(400).json(errorMsg);
-              } else {
-                const currEvent = new Event({
-                  longitude: parseFloat(data.longitude).toFixed(6),
-                  latitude: parseFloat(data.latitude).toFixed(6),
-                  activityType: activityType,
-                  uvVal: parseFloat(data.uvVal),
-                  speed: parseFloat(data.speed),
-                  deviceID: req.body.deviceID,
-                });
-                if (!activity) {
-                  const currActivity = new Activity ({
-                    startTime: parseInt(data.startTime),
-                    deviceID: req.body.deviceID,
-                  })
-                  currActivity.save(function (err, activity) {
-                    if (err) {
-                      throw err;
-                    } else {
-                      responseJSON.success = true;
-                      responseJSON.message = 'Activity with start time' + currActivity.startTime + ' was successfully saved!';
-                      res.status(201).json(responseJSON);
-                    }
-                  });
-                }
-                else {
-                  activity.events.push(event);
-                }
-              }
-              res.status(200).json(responseJSON);
+        Activity.findOne({ startTime: data.startTime }, function (err, activity) {
+          if (err) {
+            const errorMsg = { message: err };
+            res.status(400).json(errorMsg);
+          } else {
+            const currEvent = new Event({
+              longitude: parseFloat(data.longitude).toFixed(6),
+              latitude: parseFloat(data.latitude).toFixed(6),
+              activityType: activityType,
+              uvVal: parseFloat(data.uvVal),
+              speed: parseFloat(data.speed),
+              deviceID: req.body.deviceID,
             });
+            if (!activity) {
+              const currActivity = new Activity ({
+                startTime: parseInt(data.startTime),
+                deviceID: req.body.deviceID,
+              })
+              currActivity.save(function (err, activity) {
+                if (err) {
+                  throw err;
+                } else {
+                  responseJSON.success = true;
+                  responseJSON.message = 'Activity with start time' + currActivity.startTime + ' was successfully saved!';
+                  res.status(201).json(responseJSON);
+                }
+              });
+            }
+            else {
+              activity.events.push(event);
+            }
+          }
+          res.status(200).json(responseJSON);
+          });
       } else {
         res.status(400).json({ success: false, error: 'Invalid API key' });
       }
