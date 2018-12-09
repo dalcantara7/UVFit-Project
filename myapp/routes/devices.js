@@ -195,12 +195,11 @@ router.post('/reportevent', function (req, res, next) {
             const currActivity = new Activity({
               startTime: parseInt(data.startTime, 10),
               deviceID: req.body.deviceID,
+              events: [currEvent],
             });
 
             currActivity.save(function (err, activity) {
               if (err) throw err;
-
-              console.log('Activity with start time ' + currActivity.startTime + ' was successfully saved!');
 
               res.status(201).json({
                 success: true,
@@ -212,9 +211,10 @@ router.post('/reportevent', function (req, res, next) {
             activity.save(function (err, activity) {
               if (err) throw err;
 
-              console.log('Activity with start time' + activity.startTime + ' was succesfully updated');
-
-              res.status(200).json({ success: true });
+              res.status(200).json({
+                success: true,
+                message: 'Activity with start time ' + activity.startTime + ' was succesfully updated',
+              });
             });
           }
         });
