@@ -8,6 +8,7 @@ const path = require('path');
 const request = require('request');
 const Device = require('../models/devices');
 const Event = require('../models/events');
+const Activity = require('../models/activities');
 const User = require('../models/users');
 
 const router = express.Router();

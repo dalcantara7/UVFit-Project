@@ -74,9 +74,6 @@
     header.innerHTML = 'Speed';
     row.appendChild(header);
     header = document.createElement('th');
-    header.innerHTML = 'Date';
-    row.appendChild(header);
-    header = document.createElement('th');
     header.innerHTML = 'Duration';
     row.appendChild(header);
     header = document.createElement('th');
@@ -104,15 +101,16 @@
       data.innerHTML = event.speed;
       row.appendChild(data);
       data = document.createElement('td');
-      data.innerHTML = event.published_at;
-      row.appendChild(data);
-      data = document.createElement('td');
       data.innerHTML = event.duration;
       row.appendChild(data);
 
       totalUV += event.uvVal;
       totalDuration += event.duration;
       totalSpeed += event.speed;
+
+      row.addEventListener('click', function () {
+
+      });
 
       eventTable.appendChild(row);
     }
