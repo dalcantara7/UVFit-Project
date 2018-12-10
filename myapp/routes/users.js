@@ -108,7 +108,7 @@ router.get('/getdevices', function (req, res) {
 });
 
 router.get('/preferences', function (req, res) {
-
+  res.sendFile(path.resolve('./public/userPrefs.html'));
 });
 
 router.post('/setpreferences', function (req, res) {
