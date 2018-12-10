@@ -14,7 +14,9 @@ var path = require('path');
 var options = {
   key: fs.readFileSync(path.resolve(__dirname + '/evanweiler.key')),
   cert: fs.readFileSync(path.resolve(__dirname + '/evanweiler_com.crt'))
-}
+};
+
+console.log(options);
 
 /**
  * Get port from environment and store in Express.
