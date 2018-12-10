@@ -107,6 +107,10 @@ router.get('/getdevices', function (req, res) {
   });
 });
 
+router.get('/preferences', function (req, res) {
+
+});
+
 router.post('/setpreferences', function (req, res) {
   let userEmail;
   const responseJSON = {
@@ -149,9 +153,10 @@ router.post('/setpreferences', function (req, res) {
 
     user.save(function (err, user) {
       if (err) throw err;
-    });
 
-    res.json(responseJSON);
+      responseJSON.message = 'Successfully Made Changes!';
+      res.json(responseJSON);
+    });
   });
 });
 
