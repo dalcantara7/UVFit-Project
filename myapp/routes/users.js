@@ -133,32 +133,36 @@ router.post('/setpreferences', function (req, res) {
 
     res.status(401).json(responseJSON);
   }
-
-  User.findOne({ email: sanitize(userEmail) }, function (err, user) {
-    if (err) throw err;
-
-    console.log(user);
-
-    if (req.body.email) {
-      user.email = req.body.email;
-      responseJSON.newtoken = jwt.encode({ userEmail: req.body.email }, secret);
-    }
-
-    if (req.body.password) {
-      const salt = bcrypt.genSaltSync(10);
-      user.password = bcrypt.hashSync(req.body.password, salt);
-    }
-
-    if (req.body.uvThresh) {
-      user.uvThresh = req.body.uvThresh;
-    }
-
-    user.save(function (err, user) {
-      if (err) throw err;
-
-      responseJSON.message = 'Successfully Made Changes!';
+  User.findOne({ email: sanitize(req.body.email) }, function (err, user) {
+    if (user) {
+      responseJSON.message = 'User with that email already exists.';
       res.json(responseJSON);
-    });
+    } else {
+      User.findOne({ email: sanitize(userEmail) }, function (err, user) {
+        if (err) throw err;
+
+        if (req.body.email) {
+          user.email = req.body.email;
+          responseJSON.newtoken = jwt.encode({ userEmail: req.body.email }, secret);
+        }
+
+        if (req.body.password) {
+          const salt = bcrypt.genSaltSync(10);
+          user.password = bcrypt.hashSync(req.body.password, salt);
+        }
+
+        if (req.body.uvThresh) {
+          user.uvThresh = req.body.uvThresh;
+        }
+
+        user.save(function (err, user) {
+          if (err) throw err;
+
+          responseJSON.message = 'Successfully Made Changes!';
+          res.json(responseJSON);
+        });
+      });
+    }
   });
 });
 
