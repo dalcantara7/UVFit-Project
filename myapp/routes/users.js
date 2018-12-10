@@ -134,7 +134,7 @@ router.post('/setpreferences', function (req, res) {
     res.status(401).json(responseJSON);
   }
 
-  User.findOne({ userEmail: sanitize(userEmail) }, function (err, user) {
+  User.findOne({ email: sanitize(userEmail) }, function (err, user) {
     if (err) throw err;
 
     console.log(user);
