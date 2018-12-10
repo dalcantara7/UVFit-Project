@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const sanitize = require('mongo-sanitize');
 const jwt = require('jwt-simple');
+const fs = require('fs');
 const path = require('path');
 const User = require('../models/users');
 const Device = require('../models/devices');
@@ -12,7 +13,7 @@ const Device = require('../models/devices');
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 
-const secret = 'testsecretkey';
+const secret = fs.readFileSync(path.resolve(__dirname, '../jwtkey.txt')).toString();
 
 router.get('/register', function (req, res, next) {
   res.sendFile(path.resolve('./public/registerUser.html'));
@@ -103,6 +104,54 @@ router.get('/getdevices', function (req, res) {
     responseJSON.success = true;
 
     res.status(200).json(responseJSON);
+  });
+});
+
+router.post('/setpreferences', function (req, res) {
+  let userEmail;
+  const responseJSON = {
+    success: false,
+  };
+
+  // authentication check
+  if (req.headers.x_auth) {
+    try {
+      const token = req.headers.x_auth;
+      userEmail = jwt.decode(token, secret).userEmail;
+    } catch (ex) {
+      responseJSON.message = 'Invalid authorization token.';
+      responseJSON.success = false;
+      res.status(401).json(responseJSON);
+    }
+  } else {
+    responseJSON.message = 'Missing authorization token.';
+    responseJSON.success = false;
+
+    res.status(401).json(responseJSON);
+  }
+
+  User.findOne({ userEmail: sanitize(userEmail) }, function (err, user) {
+    if (err) throw err;
+
+    if (req.body.email) {
+      user.email = req.body.email;
+      responseJSON.newtoken = jwt.encode({ userEmail: req.body.email }, secret);
+    }
+
+    if (req.body.password) {
+      const salt = bcrypt.genSaltSync(10);
+      user.password = bcrypt.hashSync(req.body.password, salt);
+    }
+
+    if (req.body.uvThresh) {
+      user.uvThresh = req.body.uvThresh;
+    }
+
+    user.save(function (err, user) {
+      if (err) throw err;
+    });
+
+    res.json(responseJSON);
   });
 });
 
