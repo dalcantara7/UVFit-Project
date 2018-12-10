@@ -16,8 +16,6 @@ var options = {
   cert: fs.readFileSync(path.resolve(__dirname + '/evanweiler_com.crt')).toString()
 };
 
-console.log(options);
-
 /**
  * Get port from environment and store in Express.
  */
