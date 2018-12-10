@@ -27,7 +27,7 @@
       prefsJSON.uvThresh = document.getElementById('uvThresh').value;
     }
 
-    const url = 'https://www.evanweiler.com:3000/users/setpreferences';
+    const url = 'https://www.evanweiler.com:3443/users/setpreferences';
 
     const fetchOptions = {
       method: 'POST',
