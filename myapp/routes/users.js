@@ -134,11 +134,10 @@ router.post('/setpreferences', function (req, res) {
     res.status(401).json(responseJSON);
   }
 
-  console.log(userEmail);
-  console.log(sanitize(userEmail));
-
   User.findOne({ userEmail: sanitize(userEmail) }, function (err, user) {
     if (err) throw err;
+
+    console.log(user);
 
     if (req.body.email) {
       user.email = req.body.email;
