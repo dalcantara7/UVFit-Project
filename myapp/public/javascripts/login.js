@@ -14,7 +14,7 @@
   };
 
   function userLogin() {
-    const url = 'http://13.59.207.131:3000/users/auth';
+    const url = 'https://www.evanweiler.com:3443/users/auth';
 
     const message = {
       email: document.getElementById('email').value,
@@ -38,7 +38,7 @@
           window.sessionStorage.setItem('token', responseJSON.token);
           window.sessionStorage.setItem('username', responseJSON.username);
           setTimeout(function () {
-            window.location.replace('http://13.59.207.131:3000/');
+            window.location.replace('https://www.evanweiler.com:3443/');
           }, 2000);
         } else {
           document.getElementById('error').innerHTML = responseJSON.message;

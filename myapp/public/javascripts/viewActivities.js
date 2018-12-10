@@ -21,7 +21,7 @@
   };
 
   function showEvents() {
-    const url = 'http://13.59.207.131:3000/devices/getactivities';
+    const url = 'https://www.evanweiler.com:3443/devices/getactivities';
 
     const fetchOptions = {
       method: 'GET',
@@ -118,7 +118,7 @@
       row.addEventListener('click', function () {
         document.getElementById('singleactivity').style.display = 'block';
         document.getElementById('activityView').style.display = 'none';
-        const url = 'http://13.59.207.131:3000/devices/getevents?startTime=' + activity.startTime;
+        const url = 'https://www.evanweiler.com:3443/devices/getevents?startTime=' + activity.startTime;
 
         const fetchOptions = {
           method: 'GET',
