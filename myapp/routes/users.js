@@ -153,10 +153,10 @@ router.post('/setpreferences', function (req, res) {
 
     user.save(function (err, user) {
       if (err) throw err;
-    });
 
-    responseJSON.message = 'Successfully Made Changes!';
-    res.json(responseJSON);
+      responseJSON.message = 'Successfully Made Changes!';
+      res.json(responseJSON);
+    });
   });
 });
 
