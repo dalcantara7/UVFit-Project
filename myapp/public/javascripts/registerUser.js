@@ -56,26 +56,26 @@
       return Promise.reject(new Error(response.status + ':' + response.statusText));
     }
   }
-  
+
   function validateForm() {
-    if ($("#email").val().length == 0) {
-      $("#email").addClass("error");
+    if ($('#email').val().length === 0) {
+      $('#email').addClass('error');
+    } else {
+      $('#email').removeClass('error');
     }
-    else {
-      $("#email").removeClass("error");
+
+    if ($('#password').val().length <= 7) {
+      $('#password').addClass('error');
+    } else {
+      $('#password').removeClass('error');
     }
-    if (pass.val().length <= 7) {
-      $("#pass").addClass("error");
-    }
-    else {
-      $("#pass").removeClass("error");
-    }
-    
-    $("#email").click(function() {
-      $("#email").removeClass("error");
-    }
-    $("#email").click(function() {
-      $("#email").removeClass("error");
-    }
+
+    $('#email').click(function () {
+      $('#email').removeClass('error');
+    });
+
+    $('#email').click(function () {
+      $('#email').removeClass('error');
+    });
   }
 })();
