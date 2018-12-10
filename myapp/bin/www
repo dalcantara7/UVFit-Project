@@ -10,8 +10,8 @@ var debug = require('debug')('myapp:server');
 var https = require('https');
 var fs = require('fs');
 var options = {
-  key: fs.readFileSync('evanweiler.key'),
-  cert: fs.readFileSync('evanweiler_com.crt')
+  key: fs.readFileSync('./evanweiler.key'),
+  cert: fs.readFileSync('./evanweiler_com.crt')
 }
 
 /**
