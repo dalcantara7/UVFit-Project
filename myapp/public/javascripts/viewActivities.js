@@ -112,9 +112,9 @@
     avgCalories /= numAct;
 
     row = document.createElement('tr');
-    row.innerHTML = 'Average Activity:';
     data = document.createElement('td');
-    row.appendChild(data);
+    data.innerHTML = 'Average Activity:';
+    row.appendChild(data)
     data = document.createElement('td');
     data.innerHTML = avgDuration;
     row.appendChild(data);
