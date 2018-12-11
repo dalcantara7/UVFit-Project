@@ -22,16 +22,26 @@
                 <div class="signin-content">
                     <div class="signin-form">
                         <h2 class="form-title">Set Preferences</h2>
-                        <label for="email">Email:</label>
-                        <input id="email" name="email" type="text" />
-                        <label for="email_ver">Verify Email:</label>
-                        <input id="email_ver" name="email_ver" type="text" />
-                        <label for="password">Password:</label>
-                        <input id="password" name="password" type="password" />
-                        <label for="password_ver">Verify Password:</label>
-                        <input id="password_ver" name="password_ver" type="password" />
-                        <label for="uvThresh">UV Threshold:</label>
-                        <input id="uvThresh" name="uvThresh" type="text" />
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input type="text" name="email" id="email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="re_email">Verify Email:</label>
+                            <input type="text" name="re_email" id="re_email"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="pass">Password:</label>
+                            <input type="password" name="pass" id="password" placeholder="Password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="re_pass">Verify Password:</label>
+                            <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="uvThresh">UV Threshold:</label>
+                            <input id="uvThresh" name="uvThresh" type="text" />
+                        </div>
                         <button id="submit">Submit</button>
                         <div id="error"></div>
                     </div>
