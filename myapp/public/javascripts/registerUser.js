@@ -21,6 +21,10 @@
       password: document.getElementById('password').value,
       email: document.getElementById('email').value,
     };
+    
+    if(!validateForm()) {
+        event.preventDefault();
+    }
 
     const fetchOptions = {
       method: 'POST',
@@ -60,12 +64,14 @@
   function validateForm() {
     if ($('#email').val().length === 0) {
       $('#email').addClass('error');
+      return false;
     } else {
       $('#email').removeClass('error');
     }
 
     if ($('#password').val().length <= 7) {
       $('#password').addClass('error');
+      return false;
     } else {
       $('#password').removeClass('error');
     }

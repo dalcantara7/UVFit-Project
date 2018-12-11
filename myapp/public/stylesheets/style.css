@@ -380,7 +380,7 @@ input.pref_input {
   display: block;
   border: none;
   border-bottom: 1px solid #999;
-  padding: 6px 30px 6px 100px;
+  padding: 6px 30px 6px 120px;
   font-family: Poppins;
   box-sizing: border-box; }
   input::-webkit-input-placeholder {
