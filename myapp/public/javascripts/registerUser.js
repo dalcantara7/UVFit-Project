@@ -21,7 +21,7 @@
       password: document.getElementById('password').value,
       email: document.getElementById('email').value,
     };
-
+    
     const fetchOptions = {
       method: 'POST',
       headers: {
@@ -60,12 +60,14 @@
   function validateForm() {
     if ($('#email').val().length === 0) {
       $('#email').addClass('error');
+      return false;
     } else {
       $('#email').removeClass('error');
     }
 
     if ($('#password').val().length <= 7) {
       $('#password').addClass('error');
+      return false;
     } else {
       $('#password').removeClass('error');
     }
