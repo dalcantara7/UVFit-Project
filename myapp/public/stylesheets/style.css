@@ -34,15 +34,15 @@ p.error {
 }
 
 #email-error {
-    display: none;
+    display: block;
 }
 
 #pass-error {
-    display: none;
+    display: block;
 }
 
 #mismatch-error {
-    display: none;
+    display: block;
 }
 
 /* @extend display-flex; */
