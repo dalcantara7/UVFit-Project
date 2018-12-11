@@ -56,6 +56,12 @@ router.post('/register', function (req, res) {
             subject: 'Please verify your email for UV-Fit',
             text: 'https://www.evanweiler.com:3443/users/verify?hash=' + verificationHash,
           };
+
+          transporter.sendMail(mailOptions, function (err, info) {
+            if (err) throw err;
+
+            console.log('Email sent: ' + info.response);
+          });
         });
       });
 
@@ -67,17 +73,18 @@ router.post('/register', function (req, res) {
 router.get('/verify', function (req, res) {
   const verHash = sanitize(req.query.hash);
 
-  User.findOne({ hash: verHash }, function (err, user) {
+  User.findOne({ verHash: verHash }, function (err, user) {
     if (err) throw err;
 
     if (!user) {
-      res.status(401).json({ error: 'User with specified verification link does not exist' });
+      res.status(401).send('ERROR: User with specified verification link does not exist');
     } else {
       user.isActive = true;
 
       user.save(function (err, user) {
         if (err) throw err;
-        res.json({ message: 'Successfully activated account' });
+
+        res.send('Successfully activated account!');
       });
     }
   });
