@@ -239,8 +239,8 @@
     avgCalories = 0;
 
     for (const activity of activities) {
-      console.log('Time: ' + d.getTime());
-      console.log('Time of activity: ' + activity.startTime);
+      console.log('Time: ' + typeof d.getTime());
+      console.log('Time of activity: ' + typeof activity.startTime);
       console.log('Difference: ' + parseInt(d.getTime(), 10) - parseInt(activity.startTime, 10));
       console.log('1 week time: ' + 7 * 24 * 60 * 60 * 1000);
       console.log(activity.startTime + 7 * 24 * 60 * 60 * 1000 < d.getTime());
