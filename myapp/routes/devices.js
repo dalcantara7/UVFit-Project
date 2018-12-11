@@ -270,7 +270,7 @@ router.get('/getactivities', function (req, res, next) {
       message: 'Local Activities',
     };
 
-    console.log(req.query);
+    console.log('Lat: ' + latitude + 'Long: ' + longitude);
 
     Activity.find({}, function (err, activities) {
       if (err) throw err;
