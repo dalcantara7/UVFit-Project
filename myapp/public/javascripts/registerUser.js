@@ -31,7 +31,7 @@
       body: JSON.stringify(message),
     };
     
-    validateForm() {
+    if(!validateForm()) {
         event.preventDefault();
     }
 
@@ -83,5 +83,7 @@
     $('#email').click(function () {
       $('#email').removeClass('error');
     });
+    
+    return true;
   }
 })();
