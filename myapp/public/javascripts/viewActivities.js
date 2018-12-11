@@ -243,7 +243,7 @@
       console.log('Time of activity: ' + activity.startTime);
       console.log('Difference: ' + parseInt(d.getTime() - activity.startTime, 10));
       console.log('1 week time: ' + 7 * 24 * 60 * 60 * 1000);
-      console.log(activity.startTime + 7 * 24 * 60 * 60 * 1000 < d.getTime());
+      console.log(d.getTime() - activity.startTime < 7 * 24 * 60 * 60 * 1000);
       if (d.getTime() - activity.startTime < 7 * 24 * 60 * 60 * 1000) {
         avgUV += activity.uvExposure;
         avgDuration += activity.duration;
