@@ -233,7 +233,7 @@
 
 
     const d = new Date();
-    let numAct;
+    let numAct = 0;
     avgUV = 0;
     avgDuration = 0;
     avgCalories = 0;
