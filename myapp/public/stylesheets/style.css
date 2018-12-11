@@ -23,10 +23,6 @@ select {
 #singleactivity {
   display: none;
 }
-
-a {
-  margin: 30px;
-}
 /* From Evan's CSS */
 
 input.error {
