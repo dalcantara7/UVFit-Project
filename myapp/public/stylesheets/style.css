@@ -301,6 +301,10 @@ body {
 .signup-form, .signup-image, .signin-form, .signin-image {
   width: 50%;
   overflow: hidden; }
+  
+.activities-list {
+  width: 100%;
+  overflow: hidden; }
 
 .signup-image {
   margin: 0 55px; }
@@ -553,7 +557,7 @@ label.valid {
 .zmdi-google {
   background: #e72734; }
 
-.signin-form {
+.signin-form .activities-form{
   margin-right: 90px;
   margin-left: 80px; }
 
@@ -599,7 +603,7 @@ label.valid {
     -o-order: 2;
     -ms-order: 2; }
 
-  .signup-form, .signup-image, .signin-form, .signin-image {
+  .signup-form, .signup-image, .signin-form, .signin-image .activities-form{
     width: auto; }
 
   .social-login {
@@ -612,7 +616,7 @@ label.valid {
   .form-button {
     text-align: center; }
 
-  .signin-form {
+  .signin-form .activities-form {
     order: 1;
     -moz-order: 1;
     -webkit-order: 1;
