@@ -44,7 +44,7 @@
       });
 
     navigator.geolocation.getCurrentPosition(function (position) {
-      url = 'https://www.evanweiler.com:3443/devices/getactivities?local=t&lat=' 
+      url = 'https://www.evanweiler.com:3443/devices/getactivities?local=t&lat='
           + encodeURIComponent(position.coords.latitude)
           + '&long='
           + encodeURIComponent(position.coords.longitude);
