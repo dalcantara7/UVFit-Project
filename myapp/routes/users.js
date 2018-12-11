@@ -77,13 +77,14 @@ router.get('/verify', function (req, res) {
     if (err) throw err;
 
     if (!user) {
-      res.status(401).json({ error: 'User with specified verification link does not exist' });
+      res.status(401).send('ERROR: User with specified verification link does not exist');
     } else {
       user.isActive = true;
 
       user.save(function (err, user) {
         if (err) throw err;
-        res.json({ message: 'Successfully activated account' });
+
+        res.send('Successfully activated account!');
       });
     }
   });
