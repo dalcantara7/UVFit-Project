@@ -21,7 +21,7 @@
   };
 
   function showEvents() {
-    const url = 'https://www.evanweiler.com:3443/devices/getactivities';
+    let url = 'https://www.evanweiler.com:3443/devices/getactivities?local=f';
 
     const fetchOptions = {
       method: 'GET',
@@ -42,6 +42,23 @@
       .catch(function (error) {
         console.error('ERROR: ' + error);
       });
+
+    navigator.geolocation.getCurrentPosition(function (position) {
+      url = 'https://www.evanweiler.com:3443/devices/getactivities?local=t&lat=' 
+          + encodeURIComponent(position.coords.latitude)
+          + '&long='
+          + encodeURIComponent(position.coords.longitude);
+
+      fetch(url, fetchOptions)
+        .then(checkStatus)
+        .then(function (responseText) {
+          const responseJSON = JSON.parse(responseText);
+          populateLocal(responseJSON.activities);
+        })
+        .catch(function (error) {
+          console.error('ERROR: ' + error);
+        });
+    });
   }
 
   function checkStatus(response) {
@@ -50,6 +67,10 @@
     } else {
       return Promise.reject(new Error(response.status + ':' + response.statusText));
     }
+  }
+
+  function populateLocal(activities) {
+
   }
 
   function populateTable(activities) {

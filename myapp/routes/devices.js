@@ -247,17 +247,43 @@ router.get('/getactivities', function (req, res, next) {
     res.status(401).json({ success: false, message: 'Missing authorization token.' });
   }
 
-  User.findOne({ email: userEmail }, function (err, user) {
-    if (err) throw err;
+  if (req.query.local === 'f') {
+    User.findOne({ email: userEmail }, function (err, user) {
+      if (err) throw err;
 
-    Activity.find({ deviceID: { $in: user.deviceIDs } }, function (err, activities) {
+      Activity.find({ deviceID: { $in: user.deviceIDs } }, function (err, activities) {
+        if (err) throw err;
+
+        calcData(activities);
+
+        res.json({ success: true, activities: activities, message: 'Activities for ' + user.username });
+      });
+    });
+  }
+
+  if (req.query.local === 't') {
+    const latitude = req.query.lat;
+    const longitude = req.query.long;
+    const responseJSON = {
+      success: true,
+      activities: [],
+      message: 'Local Activities',
+    };
+
+    Activity.find({}, function (err, activities) {
       if (err) throw err;
 
       calcData(activities);
 
-      res.json({ success: true, activities: activities, message: 'Activities for ' + user.username });
+      for (const activity of activities) {
+        if (distance(latitude, longitude, activity.startlat, activity.startLong) < 7) {
+          responseJSON.activities.push(activity);
+        }
+      }
+
+      res.json(responseJSON);
     });
-  });
+  }
 });
 
 function calcData(activities) {
@@ -272,6 +298,10 @@ function calcData(activities) {
 
     Event.find({ _id: { $in: activity.events } }, function (err, events) {
       if (err) throw err;
+
+      activity.startLat = events[0].latitude;
+      activity.startLong = events[0].longitude;
+
       for (const [index, event] of events.entries()) {
         // distance
         if (index !== events.length - 1) {

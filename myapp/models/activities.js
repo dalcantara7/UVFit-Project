@@ -3,6 +3,8 @@ const db = require('../db');
 const activitySchema = new db.Schema({
   startTime: { type: Number, required: true },
   deviceID: { type: String, required: true },
+  startLat: { type: Number },
+  startLong: { type: Number },
   distance: { type: Number },
   avgSpeed: { type: Number },
   duration: { type: Number },
