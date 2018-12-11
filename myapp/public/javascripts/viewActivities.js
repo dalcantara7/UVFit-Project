@@ -70,7 +70,7 @@
   }
 
   function populateLocal(activities) {
-
+    console.log(activities);
   }
 
   function populateTable(activities) {
