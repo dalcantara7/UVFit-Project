@@ -80,6 +80,9 @@
     let header = document.createElement('th');
     let data = document.createElement('td');
 
+    header.innerHTML = '';
+    row.appendChild(header);
+    header = document.createElement('th');
     header.innerHTML = 'Duration';
     row.appendChild(header);
     header = document.createElement('th');
@@ -109,7 +112,9 @@
     avgCalories /= numAct;
 
     row = document.createElement('tr');
-    row.innerHTML = '';
+    row.innerHTML = 'Average Activity:';
+    data = document.createElement('td');
+    row.appendChild(data);
     data = document.createElement('td');
     data.innerHTML = avgDuration;
     row.appendChild(data);
