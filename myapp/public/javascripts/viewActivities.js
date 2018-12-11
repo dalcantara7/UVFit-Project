@@ -237,7 +237,9 @@
     avgUV = 0;
     avgDuration = 0;
     avgCalories = 0;
+    
     for (const activity of activities) {
+      console.log('Time: ' + d.getTime() + ', last 7 days? ' + activity.startTime + 7 * 24 * 60 * 60 * 1000 < d.getTime())
       if (activity.startTime + 7 * 24 * 60 * 60 * 1000 < d.getTime()) {
         avgUV += activity.uvExposure;
         avgDuration += activity.duration;
@@ -251,7 +253,6 @@
     avgCalories /= numAct;
 
     // last 7 days
-        
     row = document.createElement('tr');
     row.innerHTML = '';
     data = document.createElement('td');
