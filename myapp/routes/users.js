@@ -73,7 +73,7 @@ router.post('/register', function (req, res) {
 router.get('/verify', function (req, res) {
   const verHash = sanitize(req.query.hash);
 
-  User.findOne({ hash: verHash }, function (err, user) {
+  User.findOne({ verHash: verHash }, function (err, user) {
     if (err) throw err;
 
     if (!user) {
