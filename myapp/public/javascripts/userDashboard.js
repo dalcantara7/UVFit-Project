@@ -12,7 +12,33 @@
   window.onload = function () {
     populateList();
     document.getElementById('activityStart').addEventListener('click', startActivity);
+    document.getElementById('deleteDevice').addEventListener('click', deleteDevice);
   };
+
+  function deleteDevice() {
+    const deviceID = document.getElementById('deviceList').value.split(':::')[0];
+    const message = {
+      deviceID: deviceID,
+    };
+
+    const url = 'https://www.evanweiler.com:3443/devices/delete';
+
+    const fetchOptions = {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        x_auth: window.sessionStorage.getItem('token'),
+      },
+      body: JSON.stringify(message),
+    };
+
+    fetch(url, fetchOptions)
+      .then(checkStatus)
+      .catch(function (error) {
+        console.error('ERROR ' + error);
+      });
+  }
 
   function startActivity() {
     const deviceID = document.getElementById('deviceList').value.split(':::')[0];
