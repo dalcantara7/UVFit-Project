@@ -7,6 +7,8 @@ const sanitize = require('mongo-sanitize');
 const jwt = require('jwt-simple');
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 const User = require('../models/users');
 const Device = require('../models/devices');
 
@@ -29,18 +31,54 @@ router.post('/register', function (req, res) {
       res.json({ success: false, message: 'Email already in use' });
     } else {
       bcrypt.hash(req.body.password, null, null, function (err, hash) {
+        const verificationHash = crypto.randomBytes(20).toString('hex');
         const currUser = new User({
           email: req.body.email,
           username: req.body.username,
           password: hash,
+          verHash: verificationHash,
         });
 
-        currUser.save(function (err, currUser) {
+        currUser.save(function (err, user) {
           if (err) throw err;
+
+          const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: '513UVFitProject@gmail.com',
+              pass: 'HeyThisHereIsAPassword123!',
+            },
+          });
+
+          const mailOptions = {
+            from: '513UVFitProject@gmail.com',
+            to: user.email,
+            subject: 'Please verify your email for UV-Fit',
+            text: 'https://www.evanweiler.com:3443/users/verify?hash=' + verificationHash,
+          };
         });
       });
 
-      res.json({ success: true, message: 'Successfully registered' });
+      res.json({ success: true, message: 'Successfully registered, please see your email to verify your email' });
+    }
+  });
+});
+
+router.get('/verify', function (req, res) {
+  const verHash = sanitize(req.query.hash);
+
+  User.findOne({ hash: verHash }, function (err, user) {
+    if (err) throw err;
+
+    if (!user) {
+      res.status(401).json({ error: 'User with specified verification link does not exist' });
+    } else {
+      user.isActive = true;
+
+      user.save(function (err, user) {
+        if (err) throw err;
+        res.json({ message: 'Successfully activated account' });
+      });
     }
   });
 });
@@ -51,6 +89,8 @@ router.post('/auth', function (req, res, next) {
 
     if (!user) {
       res.status(401).json({ error: 'Bad email' });
+    } else if (!user.isActive) {
+      res.status(401).json({ error: 'Email not yet verified' });
     } else {
       bcrypt.compare(req.body.password, user.password, function (err, valid) {
         if (err) {
