@@ -73,6 +73,7 @@
     document.getElementById('lastseven').innerHTML = '';
 
     const localTable = document.createElement('table');
+    const d = new Date();
     let row = document.createElement('tr');
     let header = document.createElement('th');
     let data = document.createElement('td');
@@ -100,57 +101,59 @@
     localTable.appendChild(row);
 
     for (const activity of activities) {
-      row = document.createElement('tr');
-      row.innerHTML = '';
-      data = document.createElement('td');
-      data.innerHTML = activity.deviceID;
-      row.appendChild(data);
-      data = document.createElement('td');
-      data.innerHTML = activity.activityType;
-      row.appendChild(data);
-      data = document.createElement('td');
-      data.innerHTML = activity.startTime;
-      row.appendChild(data);
-      data = document.createElement('td');
-      data.innerHTML = activity.uvExposure;
-      row.appendChild(data);
-      data = document.createElement('td');
-      data.innerHTML = activity.avgSpeed.toFixed(2);
-      row.appendChild(data);
-      data = document.createElement('td');
-      data.innerHTML = activity.duration;
-      row.appendChild(data);
-      data = document.createElement('td');
-      data.innerHTML = activity.distance.toFixed(3);
-      row.appendChild(data);
+      if (d.getTime() - activity.startTime < 7 * 24 * 60 * 60 * 1000) {
+        row = document.createElement('tr');
+        row.innerHTML = '';
+        data = document.createElement('td');
+        data.innerHTML = activity.deviceID;
+        row.appendChild(data);
+        data = document.createElement('td');
+        data.innerHTML = activity.activityType;
+        row.appendChild(data);
+        data = document.createElement('td');
+        data.innerHTML = activity.startTime;
+        row.appendChild(data);
+        data = document.createElement('td');
+        data.innerHTML = activity.uvExposure;
+        row.appendChild(data);
+        data = document.createElement('td');
+        data.innerHTML = activity.avgSpeed.toFixed(2);
+        row.appendChild(data);
+        data = document.createElement('td');
+        data.innerHTML = activity.duration;
+        row.appendChild(data);
+        data = document.createElement('td');
+        data.innerHTML = activity.distance.toFixed(3);
+        row.appendChild(data);
 
-      row.addEventListener('click', function () {
-        document.getElementById('singleactivity').style.display = 'block';
-        document.getElementById('activityView').style.display = 'none';
-        const url = 'https://www.evanweiler.com:3443/devices/getevents?startTime=' + activity.startTime;
+        row.addEventListener('click', function () {
+          document.getElementById('singleactivity').style.display = 'block';
+          document.getElementById('activityView').style.display = 'none';
+          const url = 'https://www.evanweiler.com:3443/devices/getevents?startTime=' + activity.startTime;
 
-        const fetchOptions = {
-          method: 'GET',
-          headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            x_auth: window.sessionStorage.getItem('token'),
-          },
-        };
+          const fetchOptions = {
+            method: 'GET',
+            headers: {
+              Accept: 'application/json',
+              'Content-Type': 'application/json',
+              x_auth: window.sessionStorage.getItem('token'),
+            },
+          };
 
-        fetch(url, fetchOptions)
-          .then(checkStatus)
-          .then(function (responseText) {
-            const responseJSON = JSON.parse(responseText);
+          fetch(url, fetchOptions)
+            .then(checkStatus)
+            .then(function (responseText) {
+              const responseJSON = JSON.parse(responseText);
 
-            showSingleActivity(responseJSON.events);
-          })
-          .catch(function (error) {
-            console.error('ERROR: ' + error);
-          });
-      });
+              showSingleActivity(responseJSON.events);
+            })
+            .catch(function (error) {
+              console.error('ERROR: ' + error);
+            });
+        });
 
-      localTable.appendChild(row);
+        localTable.appendChild(row);
+      }
     }
 
     document.getElementById('lastseven').appendChild(localTable);
