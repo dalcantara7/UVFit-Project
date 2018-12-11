@@ -32,7 +32,7 @@
     };
     
     if(!validateForm()) {
-        event.preventDefault();
+        return false;
     }
 
     fetch(url, fetchOptions)
@@ -62,28 +62,51 @@
   }
 
   function validateForm() {
+    var flag = true;  
+    
     if ($('#email').val().length === 0) {
       $('#email').addClass('error');
-      return false;
+      $('#email').css({display: block});
+      flag = false;
     } else {
       $('#email').removeClass('error');
+      $('#email').css({display: none});
     }
 
-    if (($('#password').val().length <= 7) || ($('#password').val() === $('#re_pass').val())) {
+    if (($('#password').val().length <= 7)) {
       $('#password').addClass('error');
-      return false;
+      $('#password').css({display: block});
+      flag = false;
     } else {
       $('#password').removeClass('error');
+      $('#password').css({display: none});
+    }
+    
+    if ($('#password').val() === $('#re_pass').val()) {
+      $('#password').addClass('error');
+      $('#re_pass').addClass('error');
+      $('#password').css({display: block});
+      $('#re_pass').css({display: block});
+      flag = false;
+    } else {
+      $('#password').removeClass('error');
+      $('#re_pass').removeClass('error');
+      $('#password').css({display: none});
+      $('#re_pass').css({display: none});
     }
 
     $('#email').click(function () {
       $('#email').removeClass('error');
     });
 
-    $('#email').click(function () {
-      $('#email').removeClass('error');
+    $('#password').click(function () {
+      $('#password').removeClass('error');
     });
     
-    return true;
+    $('#re_pass').click(function () {
+      $('#re_pass').removeClass('error');
+    });
+    
+    return flag;
   }
 })();
