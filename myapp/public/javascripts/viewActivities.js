@@ -269,13 +269,31 @@
     data.innerHTML = 'Average Activity';
     row.appendChild(data);
     data = document.createElement('td');
-    data.innerHTML = avgDuration.toFixed(1);
+
+    if (avgDuration) {
+      data.innerHTML = avgDuration.toFixed(1);
+    } else {
+      data.innerHTML = '-';
+    }
+
     row.appendChild(data);
     data = document.createElement('td');
-    data.innerHTML = avgUV;
+
+    if (avgUV) {
+      data.innerHTML = avgUV;
+    } else {
+      data.innerHTML = '-';
+    }
+
     row.appendChild(data);
     data = document.createElement('td');
-    data.innerHTML = avgCalories.toFixed(2);
+
+    if (avgCalories) {
+      data.innerHTML = avgCalories.toFixed(2);
+    } else {
+      data.innerHTML = '-';
+    }
+
     row.appendChild(data);
     summaryTable.appendChild(row);
 
