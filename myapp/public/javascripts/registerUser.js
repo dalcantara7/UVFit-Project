@@ -22,10 +22,6 @@
       email: document.getElementById('email').value,
     };
     
-    if(!validateForm()) {
-        event.preventDefault();
-    }
-
     const fetchOptions = {
       method: 'POST',
       headers: {
