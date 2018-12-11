@@ -262,8 +262,8 @@ router.get('/getactivities', function (req, res, next) {
   }
 
   if (req.query.local === 't') {
-    const latitude = req.query.lat;
-    const longitude = req.query.long;
+    const latitude = parseFloat(req.query.lat);
+    const longitude = parseFloat(req.query.long);
     const responseJSON = {
       success: true,
       activities: [],
