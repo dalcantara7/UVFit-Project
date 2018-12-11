@@ -93,6 +93,42 @@ router.post('/register', function (req, res, next) {
   });
 });
 
+router.delete('/delete', function (req, res) {
+  let userEmail;
+  const responseJSON = {};
+
+  // authentication check
+  if (req.headers.x_auth) {
+    try {
+      const token = jwt.decode(req.headers.x_auth, secret);
+      userEmail = token.userEmail;
+    } catch (ex) {
+      responseJSON.message = 'Invalid authorization token.';
+      responseJSON.success = false;
+      res.status(401).json(responseJSON);
+    }
+  } else {
+    responseJSON.message = 'Missing authorization token.';
+    responseJSON.success = false;
+    res.status(401).json(responseJSON);
+  }
+
+  if (!req.body.deviceID) {
+    responseJSON.message = 'missing device id';
+    res.status(400).json(responseJSON);
+  }
+
+  User.findOne({ email: userEmail }, function (err, user) {
+    const index = user.deviceIDs.indexOf(req.body.deviceID);
+
+    user.deviceIDs.splice(index, 1);
+
+    user.save(function (err, user) {
+      if (err) throw err;
+    });
+  });
+});
+
 router.post('/sendinfo', function (req, res, next) {
   let userEmail;
   const responseJSON = {
