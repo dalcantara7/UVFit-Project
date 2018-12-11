@@ -77,20 +77,15 @@
       $('#password').addClass('error');
       $('#pass-error').css({"display": "block"});
       flag = false;
+      if ($('#password').val() !== $('#re_pass').val()) {
+        $('#re_pass').addClass('error');
+        $('#mismatch-error').css({"display": "block"});
+      } else {
+        $('#mismatch-error').css({"display": "none"});
+      }
     } else {
       $('#password').removeClass('error');
       $('#pass-error').css({"display": "none"});
-    }
-    
-    if ($('#password').val() !== $('#re_pass').val()) {
-      $('#password').addClass('error');
-      $('#re_pass').addClass('error');
-      $('#mismatch-error').css({"display": "block"});
-      flag = false;
-    } else {
-      $('#password').removeClass('error');
-      $('#re_pass').removeClass('error');
-      $('#mismatch-error').css({"display": "none"});
     }
 
     $('#email').click(function () {
