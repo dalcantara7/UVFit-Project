@@ -114,6 +114,8 @@
     row = document.createElement('tr');
     row.innerHTML = '';
     data = document.createElement('td');
+    row.appendChild(data);
+    data = document.createElement('td');
     data.innerHTML = avgDuration;
     row.appendChild(data);
     data = document.createElement('td');
