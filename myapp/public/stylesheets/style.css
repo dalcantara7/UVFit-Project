@@ -29,6 +29,22 @@ input.error {
   border-bottom: 2px solid red;
 }
 
+p.error {
+    font-color: red;
+}
+
+#email-error {
+    display: none;
+}
+
+#pass-error {
+    display: none;
+}
+
+#mismatch-error {
+    display: none;
+}
+
 /* @extend display-flex; */
 display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .default-index, .social-login, .socials {
   display: flex;

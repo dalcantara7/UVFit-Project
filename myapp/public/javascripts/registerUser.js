@@ -66,33 +66,33 @@
     
     if ($('#email').val().length === 0) {
       $('#email').addClass('error');
-      $('#email').css({display: block});
+      $('#email').css({"display": "block"});
       flag = false;
     } else {
       $('#email').removeClass('error');
-      $('#email').css({display: none});
+      $('#email').css({"display": "none"});
     }
 
     if (($('#password').val().length <= 7)) {
       $('#password').addClass('error');
-      $('#password').css({display: block});
+      $('#password').css({"display": "block"});
       flag = false;
     } else {
       $('#password').removeClass('error');
-      $('#password').css({display: none});
+      $('#password').css({"display": "none"});
     }
     
     if ($('#password').val() === $('#re_pass').val()) {
       $('#password').addClass('error');
       $('#re_pass').addClass('error');
-      $('#password').css({display: block});
-      $('#re_pass').css({display: block});
+      $('#password').css({"display": "block"});
+      $('#re_pass').css({"display": "block"});
       flag = false;
     } else {
       $('#password').removeClass('error');
       $('#re_pass').removeClass('error');
-      $('#password').css({display: none});
-      $('#re_pass').css({display: none});
+      $('#password').css({"display": "none"});
+      $('#re_pass').css({"display": "none"});
     }
 
     $('#email').click(function () {
