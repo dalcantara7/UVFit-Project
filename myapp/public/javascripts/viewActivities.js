@@ -275,7 +275,7 @@
     data.innerHTML = 'Total Activity';
     row.appendChild(data);
     data = document.createElement('td');
-    data.innerHTML = totalDuration;
+    data.innerHTML = totalDuration.toFixed(1);
     row.appendChild(data);
     data = document.createElement('td');
     data.innerHTML = totalUV;
