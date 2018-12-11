@@ -62,27 +62,26 @@
   }
 
   function validateForm() {
-    if (document.getElementById('email').val().length === 0) {
-      document.getElementById('email').addClass('error');
+    if ($('#email').val().length === 0) {
+      $('#email').addClass('error');
       return false;
     } else {
-      document.getElementById('email').removeClass('error');
+      $('#email').removeClass('error');
     }
 
-    if ((document.getElementById('password').val().length <= 7) || 
-    (document.getElementById('password').val() === document.getElementById('re_pass').val())) {
-      document.getElementById('password').addClass('error');
+    if (($('#password').val().length <= 7) || ($('#password').val() === $('#re_pass').val())) {
+      $('#password').addClass('error');
       return false;
     } else {
-      document.getElementById('password').removeClass('error');
+      $('#password').removeClass('error');
     }
 
-    document.getElementById('email').click(function () {
-      document.getElementById('email').removeClass('error');
+    $('#email').click(function () {
+      $('#email').removeClass('error');
     });
 
-    document.getElementById('email').click(function () {
-      document.getElementById('email').removeClass('error');
+    $('#email').click(function () {
+      $('#email').removeClass('error');
     });
     
     return true;

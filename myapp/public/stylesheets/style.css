@@ -30,7 +30,7 @@ input.error {
 }
 
 /* @extend display-flex; */
-display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
+display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .default-index, .social-login, .socials {
   display: flex;
   display: -webkit-flex; }
 
@@ -485,7 +485,7 @@ label.valid {
 .material-icons-name {
   font-size: 18px; }
 
-.signin-content {
+.signin-content, .default-index{
   padding-top: 67px;
   padding-bottom: 87px; }
 
@@ -558,7 +558,7 @@ label.valid {
   .container {
     max-width: 1200px; } }
 @media screen and (max-width: 768px) {
-  .signup-content, .signin-content {
+  .signup-content, .signin-content, .default-index {
     flex-direction: column;
     -moz-flex-direction: column;
     -webkit-flex-direction: column;
