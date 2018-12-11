@@ -29,10 +29,6 @@ input.error {
   border-bottom: 2px solid red;
 }
 
-p.error {
-    font-color: red;
-}
-
 #email-error {
     display: none;
 }

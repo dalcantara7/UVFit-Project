@@ -41,10 +41,12 @@
             window.location.replace('https://www.evanweiler.com:3443/');
           }, 2000);
         } else {
+          $('#mismatch-error').css({"display": "block"});
           document.getElementById('error').innerHTML = responseJSON.message;
         }
       })
       .catch(function (error) {
+        
         console.error('ERROR: ' + error);
       });
   }
