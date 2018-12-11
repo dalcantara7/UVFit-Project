@@ -69,7 +69,7 @@
       $('#email').removeClass('error');
     }
 
-    if ($('#password').val().length <= 7) {
+    if (($('#password').val().length <= 7) || ($('#password').val() === $('#re_pass').val())) {
       $('#password').addClass('error');
       return false;
     } else {
