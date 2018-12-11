@@ -56,6 +56,12 @@ router.post('/register', function (req, res) {
             subject: 'Please verify your email for UV-Fit',
             text: 'https://www.evanweiler.com:3443/users/verify?hash=' + verificationHash,
           };
+
+          transporter.sendMail(mailOptions, function (err, info) {
+            if (err) throw err;
+
+            console.log('Email sent: ' + info.response);
+          });
         });
       });
 
