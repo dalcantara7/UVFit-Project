@@ -76,6 +76,84 @@
     let row = document.createElement('tr');
     let header = document.createElement('th');
     let data = document.createElement('td');
+
+    header.innerHTML = 'Device ID';
+    row.appendChild(header);
+    header = document.createElement('th');
+    header.innerHTML = 'Activity';
+    row.appendChild(header);
+    header = document.createElement('th');
+    header.innerHTML = 'Start Time';
+    row.appendChild(header);
+    header = document.createElement('th');
+    header.innerHTML = 'UV Exposure';
+    row.appendChild(header);
+    header = document.createElement('th');
+    header.innerHTML = 'Average Speed (mph)';
+    row.appendChild(header);
+    header = document.createElement('th');
+    header.innerHTML = 'Duration (s)';
+    row.appendChild(header);
+    header = document.createElement('th');
+    header.innerHTML = 'Distance (sm)';
+    row.appendChild(header);
+    localTable.appendChild(row);
+
+    for (const activity of activities) {
+      row = document.createElement('tr');
+      row.innerHTML = '';
+      data = document.createElement('td');
+      data.innerHTML = activity.deviceID;
+      row.appendChild(data);
+      data = document.createElement('td');
+      data.innerHTML = activity.activityType;
+      row.appendChild(data);
+      data = document.createElement('td');
+      data.innerHTML = activity.startTime;
+      row.appendChild(data);
+      data = document.createElement('td');
+      data.innerHTML = activity.uvExposure;
+      row.appendChild(data);
+      data = document.createElement('td');
+      data.innerHTML = activity.avgSpeed.toFixed(2);
+      row.appendChild(data);
+      data = document.createElement('td');
+      data.innerHTML = activity.duration;
+      row.appendChild(data);
+      data = document.createElement('td');
+      data.innerHTML = activity.distance.toFixed(3);
+      row.appendChild(data);
+
+      row.addEventListener('click', function () {
+        document.getElementById('singleactivity').style.display = 'block';
+        document.getElementById('activityView').style.display = 'none';
+        const url = 'https://www.evanweiler.com:3443/devices/getevents?startTime=' + activity.startTime;
+
+        const fetchOptions = {
+          method: 'GET',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            x_auth: window.sessionStorage.getItem('token'),
+          },
+        };
+
+        fetch(url, fetchOptions)
+          .then(checkStatus)
+          .then(function (responseText) {
+            const responseJSON = JSON.parse(responseText);
+
+            showSingleActivity(responseJSON.events);
+          })
+          .catch(function (error) {
+            console.error('ERROR: ' + error);
+          });
+      });
+
+      localTable.appendChild(row);
+    }
+
+    document.getElementById('lastseven').appendChild(localTable);
   }
 
   function populateTable(activities) {
