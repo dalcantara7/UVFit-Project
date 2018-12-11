@@ -270,16 +270,13 @@ router.get('/getactivities', function (req, res, next) {
       message: 'Local Activities',
     };
 
-    console.log('Lat: ' + latitude + 'Long: ' + longitude);
-
     Activity.find({}, function (err, activities) {
       if (err) throw err;
 
       calcData(activities);
 
       for (const activity of activities) {
-        console.log(distance(latitude, longitude, activity.startLat, activity.startLong));
-        if (distance(latitude, longitude, activity.startlat, activity.startLong) < 7) {
+        if (distance(latitude, longitude, activity.startLat, activity.startLong) < 7) {
           responseJSON.activities.push(activity);
         }
       }
