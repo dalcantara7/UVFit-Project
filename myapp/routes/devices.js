@@ -94,6 +94,7 @@ router.post('/register', function (req, res, next) {
 });
 
 router.post('/sendinfo', function (req, res, next) {
+  let userEmail;
   const responseJSON = {
     success: false,
     message: '',
@@ -103,6 +104,7 @@ router.post('/sendinfo', function (req, res, next) {
   if (req.headers.x_auth) {
     try {
       const token = jwt.decode(req.headers.x_auth, secret);
+      userEmail = token.userEmail;
     } catch (ex) {
       responseJSON.message = 'Invalid authorization token.';
       responseJSON.success = false;
@@ -119,44 +121,23 @@ router.post('/sendinfo', function (req, res, next) {
     res.status(400).json(responseJSON);
   }
 
-  request({
-    method: 'POST',
-    uri: 'https://api.particle.io/v1/devices/' + req.body.deviceID + '/apiAndUV',
-    form: {
-      access_token: particleToken,
-      args: req.body.apikey + ':::' + 40,
-    },
+  User.findOne({ email: userEmail }, function (err, user) {
+    if (err) throw err;
+
+    request({
+      method: 'POST',
+      uri: 'https://api.particle.io/v1/devices/' + req.body.deviceID + '/apiAndUV',
+      form: {
+        access_token: particleToken,
+        args: req.body.apikey + ':::' + user.uvThresh,
+      },
+    });
+
+    responseJSON.success = true;
+    responseJSON.message = 'Device ID ' + req.body.deviceid + ' pinged.';
+    res.json(responseJSON);
   });
-
-  responseJSON.success = true;
-  responseJSON.message = 'Device ID ' + req.body.deviceid + ' pinged.';
-  res.json(responseJSON);
 });
-
-// Checking to see if device IDs have been registered
-// router.get('/status/:devid', function (req, res, next) {
-//   const deviceID = req.query.devid;
-//   const responseJSON = { devices: [] };
-//   let query;
-
-//   if (deviceID === 'all') {
-//     query = {};
-//   } else {
-//     query = { deviceID: deviceID };
-//   }
-
-//   Device.find(query, function (err, allDevices) {
-//     if (err) {
-//       const errorMsg = { message: err };
-//       res.status(400).json(errorMsg);
-//     } else {
-//       for (const doc of allDevices) {
-//         responseJSON.devices.push({ deviceID: doc.deviceID, lastContact: doc.lastContact });
-//       }
-//     }
-//     res.status(200).json(responseJSON);
-//   });
-// });
 
 router.post('/reportevent', function (req, res, next) {
   const data = req.body.data;

@@ -144,21 +144,23 @@ router.post('/setpreferences', function (req, res) {
         if (req.body.email) {
           user.email = req.body.email;
           responseJSON.newtoken = jwt.encode({ userEmail: req.body.email }, secret);
+          responseJSON.message = 'Successfully Made Changes!';
         }
 
         if (req.body.password) {
           const salt = bcrypt.genSaltSync(10);
           user.password = bcrypt.hashSync(req.body.password, salt);
+          responseJSON.message = 'Successfully Made Changes!';
         }
 
         if (req.body.uvThresh) {
           user.uvThresh = req.body.uvThresh;
+          responseJSON.message = 'Successfully Made Changes!';
         }
 
         user.save(function (err, user) {
           if (err) throw err;
 
-          responseJSON.message = 'Successfully Made Changes!';
           res.json(responseJSON);
         });
       });
