@@ -38,6 +38,8 @@
       .catch(function (error) {
         console.error('ERROR ' + error);
       });
+
+    location.reload();
   }
 
   function startActivity() {
