@@ -41,7 +41,6 @@
             window.location.replace('https://www.evanweiler.com:3443/');
           }, 2000);
         } else {
-          $('#mismatch-error').css({"display": "block"});
           document.getElementById('error').innerHTML = responseJSON.message;
         }
       })
@@ -55,6 +54,7 @@
     if (response.status >= 200 && response.status < 300) {
       return response.text();
     } else {
+      $('#mismatch-error').css({"display": "block"});
       return Promise.reject(new Error(response.status + ':' + response.statusText));
     }
   }

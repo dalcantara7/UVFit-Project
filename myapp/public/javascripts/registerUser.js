@@ -73,7 +73,7 @@
       $('#email-error').css({"display": "none"});
     }
 
-    if (($('#password').val().length <= 7)) {
+    if (($('#password').val().length <= 7) || ($('#password').val() === "")) {
       $('#password').addClass('error');
       $('#pass-error').css({"display": "block"});
       flag = false;
