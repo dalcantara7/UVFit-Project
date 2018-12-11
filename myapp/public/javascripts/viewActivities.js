@@ -244,7 +244,7 @@
       console.log('Difference: ' + parseInt(d.getTime() - activity.startTime, 10));
       console.log('1 week time: ' + 7 * 24 * 60 * 60 * 1000);
       console.log(activity.startTime + 7 * 24 * 60 * 60 * 1000 < d.getTime());
-      if (activity.startTime + 7 * 24 * 60 * 60 * 1000 < d.getTime()) {
+      if (parseInt(activity.startTime + 7 * 24 * 60 * 60 * 1000, 10) < d.getTime()) {
         avgUV += activity.uvExposure;
         avgDuration += activity.duration;
         avgCalories += activity.avgSpeed * activity.distance;
