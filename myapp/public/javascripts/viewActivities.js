@@ -70,7 +70,12 @@
   }
 
   function populateLocal(activities) {
-    console.log(activities);
+    document.getElementById('lastseven').innerHTML = '';
+
+    const localTable = document.createElement('table');
+    let row = document.createElement('tr');
+    let header = document.createElement('th');
+    let data = document.createElement('td');
   }
 
   function populateTable(activities) {
@@ -174,9 +179,9 @@
     header = document.createElement('th');
     data = document.createElement('td');
 
-    const avgUV = totalUV / activities.length;
-    const avgDuration = totalDuration / activities.length;
-    const avgCalories = totalCalories / activities.length;
+    let avgUV = totalUV / activities.length;
+    let avgDuration = totalDuration / activities.length;
+    let avgCalories = totalCalories / activities.length;
 
     header.innerHTML = '';
     row.appendChild(header);
@@ -214,6 +219,43 @@
     row.innerHTML = '';
     data = document.createElement('td');
     data.innerHTML = 'Average Activity';
+    row.appendChild(data);
+    data = document.createElement('td');
+    data.innerHTML = avgDuration.toFixed(1);
+    row.appendChild(data);
+    data = document.createElement('td');
+    data.innerHTML = avgUV;
+    row.appendChild(data);
+    data = document.createElement('td');
+    data.innerHTML = avgCalories.toFixed(2);
+    row.appendChild(data);
+    summaryTable.appendChild(row);
+
+
+    const d = new Date();
+    let numAct;
+    avgUV = 0;
+    avgDuration = 0;
+    avgCalories = 0;
+    for (const activity of activities) {
+      if (activity.startTime + 7 * 24 * 60 * 60 * 1000 < d.getTime()) {
+        avgUV += activity.uvExposure;
+        avgDuration += activity.duration;
+        avgCalories += activity.avgSpeed * activity.distance;
+        numAct++;
+      }
+    }
+
+    avgUV /= numAct;
+    avgDuration /= numAct;
+    avgCalories /= numAct;
+
+    // last 7 days
+        
+    row = document.createElement('tr');
+    row.innerHTML = '';
+    data = document.createElement('td');
+    data.innerHTML = 'Last 7 days';
     row.appendChild(data);
     data = document.createElement('td');
     data.innerHTML = avgDuration.toFixed(1);
