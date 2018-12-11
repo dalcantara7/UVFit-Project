@@ -4,6 +4,8 @@ const userSchema = new db.Schema({
   email: { type: String, required: true, unique: true },
   username: { type: String, required: true },
   password: { type: String, required: true },
+  verHash: { type: String },
+  isActive: { type: Boolean, default: false },
   uvThresh: { type: Number, required: true, default: 40 },
   regDate: { type: Date, required: true, default: Date.now },
   deviceIDs: [String],

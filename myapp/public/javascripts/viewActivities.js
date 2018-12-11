@@ -69,6 +69,8 @@
     }
   }
 
+  // TODO: NEED TO BE AVERAGE, NOT ALL ACTIVITIES
+
   function populateLocal(activities) {
     document.getElementById('lastseven').innerHTML = '';
 
@@ -78,83 +80,51 @@
     let header = document.createElement('th');
     let data = document.createElement('td');
 
-    header.innerHTML = 'Device ID';
+    header.innerHTML = '';
     row.appendChild(header);
     header = document.createElement('th');
-    header.innerHTML = 'Activity';
-    row.appendChild(header);
-    header = document.createElement('th');
-    header.innerHTML = 'Start Time';
+    header.innerHTML = 'Duration';
     row.appendChild(header);
     header = document.createElement('th');
     header.innerHTML = 'UV Exposure';
     row.appendChild(header);
     header = document.createElement('th');
-    header.innerHTML = 'Average Speed (mph)';
-    row.appendChild(header);
-    header = document.createElement('th');
-    header.innerHTML = 'Duration (s)';
-    row.appendChild(header);
-    header = document.createElement('th');
-    header.innerHTML = 'Distance (sm)';
+    header.innerHTML = 'Calories Burned';
     row.appendChild(header);
     localTable.appendChild(row);
 
+    let numAct = 0;
+    let avgUV = 0;
+    let avgDuration = 0;
+    let avgCalories = 0;
+
     for (const activity of activities) {
       if (d.getTime() - activity.startTime < 7 * 24 * 60 * 60 * 1000) {
-        row = document.createElement('tr');
-        row.innerHTML = '';
-        data = document.createElement('td');
-        data.innerHTML = activity.deviceID;
-        row.appendChild(data);
-        data = document.createElement('td');
-        data.innerHTML = activity.activityType;
-        row.appendChild(data);
-        data = document.createElement('td');
-        data.innerHTML = activity.startTime;
-        row.appendChild(data);
-        data = document.createElement('td');
-        data.innerHTML = activity.uvExposure;
-        row.appendChild(data);
-        data = document.createElement('td');
-        data.innerHTML = activity.avgSpeed.toFixed(2);
-        row.appendChild(data);
-        data = document.createElement('td');
-        data.innerHTML = activity.duration;
-        row.appendChild(data);
-        data = document.createElement('td');
-        data.innerHTML = activity.distance.toFixed(3);
-        row.appendChild(data);
-
-        row.addEventListener('click', function () {
-          document.getElementById('singleactivity').style.display = 'block';
-          document.getElementById('activityView').style.display = 'none';
-          const url = 'https://www.evanweiler.com:3443/devices/getevents?startTime=' + activity.startTime;
-
-          const fetchOptions = {
-            method: 'GET',
-            headers: {
-              Accept: 'application/json',
-              'Content-Type': 'application/json',
-              x_auth: window.sessionStorage.getItem('token'),
-            },
-          };
-
-          fetch(url, fetchOptions)
-            .then(checkStatus)
-            .then(function (responseText) {
-              const responseJSON = JSON.parse(responseText);
-
-              showSingleActivity(responseJSON.events);
-            })
-            .catch(function (error) {
-              console.error('ERROR: ' + error);
-            });
-        });
-
-        localTable.appendChild(row);
+        avgUV += activity.uvExposure;
+        avgDuration += activity.duration;
+        avgCalories += activity.avgSpeed * activity.distance;
+        numAct++;
       }
     }
+
+    avgUV /= numAct;
+    avgDuration /= numAct;
+    avgCalories /= numAct;
+
+    row = document.createElement('tr');
+    row.innerHTML = '';
+    data = document.createElement('td');
+    data.innerHTML = avgDuration;
+    row.appendChild(data);
+    data = document.createElement('td');
+    data.innerHTML = avgUV;
+    row.appendChild(data);
+    data = document.createElement('td');
+    data.innerHTML = avgCalories;
+    row.appendChild(data);
+    row.appendChild(data);
+
+    localTable.appendChild(row);
 
     document.getElementById('lastseven').appendChild(localTable);
   }
