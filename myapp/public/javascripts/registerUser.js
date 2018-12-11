@@ -30,6 +30,10 @@
       },
       body: JSON.stringify(message),
     };
+    
+    validateForm() {
+        event.preventDefault();
+    }
 
     fetch(url, fetchOptions)
       .then(checkStatus)
