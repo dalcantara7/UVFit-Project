@@ -21,7 +21,7 @@
       password: document.getElementById('password').value,
       email: document.getElementById('email').value,
     };
-    
+
     const fetchOptions = {
       method: 'POST',
       headers: {
@@ -30,7 +30,7 @@
       },
       body: JSON.stringify(message),
     };
-    
+
     if(!validateForm()) {
         return false;
     }
@@ -62,9 +62,9 @@
   }
 
   function validateForm() {
-    var flag = true;  
-    
-    if ($('#email').val().length != '^([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))$') {
+    var flag = true;
+
+    if ($('#email').val() == '^([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))$') {
       $('#email').addClass('error');
       $('#email-error').css({"display": "block"});
       flag = false;
@@ -95,11 +95,11 @@
     $('#password').click(function () {
       $('#password').removeClass('error');
     });
-    
+
     $('#re_pass').click(function () {
       $('#re_pass').removeClass('error');
     });
-    
+
     return flag;
   }
 })();
