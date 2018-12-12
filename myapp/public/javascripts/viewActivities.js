@@ -433,17 +433,9 @@
           request.onload = function() {
               var data = JSON.parse(this.response);
               
-              if (request.status >= 200 && request.status < 400) {
-                  console.log(data);
-              } else {
-                  console.log('error');
-              }
+              document.getElementById('forecast').innerHTML = data;
           }
           request.send();
-<<<<<<< HEAD
-      )};
-=======
       });
->>>>>>> 30b9d383307035b507124de7e977b5a12748ade2
   }
 })();
