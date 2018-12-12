@@ -574,6 +574,31 @@ label.valid {
   margin-right: 20px;
   margin-top: 10px; }
 
+  .topnav {
+    overflow: hidden;
+    background-color: rgb(255, 255, 255);
+    border-radius: 15px;
+  }
+  
+  .topnav a {
+    float: left;
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+  }
+  
+  .topnav a:hover {
+    background-color: #4292dc;
+    color: white;
+  }
+  
+  .topnav a.active {
+    background-color: #6dabe4;
+    color: white;
+  }
+
 @media screen and (max-width: 1200px) {
   .container {
     width: calc( 100% - 30px);
