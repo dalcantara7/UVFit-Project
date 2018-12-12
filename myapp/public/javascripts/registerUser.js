@@ -81,6 +81,7 @@
       if ($('#password').val() !== $('#re_pass').val()) {
         $('#re_pass').addClass('error');
         $('#mismatch-error').css({"display": "block"});
+        flag = false;
       } else {
         $('#mismatch-error').css({"display": "none"});
       }
