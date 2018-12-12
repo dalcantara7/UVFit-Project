@@ -43,7 +43,7 @@
         console.error('ERROR ' + error);
       });
 
-    location.reload();
+    window.location.reload();
   }
 
   function startActivity() {
