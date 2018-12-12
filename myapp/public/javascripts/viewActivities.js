@@ -73,8 +73,6 @@
     }
   }
 
-  // TODO: NEED TO BE AVERAGE, NOT ALL ACTIVITIES
-
   function populateLocal(activities) {
     document.getElementById('lastseven').innerHTML = '';
 
@@ -442,6 +440,10 @@
               }
           }
           request.send();
+<<<<<<< HEAD
       )};
+=======
+      });
+>>>>>>> 30b9d383307035b507124de7e977b5a12748ade2
   }
 })();
