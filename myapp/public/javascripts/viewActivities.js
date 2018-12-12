@@ -420,7 +420,7 @@
 
     document.getElementById('singletable').appendChild(singleTable);
   }
-
+/**
   function showForecast(response) {
     //const weatherapikey = '527d42d0e23fae5206b8c01fa3726042';
     navigator.geolocation.getCurrentPosition(function (position) {
@@ -466,4 +466,5 @@
       request.send();
     });
   }
+  **/
 })();
