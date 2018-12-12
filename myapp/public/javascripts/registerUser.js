@@ -63,8 +63,8 @@
 
   function validateForm() {
     var flag = true;
-
-    if ($('#email').val() != '^([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))$') {
+    //$('#email').val() == '^([\w\-\.]+)@((\[([0-9]{1,3}\.){3}[0-9]{1,3}\])|(([\w\-]+\.)+)([a-zA-Z]{2,4}))$'
+    if ($('#email').val().length === 0) {
       $('#email').addClass('error');
       $('#email-error').css({"display": "block"});
       flag = false;
