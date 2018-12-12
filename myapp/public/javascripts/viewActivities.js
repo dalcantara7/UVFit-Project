@@ -422,7 +422,7 @@
 
     document.getElementById('singletable').appendChild(singleTable);
   }
-  /**
+
   function showForecast(response) {
       navigator.geolocation.getCurrentPosition(function(position) {
           var apiurl = 'api.openweathermap.org/data/2.5/forecast?lat='
@@ -444,5 +444,4 @@
           request.send();
       }
   }
-  **/
 })();
