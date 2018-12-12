@@ -433,11 +433,7 @@
       request.onload = function () {
         const data = JSON.parse(this.response);
 
-        if (request.status >= 200 && request.status < 400) {
-          console.log(data.list.main.temp);
-        } else {
-          console.log('error');
-        }
+        document.getElementById("test-api").innerHTML = data.list.main.temp;
       }
       request.send();
     });
