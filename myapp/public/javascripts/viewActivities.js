@@ -18,6 +18,10 @@
       document.getElementById('singleactivity').style.display = 'none';
       document.getElementById('activityView').style.display = 'block';
     });
+    document.getElementById('logoutlink').addEventListener('click', function () {
+      window.sessionStorage.clear();
+      window.location.assign("https://www.evanweiler.com:3443/login");
+    });
   };
 
   function showEvents() {

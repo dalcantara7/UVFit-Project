@@ -30,10 +30,16 @@ function getNewApikey() {
   return newApikey;
 }
 
+/**
+ *  returns the register device .html page
+ */
 router.get('/register', function (req, res, next) {
   res.sendFile(path.resolve('./public/registerDevice.html'));
 });
 
+/**
+ *  takes in a json object with a device ID and registers if its not already in the database
+ */
 router.post('/register', function (req, res, next) {
   const responseJSON = {};
   let userEmail;
@@ -93,6 +99,10 @@ router.post('/register', function (req, res, next) {
   });
 });
 
+/**
+ *  takes in a deviceID and deletes it from both the user and devices database
+ *  returns a success bool and a message
+ */
 router.delete('/delete', function (req, res) {
   let userEmail;
   const responseJSON = {};
@@ -135,6 +145,10 @@ router.delete('/delete', function (req, res) {
   });
 });
 
+/**
+ *  send the photon both its api key and the user's UV threshold value
+ *  returns a success bool and message
+ */
 router.post('/sendinfo', function (req, res, next) {
   let userEmail;
   const responseJSON = {
@@ -181,6 +195,11 @@ router.post('/sendinfo', function (req, res, next) {
   });
 });
 
+/**
+ *  endpoint to photon to send events to, which are saved to the
+ *  events database and added to their respective activity
+ *  returns a success bool and message
+ */
 router.post('/reportevent', function (req, res, next) {
   const data = req.body.data;
 
@@ -244,6 +263,10 @@ router.post('/reportevent', function (req, res, next) {
   });
 });
 
+/**
+ *  endpoint to query the database for events for a specific user
+ *  returns a json object with the queried events
+ */
 router.get('/getevents', function (req, res, next) {
   let userEmail;
 
@@ -275,6 +298,10 @@ router.get('/getevents', function (req, res, next) {
   });
 });
 
+/**
+ *  endpoint to query the database for activities associated with a user
+ *  returns a json object with the queried activities
+ */
 router.get('/getactivities', function (req, res, next) {
   let userEmail;
 
