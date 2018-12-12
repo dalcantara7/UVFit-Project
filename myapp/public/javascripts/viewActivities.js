@@ -436,7 +436,32 @@
       request.onload = function () {
         const data = JSON.parse(this.response);
 
-        document.getElementById("test-api").innerHTML = data.list.main.temp;
+        const localTable = document.createElement('table');
+        let row = document.createElement('tr');
+        let header = document.createElement('th');
+        let data = document.createElement('td');
+
+        header.innerHTML = 'Date';
+        row.appendChild(header);
+        header = document.createElement('th');
+        header.innerHTML = 'Weather';
+        row.appendChild(header);
+        header = document.createElement('th');
+        header.innerHTML = 'Temperature';
+        row.appendChild(header);
+        header = document.createElement('th');
+        header.innerHTML = 'UV Index';
+        row.appendChild(header);
+        header = document.createElement('th');
+        header.innerHTML = 'Precipitation';
+        row.appendChild(header);
+        header = document.createElement('th');
+        header.innerHTML = 'Humidity';
+        row.appendChild(header);
+        header = document.createElement('th');
+        header.innerHTML = 'Wind';
+        row.appendChild(header);
+        eventTable.appendChild(row);
       }
       request.send();
     });
