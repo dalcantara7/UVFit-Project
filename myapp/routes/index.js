@@ -10,16 +10,4 @@ router.get('/', function (req, res) {
   res.sendFile(path.resolve('./public/index.html'));
 });
 
-
-// continuous integration through github webhook (commented out for the purposes of this demo)
-router.post('/', function (req, res) {
-  exec('./restart.sh', function (error, stdout, stderr) {
-    console.log(error);
-    console.log(stdout);
-    console.log(stderr);
-  });
-
-  res.json({ message: 'Successful Restart' });
-});
-
 module.exports = router;
