@@ -422,14 +422,14 @@
   }
 
   function showForecast(response) {
-    const weatherapikey = '527d42d0e23fae5206b8c01fa3726042';
+    //const weatherapikey = '527d42d0e23fae5206b8c01fa3726042';
     navigator.geolocation.getCurrentPosition(function (position) {
       const apiurl = 'api.openweathermap.org/data/2.5/forecast?lat='
                 + encodeURIComponent(position.coords.latitude)
                 + '&lon='
                 + encodeURIComponent(position.coords.longitude)
                 + '&APPID='
-                + weatherapikey;
+                + '527d42d0e23fae5206b8c01fa3726042';
       const request = new XMLHttpRequest();
       request.open('GET', apiurl, true);
 
