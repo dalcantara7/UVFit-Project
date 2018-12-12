@@ -44,7 +44,9 @@ input.error {
 /* @extend display-flex; */
 display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .default-index, .social-login, .socials {
   display: flex;
-  display: -webkit-flex; }
+  display: -webkit-flex; 
+  padding: 20px 20px 20px 20px;
+}
 
 /* @extend list-type-ulli; */
 list-type-ulli, .socials {
@@ -505,7 +507,9 @@ label.valid {
 
 .signin-content, .default-index{
   padding-top: 67px;
-  padding-bottom: 87px; }
+  padding-bottom: 87px; 
+
+}
 
 .social-login {
   align-items: center;
@@ -561,7 +565,9 @@ label.valid {
 
 .signin-form .activities-form{
   margin-right: 90px;
-  margin-left: 80px; }
+  margin-left: 80px; 
+  padding: 10px 10px 10px 10px;
+}
 
 .signin-image {
   margin-left: 110px;
