@@ -125,6 +125,12 @@ router.delete('/delete', function (req, res) {
 
     user.save(function (err, user) {
       if (err) throw err;
+
+      Device.findOneAndDelete({ deviceID: req.body.deviceID }, function (err, device) {
+        if (err) throw err;
+
+        res.json({ success: true, message: 'Successfully deleted device ' + req.body.deviceID });
+      });
     });
   });
 });
