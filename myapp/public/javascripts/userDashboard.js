@@ -13,6 +13,10 @@
     populateList();
     document.getElementById('activityStart').addEventListener('click', startActivity);
     document.getElementById('deleteDevice').addEventListener('click', deleteDevice);
+    document.getElementById('logoutlink').addEventListener('click', function () {
+      window.sessionStorage.clear();
+      window.location.reload();
+    });
   };
 
   function deleteDevice() {
