@@ -15,7 +15,7 @@
     document.getElementById('deleteDevice').addEventListener('click', deleteDevice);
     document.getElementById('logoutlink').addEventListener('click', function () {
       window.sessionStorage.clear();
-      window.location.reload();
+      window.location.assign("https://www.evanweiler.com:3443/login");
     });
   };
 
