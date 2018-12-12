@@ -17,14 +17,25 @@ router.use(bodyParser.urlencoded({ extended: false }));
 
 const secret = fs.readFileSync(path.resolve(__dirname, '../jwtkey.txt')).toString();
 
+/**
+ *  returns the page for registering a user
+ */
 router.get('/register', function (req, res, next) {
   res.sendFile(path.resolve('./public/registerUser.html'));
 });
 
+/**
+ *  returns the page for the user dashboard
+ */
 router.get('/dashboard', function (req, res, next) {
   res.sendFile(path.resolve('./public/userDashboard.html'));
 });
 
+/**
+ *  post route for registering a user, takes in a username, password, and email
+ *  sends an email to the users registered email with a hash to verify email
+ *  returns a success bool and a message
+ */
 router.post('/register', function (req, res) {
   User.findOne({ email: sanitize(req.body.email) }, function (err, user) {
     if (user) {
@@ -68,6 +79,10 @@ router.post('/register', function (req, res) {
   });
 });
 
+/**
+ *  get endpoint for user email verification. takes in a single query parameter, the hash
+ *  returns a plaintext message
+ */
 router.get('/verify', function (req, res) {
   const verHash = sanitize(req.query.hash);
 
@@ -88,6 +103,9 @@ router.get('/verify', function (req, res) {
   });
 });
 
+/**
+ *  route to authenticate the user for when they login
+ */
 router.post('/auth', function (req, res, next) {
   User.findOne({ email: sanitize(req.body.email) }, function (err, user) {
     if (err) throw err;
@@ -111,10 +129,17 @@ router.post('/auth', function (req, res, next) {
   });
 });
 
+/**
+ *  route to receive the activities page for the user
+ */
 router.get('/activities', function (req, res, next) {
   res.sendFile(path.resolve('./public/viewActivities.html'));
 });
 
+/**
+ *  route to get all devices for the associated user
+ *  returns a success bool and devices array
+ */
 router.get('/getdevices', function (req, res) {
   let userEmail;
   const responseJSON = {
@@ -152,10 +177,17 @@ router.get('/getdevices', function (req, res) {
   });
 });
 
+/**
+ *  gets the page for the user preferences
+ */
 router.get('/preferences', function (req, res) {
   res.sendFile(path.resolve('./public/userPrefs.html'));
 });
 
+/**
+ *  takes in a json object of new user preferences and sets them in the database
+ *  returns a success bool and message
+ */
 router.post('/setpreferences', function (req, res) {
   let userEmail;
   const responseJSON = {
