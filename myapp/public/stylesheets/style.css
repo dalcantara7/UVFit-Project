@@ -580,7 +580,7 @@ label.valid {
     border-radius: 15px;
   }
 
-  #logoutlink {
+  .logoutlink {
     padding-right: 50px;
     float: right;
   }
