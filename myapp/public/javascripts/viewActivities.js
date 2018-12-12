@@ -422,24 +422,24 @@
   }
 
   function showForecast(response) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-          var apiurl = 'api.openweathermap.org/data/2.5/forecast?lat='
+    navigator.geolocation.getCurrentPosition(function (position) {
+      const apiurl = 'api.openweathermap.org/data/2.5/forecast?lat='
                 + encodeURIComponent(position.coords.latitude)
                 + '&lon='
                 + encodeURIComponent(position.coords.longitude);
-          var request = new XMLHttpRequest();
-          request.open('GET', apiurl, true);
-          
-          request.onload = function() {
-              var data = JSON.parse(this.response);
-              
-              if (request.status >= 200 && request.status < 400) {
-                  console.log(data);
-              } else {
-                  console.log('error');
-              }
-          }
-          request.send();
-      });
+      const request = new XMLHttpRequest();
+      request.open('GET', apiurl, true);
+
+      request.onload = function () {
+        const data = JSON.parse(this.response);
+
+        if (request.status >= 200 && request.status < 400) {
+          console.log(data);
+        } else {
+          console.log('error');
+        }
+      }
+      request.send();
+    });
   }
 })();
